@@ -1,29 +1,26 @@
-<script>
-    // --- Yahan apna naya data paste karo ---
-    const courseData = {
-        modules: [
-            { 
-                title: "Module 1: Introduction", 
-                video: "https://www.youtube.com/embed/fmpqeJA5xt4", 
-                quizzes: [
-                    {q: "What is Data Analytics?", a: "Decision making"},
-                    {q: "What is an analyst role?", a: "Data processing"},
-                    // ... aise hi 5 sawal
-                ] 
-            },
-            // ... baaki 4 modules ka data yahan
-        ],
-        finalAssessment: {
-            title: "Final Assessment",
-            questions: [
-                // ... yahan 10 questions
-            ]
-        }
-    };
-
-    // --- Iske niche baaki ka logic (loadModule function etc.) rahega ---
+// Naya loadModule jo quiz bhi dikhayega
+function loadModule(index) {
+    const mod = courseData.modules[index];
+    document.getElementById('lessonTitle').innerText = mod.title;
+    document.getElementById('videoPlayer').src = mod.video;
     
-    function loadModule(index) {
-        // ... ab yahan 'courseData.modules[index]' ka use karo
-    }
-</script>
+    // Quiz box update
+    const quizBox = document.querySelector('.quiz-box');
+    quizBox.innerHTML = `<h3>Assessment</h3>` + mod.quizzes.map((q, i) => `
+        <p>${q.q}</p>
+        <input type="text" id="ans${i}" placeholder="Enter answer">
+    `).join('') + `<button onclick="checkModuleQuiz(${index})">Submit Module Quiz</button>`;
+}
+
+// Final Assessment load karne ke liye naya function
+function loadFinal() {
+    const final = courseData.finalAssessment;
+    document.getElementById('lessonTitle').innerText = final.title;
+    document.getElementById('videoPlayer').style.display = "none"; // Video chupa do
+    
+    const quizBox = document.querySelector('.quiz-box');
+    quizBox.innerHTML = `<h3>Final Assessment</h3>` + final.questions.map((q, i) => `
+        <p>${i+1}. ${q.q}</p>
+        <input type="text" id="finalAns${i}">
+    `).join('') + `<button onclick="checkFinal()">Submit Final Test</button>`;
+}
