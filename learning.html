@@ -1,26 +1,27 @@
-// Naya loadModule jo quiz bhi dikhayega
-function loadModule(index) {
-    const mod = courseData.modules[index];
-    document.getElementById('lessonTitle').innerText = mod.title;
-    document.getElementById('videoPlayer').src = mod.video;
-    
-    // Quiz box update
-    const quizBox = document.querySelector('.quiz-box');
-    quizBox.innerHTML = `<h3>Assessment</h3>` + mod.quizzes.map((q, i) => `
-        <p>${q.q}</p>
-        <input type="text" id="ans${i}" placeholder="Enter answer">
-    `).join('') + `<button onclick="checkModuleQuiz(${index})">Submit Module Quiz</button>`;
-}
+<script>
+    // 1. Sabse upar 'courseData' wala pura object yahan rahega.
 
-// Final Assessment load karne ke liye naya function
-function loadFinal() {
-    const final = courseData.finalAssessment;
-    document.getElementById('lessonTitle').innerText = final.title;
-    document.getElementById('videoPlayer').style.display = "none"; // Video chupa do
-    
-    const quizBox = document.querySelector('.quiz-box');
-    quizBox.innerHTML = `<h3>Final Assessment</h3>` + final.questions.map((q, i) => `
-        <p>${i+1}. ${q.q}</p>
-        <input type="text" id="finalAns${i}">
-    `).join('') + `<button onclick="checkFinal()">Submit Final Test</button>`;
-}
+    // 2. Beech mein 'loadModule' aur 'loadFinal' functions rahenge.
+
+    // 3. Sabse neeche ye sidebar wala code paste karo:
+    const list = document.getElementById('moduleList');
+
+    // Modules add karo
+    courseData.modules.forEach((mod, index) => {
+        const div = document.createElement('div');
+        div.className = 'module-item';
+        div.innerText = mod.title;
+        div.onclick = () => loadModule(index);
+        list.appendChild(div);
+    });
+
+    // Final Assessment ka button add karo
+    const finalDiv = document.createElement('div');
+    finalDiv.className = 'module-item';
+    finalDiv.innerText = "Final Assessment";
+    finalDiv.onclick = loadFinal;
+    list.appendChild(finalDiv);
+
+    // Default pehla module load karo
+    loadModule(0); 
+</script>
