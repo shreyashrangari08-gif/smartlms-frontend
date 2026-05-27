@@ -9,12 +9,20 @@ async function submitAuth(type) {
             body: JSON.stringify({ username, email })
         });
 
-        // Backend se aaye huye JSON ko parse karo
-        const data = await response.json();
-        
-        // Agar data mein 'message' hai toh wo dikhao, varna poora data stringify karke dikhao
-        document.getElementById('message').innerText = data.message || JSON.stringify(data);
+        // Poora response text format mein lo pehle
+        const rawData = await response.text();
+        console.log("Backend se mila data:", rawData); // Ye console mein dikhega
+
+        // Ab try karo ki wo JSON hai ya nahi
+        try {
+            const jsonData = JSON.parse(rawData);
+            document.getElementById('message').innerText = jsonData.message || "Message property nahi mili";
+        } catch (e) {
+            // Agar JSON nahi hai, toh seedha text dikha do
+            document.getElementById('message').innerText = rawData;
+        }
+
     } catch (error) {
-        document.getElementById('message').innerText = "Error: Backend se connect nahi ho pa raha.";
+        document.getElementById('message').innerText = "Error: Connection fail.";
     }
 }
