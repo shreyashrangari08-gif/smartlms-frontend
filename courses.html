@@ -1,35 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style>
-        .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 15px; }
-        .btn-enroll { background: #007bff; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
-    </style>
-</head>
-<body>
+<style>
+    /* Card design jaisa aapne pucha */
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding: 20px; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; transition: 0.3s; }
+    .card img { width: 100%; height: 160px; object-fit: cover; }
+    .card-body { padding: 20px; }
+    .btn-enroll { background: #007bff; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; }
+</style>
 
 <div class="course-grid" id="courseList"></div>
 
 <script>
-    async function loadCourses() {
-        const res = await fetch('https://lms-backrnd.onrender.com/courses');
-        const data = await res.json();
-        
-        document.getElementById('courseList').innerHTML = data.map(c => `
-            <div class="card">
-                <img src="${c.imageUrl || 'https://via.placeholder.com/300'}" alt="Course Image">
-                <div class="card-body">
-                    <h3>${c.title}</h3>
-                    <p>${c.description || 'No description available'}</p>
-                    <button class="btn-enroll">Start Learning</button>
-                </div>
+async function loadCourses() {
+    const res = await fetch('https://lms-backrnd.onrender.com/courses');
+    const data = await res.json();
+    
+    document.getElementById('courseList').innerHTML = data.map(c => `
+        <div class="card">
+            <img src="${c.imageUrl || 'https://via.placeholder.com/320x160'}" alt="Course">
+            <div class="card-body">
+                <h3>${c.title}</h3>
+                <p>${c.description || 'Professional Certification Pathway.'}</p>
+                <button class="btn-enroll" onclick="openCourse('${c.videoUrl}', '${c.title}')">Start Learning</button>
             </div>
-        `).join('');
-    }
-    loadCourses();
+        </div>
+    `).join('');
+}
+
+function openCourse(videoUrl, title) {
+    if(!videoUrl) { alert("Video content coming soon!"); return; }
+    // Naye window mein video khulega
+    const win = window.open("", "_blank", "width=800,height=600");
+    win.document.write(`<h1>${title}</h1><iframe width="100%" height="400" src="${videoUrl}"></iframe>`);
+}
+
+loadCourses();
 </script>
-</body>
-</html>
