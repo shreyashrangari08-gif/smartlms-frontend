@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Courses</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .course-card { background: white; padding: 20px; margin: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <h1>Available Courses</h1>
+    <div id="courseList">Loading courses...</div>
+
+    <script>
+        // Server se courses fetch karne ka logic
+        async function fetchCourses() {
+            const res = await fetch('https://lms-backrnd.onrender.com/courses');
+            const courses = await res.json();
+            const list = document.getElementById('courseList');
+            
+            if(courses.length === 0) {
+                list.innerHTML = "<p>No courses available yet. Add some courses first!</p>";
+            } else {
+                list.innerHTML = courses.map(c => `
+                    <div class="course-card">
+                        <h3>${c.title}</h3>
+                        <p>${c.description}</p>
+                        <button>Enroll Now</button>
+                    </div>
+                `).join('');
+            }
+        }
+        fetchCourses();
+    </script>
+</body>
+</html>
