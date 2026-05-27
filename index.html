@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartLMS</title>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+    
     <style>
-        body { font-family: 'Arial', sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 48%; padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; }
-        #message { margin-top: 15px; color: #333; font-weight: bold; }
+        body { font-family: sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 280px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 48%; padding: 10px; border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; }
+        #message { margin-top: 15px; color: #d9534f; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>SmartLMS</h2>
-        <input type="text" id="username" placeholder="Enter Username">
-        <input type="email" id="email" placeholder="Enter Email">
+        <input type="text" id="username" placeholder="Username">
+        <input type="email" id="email" placeholder="Email">
         <div>
             <button onclick="submitAuth('register')" style="background: green;">Register</button>
             <button onclick="submitAuth('login')" style="background: blue;">Login</button>
