@@ -1,22 +1,57 @@
-async function loadLearning() {
-    const res = await fetch(`https://lms-backrnd.onrender.com/course/${courseId}`);
-    const c = await res.json();
-    
-    document.getElementById('title').innerText = c.title;
-    
-    // Sidebar mein saare modules dikhayein
-    const sidebar = document.getElementById('lessonList');
-    sidebar.innerHTML = '<h3>Modules</h3>' + c.modules.map((mod, index) => `
-        <div style="padding:10px; cursor:pointer; border-bottom:1px solid #ccc" onclick="showModule(${index})">
-            ${mod.week}: ${mod.lessonTitle}
-        </div>
-    `).join('');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Dashboard</title>
+    <style>
+        body { font-family: sans-serif; display: flex; height: 100vh; margin: 0; }
+        .sidebar { width: 300px; background: #f4f4f4; padding: 20px; border-right: 1px solid #ddd; }
+        .main-content { flex: 1; padding: 40px; }
+        .module-item { padding: 15px; margin-bottom: 10px; background: #fff; border: 1px solid #ddd; cursor: pointer; border-radius: 5px; }
+        .module-item:hover { background: #e9e9e9; }
+        iframe { width: 100%; height: 400px; border-radius: 10px; }
+    </style>
+</head>
+<body>
 
-    // Pehla module default load karein
-    showModule(0);
-}
+<div class="sidebar" id="lessonList"><h3>Course Modules</h3></div>
+<div class="main-content">
+    <h1 id="title">Loading...</h1>
+    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+    <p id="content"></p>
+</div>
 
-function showModule(index) {
-    // Yahan fetch karke data global variable se le sakte hain
-    // Ya dobara fetch karke index wala module load karein
-}
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+
+    async function loadLearning() {
+        const res = await fetch(`https://lms-backrnd.onrender.com/course/${courseId}`);
+        const c = await res.json();
+        
+        document.getElementById('title').innerText = c.title;
+        
+        const sidebar = document.getElementById('lessonList');
+        sidebar.innerHTML = '<h3>Modules</h3>';
+        
+        c.modules.forEach((mod, index) => {
+            const div = document.createElement('div');
+            div.className = 'module-item';
+            div.innerText = `${mod.week}: ${mod.lessonTitle}`;
+            div.onclick = () => loadModuleContent(mod);
+            sidebar.appendChild(div);
+        });
+
+        // Default: Pehla module load karein
+        loadModuleContent(c.modules[0]);
+    }
+
+    function loadModuleContent(mod) {
+        document.getElementById('videoPlayer').src = mod.videoUrl.replace('watch?v=', 'embed/');
+        document.getElementById('content').innerText = mod.content;
+    }
+
+    loadLearning();
+</script>
+</body>
+</html>
