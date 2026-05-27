@@ -1,2 +1,31 @@
-<iframe id="videoPlayer" width="100%" height="400" src="https://www.youtube.com/embed/JuexCLwdas0" frameborder="0" allowfullscreen></iframe>
-<div id="content">Welcome to the course!</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Learning</title>
+</head>
+<body>
+    <h1 id="courseTitle">Loading...</h1>
+    <iframe id="videoPlayer" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
+    <div id="content"></div>
+
+    <script>
+        // Manually test ke liye entry daal rahe hain
+        const courseData = {
+            "title": "AI-ML Virtual Internship",
+            "modules": [
+                {
+                    "week": "Week 1",
+                    "lessonTitle": "Introduction to AI & ML",
+                    "videoUrl": "https://www.youtube.com/embed/JuexCLwdas0",
+                    "content": "AI aur ML ke basics sanjhein aur kaise ye kaam karte hain."
+                }
+            ]
+        };
+
+        // UI update function
+        document.getElementById('courseTitle').innerText = courseData.title;
+        document.getElementById('videoPlayer').src = courseData.modules[0].videoUrl;
+        document.getElementById('content').innerText = courseData.modules[0].content;
+    </script>
+</body>
+</html>
