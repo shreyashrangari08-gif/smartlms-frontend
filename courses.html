@@ -1,20 +1,20 @@
-// courses.html mein update
-function startCourse(courseId) {
-    // Backend se specific course ka data fetch karein
-    fetch(`https://lms-backrnd.onrender.com/course/${courseId}`)
-    .then(res => res.json())
-    .then(data => {
-        const container = document.getElementById('courseList');
-        container.innerHTML = `
-            <h2>${data.title}</h2>
-            <video src="${data.modules[0].videoUrl}" controls width="100%"></video>
-            <div id="quizSection">
-                <h3>Quiz</h3>
-                ${data.assessment.map((q, i) => `
-                    <p>${q.question}</p>
-                    ${q.options.map(opt => `<button onclick="checkAnswer('${opt}', '${q.correctAnswer}')">${opt}</button>`).join('')}
-                `).join('')}
-            </div>
-        `;
-    });
-}
+<style>
+    /* Header Styling */
+    .header { background: #003366; color: white; padding: 20px; text-align: center; }
+    .nav { background: #f8f9fa; padding: 10px; display: flex; gap: 20px; justify-content: center; }
+    
+    /* Card design jaisa aapko chahiye */
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
+</style>
+
+<div class="header">
+    <h1>INFOSYS & GLOBAL CAREER LIBRARY</h1>
+    <p>Curated pathways from top tech leaders</p>
+</div>
+
+<div class="nav">
+    <a href="#">Home</a> <a href="#">My Courses</a> <a href="#">Profile</a>
+</div>
+
+<div class="course-grid" id="courseList"></div>
