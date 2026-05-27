@@ -1,14 +1,19 @@
-<!-- Naya Video Player aur Content -->
 <iframe 
     id="videoPlayer" 
     width="100%" 
     height="400" 
-    src="https://www.youtube.com/embed/JuexCLwdas0" 
+    src="" 
     frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
     allowfullscreen>
 </iframe>
 
-<div id="content">
-    Is module mein hum AI ke basics sikhenge.
-</div>
+<div id="content"></div>
+
+<script>
+    // Ye function database se aaya hua URL iframe mein daalega
+    function loadModuleContent(mod) {
+        document.getElementById('videoPlayer').src = mod.videoUrl;
+        document.getElementById('content').innerText = mod.content;
+    }
+</script>
