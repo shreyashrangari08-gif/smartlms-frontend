@@ -1,51 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Courses</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
-        .course-card { border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 8px; background: white; }
-        .btn-add { background: #28a745; color: white; padding: 15px; border: none; cursor: pointer; width: 100%; font-size: 16px; }
-    </style>
-</head>
-<body>
-    <h1>Available Courses</h1>
-    <button class="btn-add" onclick="bulkAddCourses()">🚀 Click here to Auto-Add All Courses</button>
-    <div id="courseList"></div>
+<style>
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+    .card:hover { transform: translateY(-50px); }
+    .card img { width: 100%; height: 180px; object-fit: cover; }
+    .card-body { padding: 15px; }
+    .btn-enroll { background: #007bff; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+</style>
 
-    <script>
-        const courses = [
-            { title: "AI-ML Virtual Internship", description: "eduskillsfoundation.org" },
-            { title: "Cybersecurity Virtual Internship", description: "eduskillsfoundation.org" },
-            { title: "Cloud Computing Internship", description: "eduskillsfoundation.org" },
-            { title: "AWS Cloud Practitioner Essentials", description: "skillbuilder.aws" },
-            { title: "AWS Solutions Architect Associate", description: "skillbuilder.aws" },
-            { title: "AWS Machine Learning Foundations", description: "skillbuilder.aws" },
-            { title: "Azure Fundamentals (AZ-900)", description: "learn.microsoft.com" },
-            { title: "AI Fundamentals (AI-900)", description: "learn.microsoft.com" },
-            { title: "Power BI Data Analyst", description: "learn.microsoft.com" }
-        ];
+<div class="course-grid" id="courseList"></div>
 
-        async function bulkAddCourses() {
-            for (let course of courses) {
-                await fetch('https://lms-backrnd.onrender.com/add-course', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(course)
-                });
-            }
-            alert("All courses added successfully!");
-            loadCourses();
-        }
-
-        async function loadCourses() {
-            const res = await fetch('https://lms-backrnd.onrender.com/courses');
-            const data = await res.json();
-            document.getElementById('courseList').innerHTML = data.map(c => 
-                `<div class="course-card"><h3>${c.title}</h3><p>Source: ${c.description}</p></div>`
-            ).join('');
-        }
-        loadCourses();
-    </script>
-</body>
-</html>
+<script>
+    async function loadCourses() {
+        const res = await fetch('https://lms-backrnd.onrender.com/courses');
+        const data = await res.json();
+        document.getElementById('courseList').innerHTML = data.map(c => `
+            <div class="card">
+                <img src="${c.imageUrl || 'https://via.placeholder.com/300x180'}" alt="Course">
+                <div class="card-body">
+                    <h3>${c.title}</h3>
+                    <p>${c.shortDesc}</p>
+                    <button class="btn-enroll" onclick="watchCourse('${c.videoUrl}', '${c.title}', '${c.longDesc}')">Start Learning</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function watchCourse(video, title, desc) {
+        // Ek simple popup ya naya page jahan video chalegi
+        alert("Playing: " + title);
+        window.open(video, '_blank'); 
+    }
+    loadCourses();
+</script>
