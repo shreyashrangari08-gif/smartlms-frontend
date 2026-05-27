@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style>
-        .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
-        .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
-        .btn-enroll { background: #007bff; color: white; padding: 10px; border: none; width: 100%; border-radius: 5px; cursor: pointer; margin-top: 10px; }
-    </style>
-</head>
-<body>
-    <h1>My Courses</h1>
-    <div class="course-grid" id="courseList">Loading...</div>
-
-    <script>
-        async function loadCourses() {
-            try {
-                const res = await fetch('https://lms-backrnd.onrender.com/courses');
-                const courses = await res.json();
-                const container = document.getElementById('courseList');
-                
-                container.innerHTML = courses.map(c => `
-                    <div class="card">
-                        <img src="${c.imageUrl || 'https://via.placeholder.com/300x150'}" alt="Course Image">
-                        <h3>${c.title}</h3>
-                        <p>${c.description}</p>
-                        <button class="btn-enroll" onclick="alert('Feature coming soon!')">Start Learning</button>
-                    </div>
-                `).join('');
-            } catch (err) {
-                document.getElementById('courseList').innerText = "Error loading courses.";
-            }
-        }
-        loadCourses();
-    </script>
-</body>
-</html>
+// courses.html mein ye function change karo
+function openCourse(course) {
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0'; modal.style.left = '0';
+    modal.style.width = '100%'; modal.style.height = '100%';
+    modal.style.background = 'white';
+    modal.style.padding = '20px';
+    modal.style.overflowY = 'scroll';
+    
+    modal.innerHTML = `
+        <button onclick="this.parentElement.remove()">Close</button>
+        <h1>${course.title}</h1>
+        <iframe width="100%" height="315" src="${course.videoUrl}"></iframe>
+        <h2>Study Material</h2>
+        <p>${course.notes || "No notes available for this module."}</p>
+    `;
+    document.body.appendChild(modal);
+}
