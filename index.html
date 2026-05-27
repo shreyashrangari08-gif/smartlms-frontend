@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SmartLMS | Login</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding-top: 50px; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 300px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #218838; }
-        #message { margin-top: 15px; font-size: 14px; color: #333; text-align: center; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2>SmartLMS</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="email" id="email" placeholder="Email">
+<div class="card">
+    <h2>SmartLMS</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="email" id="email" placeholder="Email">
+    
+    <div style="display: flex; gap: 10px;">
         <button onclick="submitAuth('register')">Register</button>
-        <div id="message"></div>
+        <button onclick="submitAuth('login')" style="background: #007bff;">Login</button>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+    
+    <div id="message"></div>
+</div>
