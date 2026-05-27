@@ -1,3 +1,4 @@
+// Replace everything in script.js with this
 async function submitAuth(type) {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
@@ -10,12 +11,10 @@ async function submitAuth(type) {
             body: JSON.stringify({ username, email })
         });
         const data = await response.json();
-        
         messageDiv.innerText = data.message;
-
+        
         if (response.ok && type === 'login') {
-            alert("Login Successful! Redirecting...");
-            window.location.href = "courses.html"; 
+            window.location.href = 'courses.html';
         }
     } catch (err) {
         messageDiv.innerText = "Error: " + err.message;
