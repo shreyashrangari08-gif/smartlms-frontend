@@ -1,4 +1,5 @@
-// script.js ke login block mein ye add karo
-if (data.message.includes("Success")) {
-    window.location.href = "courses.html"; // Login hote hi courses page par bhej dega
+// script.js mein login button ke success response mein ye line add karo:
+if (response.ok) {
+    alert("Login Successful!");
+    window.location.href = "courses.html"; // Yahan redirect hoga
 }
