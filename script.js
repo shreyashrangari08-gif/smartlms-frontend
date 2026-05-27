@@ -1,14 +1,13 @@
+async function submitAuth(type) {
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
 
-const API_URL = "https://lms-backrnd.onrender.com";
+    const response = await fetch(`https://lms-backrnd.onrender.com/${type}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email })
+    });
 
-async function fetchData() {
-    try {
-        const response = await fetch(`${API_URL}/`);
-        const data = await response.text();
-        document.getElementById('data-container').innerText = data;
-    } catch (error) {
-        console.error("Error:", error);
-    }
+    const data = await response.json();
+    document.getElementById('message').innerText = data.message;
 }
-
-fetchData();
