@@ -1,6 +1,9 @@
 async function submitAuth(type) {
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
+    const msgDiv = document.getElementById('message');
+
+    msgDiv.innerText = "Loading...";
 
     try {
         const response = await fetch(`https://lms-backrnd.onrender.com/${type}`, {
@@ -10,9 +13,8 @@ async function submitAuth(type) {
         });
 
         const data = await response.json();
-        // UI par success message dikha do
-        document.getElementById('message').innerText = data.message;
+        msgDiv.innerText = data.message || "Something went wrong!";
     } catch (error) {
-        document.getElementById('message').innerText = "Error: Backend se connection fail hua.";
+        msgDiv.innerText = "Server Error: Backend se connect nahi ho raha.";
     }
 }
