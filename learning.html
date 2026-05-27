@@ -1,28 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { display: flex; font-family: 'Segoe UI', sans-serif; margin: 0; }
+        #sidebar { width: 300px; background: #2c3e50; color: white; height: 100vh; padding: 20px; }
+        #main-content { flex-grow: 1; padding: 30px; background: #f9f9f9; }
+        .module-item { padding: 15px; cursor: pointer; border-bottom: 1px solid #34495e; }
+        .module-item:hover { background: #34495e; }
+        iframe { width: 100%; height: 450px; border-radius: 10px; }
+        .content-box { background: white; padding: 20px; margin-top: 20px; border-radius: 10px; border-left: 5px solid #3498db; }
+    </style>
+</head>
+<body>
+
+<div id="sidebar">
+    <h2>Course Modules</h2>
+    <div id="moduleList"></div>
+</div>
+
+<div id="main-content">
+    <h1 id="lessonTitle">Select a module</h1>
+    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+    
+    <div class="content-box">
+        <h3>Key Takeaways</h3>
+        <ul id="takeawaysList"></ul>
+    </div>
+</div>
+
 <script>
     const modules = [
         { 
             title: "Module 1: Introduction", 
             video: "https://www.youtube.com/embed/fmpqeJA5xt4", 
-            desc: "Data analytics ke basics, analyst ka role aur data-driven decision making.",
-            takeaways: ["Data ka mahatva samajhna", "Data-driven decisions lena", "Business problems pehchanna"]
+            takeaways: ["Data Analytics basics samjhein", "Analyst ka role", "Decision making skills"] 
         },
         { 
             title: "Module 2: SQL & Analysis", 
             video: "https://www.youtube.com/embed/HXV3zeQKqGY", 
-            desc: "SQL ka full tutorial aur analysis techniques.",
-            takeaways: ["SQL queries likhna", "Data filter karna", "Sorting methods"]
+            takeaways: ["SQL queries basics", "Data filtering", "Analysis tools ka use"] 
         },
-        // ... aise hi baaki modules mein 'takeaways' array add karte jao
+        { 
+            title: "Module 3: Analysis Using SQL", 
+            video: "https://www.youtube.com/embed/7S_tz1z_5bA", 
+            takeaways: ["Real-world data cleaning", "Advanced SQL joins", "Data integrity"] 
+        },
+        { 
+            title: "Module 4: SQL Practice", 
+            video: "https://www.youtube.com/embed/27axs9dO7AE", 
+            takeaways: ["Practice queries", "Hands-on data analysis", "Error debugging"] 
+        }
     ];
 
     function loadModule(index) {
         const mod = modules[index];
         document.getElementById('lessonTitle').innerText = mod.title;
         document.getElementById('videoPlayer').src = mod.video;
-        document.getElementById('lessonDescription').innerText = mod.desc;
         
         // Takeaways update logic
         const list = document.getElementById('takeawaysList');
         list.innerHTML = mod.takeaways.map(item => `<li>${item}</li>`).join('');
     }
+
+    const list = document.getElementById('moduleList');
+    modules.forEach((mod, index) => {
+        const div = document.createElement('div');
+        div.className = 'module-item';
+        div.innerText = mod.title;
+        div.onclick = () => loadModule(index);
+        list.appendChild(div);
+    });
+
+    loadModule(0);
 </script>
+
+</body>
+</html>
