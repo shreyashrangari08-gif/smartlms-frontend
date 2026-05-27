@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SmartLMS Login</title>
+    <meta charset="UTF-8">
+    <title>SmartLMS | Login</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 300px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #218838; }
+        #message { margin-top: 15px; font-size: 14px; color: #333; text-align: center; }
+    </style>
 </head>
 <body>
-    <h2>SmartLMS Login/Register</h2>
-    <input type="text" id="username" placeholder="Enter Username">
-    <input type="email" id="email" placeholder="Enter Email">
-    <button onclick="submitAuth('register')">Register</button>
-    <p id="message"></p>
-
+    <div class="card">
+        <h2>SmartLMS</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="email" id="email" placeholder="Email">
+        <button onclick="submitAuth('register')">Register</button>
+        <div id="message"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
