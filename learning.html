@@ -1,69 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Learning Dashboard</title>
-    <style>
-        body { font-family: 'Arial', sans-serif; margin: 0; display: flex; height: 100vh; background-color: #f9f9f9; }
-        .sidebar { width: 320px; background: #ffffff; border-right: 1px solid #ddd; padding: 20px; overflow-y: auto; }
-        .main-content { flex: 1; padding: 40px; }
-        .video-container { background: #000; border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
-        .module-item { padding: 15px; margin-bottom: 10px; border-radius: 8px; background: #f0f4f8; cursor: pointer; transition: 0.3s; }
-        .module-item:hover { background: #d1e3f8; }
-        h1 { color: #003366; }
-    </style>
-</head>
-<body>
+<!-- Naya Video Player aur Content -->
+<iframe 
+    id="videoPlayer" 
+    width="100%" 
+    height="400" 
+    src="https://www.youtube.com/embed/JuexCLwdas0" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
 
-<div class="sidebar" id="lessonList">
-    <h2 style="color:#003366;">Course Modules</h2>
+<div id="content">
+    Is module mein hum AI ke basics sikhenge.
 </div>
-
-<div class="main-content">
-    <h1 id="title">Loading...</h1>
-    <div class="video-container">
-        <iframe id="videoPlayer" width="100%" height="450px" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div id="content-area">
-        <h3>About this module</h3>
-        <p id="content"></p>
-    </div>
-</div>
-
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const courseId = urlParams.get('id');
-
-    async function loadLearning() {
-        try {
-            const res = await fetch(`https://lms-backrnd.onrender.com/course/${courseId}`);
-            const c = await res.json();
-            
-            document.getElementById('title').innerText = c.title;
-            
-            const sidebar = document.getElementById('lessonList');
-            c.modules.forEach((mod, index) => {
-                const div = document.createElement('div');
-                div.className = 'module-item';
-                div.innerHTML = `<strong>${mod.week}</strong><br>${mod.lessonTitle}`;
-                div.onclick = () => loadModuleContent(mod);
-                sidebar.appendChild(div);
-            });
-
-            if(c.modules.length > 0) loadModuleContent(c.modules[0]);
-        } catch(e) {
-            document.getElementById('title').innerText = "Error loading data. Check console.";
-        }
-    }
-
-    function loadModuleContent(mod) {
-        // YouTube URL format fix
-        let vidId = mod.videoUrl.split('v=')[1] || mod.videoUrl.split('/').pop();
-        document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${vidId}`;
-        document.getElementById('content').innerText = mod.content;
-    }
-
-    loadLearning();
-</script>
-</body>
-</html>
