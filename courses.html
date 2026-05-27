@@ -1,11 +1,15 @@
-<style>
-    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
-    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
-    .card:hover { transform: translateY(-50px); }
-    .card img { width: 100%; height: 180px; object-fit: cover; }
-    .card-body { padding: 15px; }
-    .btn-enroll { background: #007bff; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 15px; }
+        .btn-enroll { background: #007bff; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
 
 <div class="course-grid" id="courseList"></div>
 
@@ -13,22 +17,19 @@
     async function loadCourses() {
         const res = await fetch('https://lms-backrnd.onrender.com/courses');
         const data = await res.json();
+        
         document.getElementById('courseList').innerHTML = data.map(c => `
             <div class="card">
-                <img src="${c.imageUrl || 'https://via.placeholder.com/300x180'}" alt="Course">
+                <img src="${c.imageUrl || 'https://via.placeholder.com/300'}" alt="Course Image">
                 <div class="card-body">
                     <h3>${c.title}</h3>
-                    <p>${c.shortDesc}</p>
-                    <button class="btn-enroll" onclick="watchCourse('${c.videoUrl}', '${c.title}', '${c.longDesc}')">Start Learning</button>
+                    <p>${c.description || 'No description available'}</p>
+                    <button class="btn-enroll">Start Learning</button>
                 </div>
             </div>
         `).join('');
     }
-    
-    function watchCourse(video, title, desc) {
-        // Ek simple popup ya naya page jahan video chalegi
-        alert("Playing: " + title);
-        window.open(video, '_blank'); 
-    }
     loadCourses();
 </script>
+</body>
+</html>
