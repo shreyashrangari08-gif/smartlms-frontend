@@ -1,108 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { display: flex; font-family: 'Segoe UI', sans-serif; margin: 0; }
-        #sidebar { width: 300px; background: #2c3e50; color: white; height: 100vh; padding: 20px; overflow-y: auto; }
-        #main-content { flex-grow: 1; padding: 30px; background: #f9f9f9; }
-        .module-item { padding: 15px; cursor: pointer; border-bottom: 1px solid #34495e; }
-        .module-item:hover { background: #34495e; }
-        iframe { width: 100%; height: 400px; border-radius: 10px; }
-        .content-box, .quiz-box { background: white; padding: 20px; margin-top: 20px; border-radius: 10px; border-left: 5px solid #3498db; }
-        #certBtn { display: none; background: #27ae60; color: white; padding: 15px; border: none; cursor: pointer; border-radius: 5px; margin-top: 20px; }
+        body { display: flex; font-family: sans-serif; margin: 0; }
+        #sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; }
+        #main-content { flex-grow: 1; padding: 30px; }
+        .module-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #34495e; }
+        #progress-bar-container { width: 100%; background: #ddd; height: 10px; margin-bottom: 20px; }
+        #progress-bar { height: 100%; background: #27ae60; width: 0%; }
     </style>
 </head>
 <body>
 
 <div id="sidebar">
-    <h2>Course Modules</h2>
+    <h3>Course Modules</h3>
     <div id="moduleList"></div>
+    <div id="finalLink" class="module-item" onclick="loadFinal()">Final Assessment</div>
 </div>
 
 <div id="main-content">
-    <h1 id="lessonTitle">Welcome</h1>
-    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
-    
-    <div class="content-box">
-        <h3>Key Takeaways</h3>
-        <ul id="takeawaysList"></ul>
-    </div>
-
-    <div class="quiz-box" id="quizContainer">
-        <h3>Assessment</h3>
-        <div id="quizContent"></div>
-    </div>
-
-    <button id="certBtn" onclick="generateCertificate()">Download Original Certificate</button>
+    <div id="progress-bar-container"><div id="progress-bar"></div></div>
+    <h1 id="lessonTitle">Module</h1>
+    <iframe id="videoPlayer" src="" width="100%" height="400" frameborder="0"></iframe>
+    <div id="quizSection"></div>
+    <button id="certBtn" style="display:none;" onclick="downloadCert()">Download Certificate</button>
 </div>
 
 <script>
-    const userName = prompt("Certificate ke liye apna pura naam likhein:");
+    let progress = localStorage.getItem('courseProgress') || 0;
     
-    const courseData = {
-        modules: [
-            { title: "Module 1: Introduction", video: "https://www.youtube.com/embed/fmpqeJA5xt4", takeaways: ["Data basics", "Analyst role"], quiz: "What is the main goal of Data Analytics?", ans: "Decision making" },
-            { title: "Module 2: SQL & Analysis", video: "https://www.youtube.com/embed/HXV3zeQKqGY", takeaways: ["SQL queries", "Filtering"], quiz: "Is SQL used for data analysis?", ans: "Yes" },
-            { title: "Module 3: Analysis Using SQL", video: "https://www.youtube.com/embed/7S_tz1z_5bA", takeaways: ["Cleaning", "Joins"], quiz: "What is data cleaning?", ans: "Process of removing errors" },
-            { title: "Module 4: SQL Practice", video: "https://www.youtube.com/embed/27axs9dO7AE", takeaways: ["Practice", "Debugging"], quiz: "What is SQL query?", ans: "Command" },
-            { title: "Module 5: Visualization", video: "https://www.youtube.com/embed/example_link", takeaways: ["Tableau", "Graphs"], quiz: "What is visualization?", ans: "Visual representation" }
-        ],
-        finalAssessment: {
-            title: "Final Assessment (10 Questions)",
-            questions: ["Q1...", "Q2...", "Q3...", "Q4...", "Q5...", "Q6...", "Q7...", "Q8...", "Q9...", "Q10..."]
-        }
-    };
+    function updateProgress(val) {
+        progress = val;
+        localStorage.setItem('courseProgress', progress);
+        document.getElementById('progress-bar').style.width = progress + "%";
+    }
 
     function loadModule(index) {
-        const mod = courseData.modules[index];
-        document.getElementById('videoPlayer').style.display = "block";
-        document.getElementById('lessonTitle').innerText = mod.title;
-        document.getElementById('videoPlayer').src = mod.video;
-        document.getElementById('takeawaysList').innerHTML = mod.takeaways.map(t => `<li>${t}</li>`).join('');
-        document.getElementById('quizContent').innerHTML = `<p>${mod.quiz}</p><input type="text" id="ansInput"><button onclick="checkModuleQuiz()">Submit</button>`;
+        // Logic to show video and specific module quiz
+        // Jab quiz submit ho, toh call karo: updateProgress(progress + 20);
     }
 
     function loadFinal() {
-        document.getElementById('lessonTitle').innerText = courseData.finalAssessment.title;
-        document.getElementById('videoPlayer').style.display = "none";
-        document.getElementById('takeawaysList').innerHTML = "<li>Complete all 10 questions to get your certificate.</li>";
-        document.getElementById('quizContent').innerHTML = courseData.finalAssessment.questions.map((q, i) => `<p>${i+1}. ${q}</p><input type="text">`).join('') + `<br><button onclick="checkFinal()">Submit Final Test</button>`;
+        // Final Assessment logic
+        document.getElementById('quizSection').innerHTML = `
+            <h3>Final Test</h3>
+            <button onclick="finishCourse()">Submit Final Test</button>
+        `;
     }
 
-    function checkModuleQuiz() { alert("Answer submitted!"); }
-
-    function checkFinal() {
-        alert("Congratulations! You passed. Certificate unlocked.");
+    function finishCourse() {
+        alert("Well done! Certificate Unlocked.");
         document.getElementById('certBtn').style.display = "block";
     }
 
-    function generateCertificate() {
+    function downloadCert() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.text("Certificate of Completion", 100, 50);
-        doc.text("Awarded to: " + userName, 100, 80);
         doc.save("Certificate.pdf");
     }
 
-    const list = document.getElementById('moduleList');
-    courseData.modules.forEach((mod, index) => {
-        const div = document.createElement('div');
-        div.className = 'module-item';
-        div.innerText = mod.title;
-        div.onclick = () => loadModule(index);
-        list.appendChild(div);
-    });
-
-    const finalDiv = document.createElement('div');
-    finalDiv.className = 'module-item';
-    finalDiv.innerText = "Final Assessment";
-    finalDiv.onclick = loadFinal;
-    list.appendChild(finalDiv);
-
-    loadModule(0);
+    updateProgress(progress);
 </script>
-
 </body>
 </html>
