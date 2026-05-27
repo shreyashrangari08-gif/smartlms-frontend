@@ -1,9 +1,51 @@
-<h1>My Courses</h1>
-<div id="courseList"></div>
-<script>
-    fetch('https://lms-backrnd.onrender.com/courses')
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('courseList').innerHTML = JSON.stringify(data);
-    });
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Courses</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .course-card { border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 8px; background: white; }
+        .btn-add { background: #28a745; color: white; padding: 15px; border: none; cursor: pointer; width: 100%; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Available Courses</h1>
+    <button class="btn-add" onclick="bulkAddCourses()">🚀 Click here to Auto-Add All Courses</button>
+    <div id="courseList"></div>
+
+    <script>
+        const courses = [
+            { title: "AI-ML Virtual Internship", description: "eduskillsfoundation.org" },
+            { title: "Cybersecurity Virtual Internship", description: "eduskillsfoundation.org" },
+            { title: "Cloud Computing Internship", description: "eduskillsfoundation.org" },
+            { title: "AWS Cloud Practitioner Essentials", description: "skillbuilder.aws" },
+            { title: "AWS Solutions Architect Associate", description: "skillbuilder.aws" },
+            { title: "AWS Machine Learning Foundations", description: "skillbuilder.aws" },
+            { title: "Azure Fundamentals (AZ-900)", description: "learn.microsoft.com" },
+            { title: "AI Fundamentals (AI-900)", description: "learn.microsoft.com" },
+            { title: "Power BI Data Analyst", description: "learn.microsoft.com" }
+        ];
+
+        async function bulkAddCourses() {
+            for (let course of courses) {
+                await fetch('https://lms-backrnd.onrender.com/add-course', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(course)
+                });
+            }
+            alert("All courses added successfully!");
+            loadCourses();
+        }
+
+        async function loadCourses() {
+            const res = await fetch('https://lms-backrnd.onrender.com/courses');
+            const data = await res.json();
+            document.getElementById('courseList').innerHTML = data.map(c => 
+                `<div class="course-card"><h3>${c.title}</h3><p>Source: ${c.description}</p></div>`
+            ).join('');
+        }
+        loadCourses();
+    </script>
+</body>
+</html>
