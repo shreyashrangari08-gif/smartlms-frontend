@@ -1,18 +1,37 @@
-// Replace your existing script in courses.html with this
-async function loadCourses() {
-    const res = await fetch('https://lms-backrnd.onrender.com/courses');
-    const courses = await res.json();
-    
-    const container = document.getElementById('courseList');
-    container.innerHTML = courses.map(c => `
-        <div class="card">
-            <img src="${c.imageUrl || 'https://via.placeholder.com/300'}" alt="Course">
-            <div class="card-body">
-                <h3>${c.title}</h3>
-                <p>${c.description}</p>
-                <button class="btn-enroll" onclick="window.open('${c.videoUrl}', '_blank')">Start Learning</button>
-            </div>
-        </div>
-    `).join('');
-}
-loadCourses();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
+        .card { border: 1px solid #ddd; padding: 15px; border-radius: 10px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+        .btn-enroll { background: #007bff; color: white; padding: 10px; border: none; width: 100%; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>My Courses</h1>
+    <div class="course-grid" id="courseList">Loading...</div>
+
+    <script>
+        async function loadCourses() {
+            try {
+                const res = await fetch('https://lms-backrnd.onrender.com/courses');
+                const courses = await res.json();
+                const container = document.getElementById('courseList');
+                
+                container.innerHTML = courses.map(c => `
+                    <div class="card">
+                        <img src="${c.imageUrl || 'https://via.placeholder.com/300x150'}" alt="Course Image">
+                        <h3>${c.title}</h3>
+                        <p>${c.description}</p>
+                        <button class="btn-enroll" onclick="alert('Feature coming soon!')">Start Learning</button>
+                    </div>
+                `).join('');
+            } catch (err) {
+                document.getElementById('courseList').innerText = "Error loading courses.";
+            }
+        }
+        loadCourses();
+    </script>
+</body>
+</html>
