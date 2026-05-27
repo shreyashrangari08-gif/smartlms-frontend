@@ -9,12 +9,10 @@ async function submitAuth(type) {
             body: JSON.stringify({ username, email })
         });
 
-        // Poora data text ki tarah lo
-        const rawData = await response.text();
-        
-        // Screen par dikhao ki backend se kya aaya
-        document.getElementById('message').innerText = "Backend Response: " + rawData;
+        const data = await response.json();
+        // UI par success message dikha do
+        document.getElementById('message').innerText = data.message;
     } catch (error) {
-        document.getElementById('message').innerText = "Network Error.";
+        document.getElementById('message').innerText = "Error: Backend se connection fail hua.";
     }
 }
