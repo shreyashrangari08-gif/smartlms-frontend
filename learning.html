@@ -1,99 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        body { display: flex; font-family: 'Segoe UI', sans-serif; margin: 0; }
-        #sidebar { width: 300px; background: #2c3e50; color: white; height: 100vh; padding: 20px; }
-        #main-content { flex-grow: 1; padding: 30px; background: #f9f9f9; }
-        .module-item { padding: 15px; cursor: pointer; border-bottom: 1px solid #34495e; }
-        .module-item:hover { background: #34495e; }
-        iframe { width: 100%; height: 400px; border-radius: 10px; }
-        .content-box, .quiz-box { background: white; padding: 20px; margin-top: 20px; border-radius: 10px; border-left: 5px solid #3498db; }
-        #certBtn { display: none; background: #27ae60; color: white; padding: 15px; border: none; cursor: pointer; border-radius: 5px; margin-top: 20px; }
-    </style>
-</head>
-<body>
-
-<div id="sidebar">
-    <h2>Course Modules</h2>
-    <div id="moduleList"></div>
-</div>
-
-<div id="main-content">
-    <h1 id="lessonTitle">Welcome</h1>
-    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
-    
-    <div class="content-box">
-        <h3>Key Takeaways</h3>
-        <ul id="takeawaysList"></ul>
-    </div>
-
-    <div class="quiz-box">
-        <h3>Assessment</h3>
-        <p id="quizQuestion">Loading question...</p>
-        <input type="radio" name="q1" value="wrong"> Option A<br>
-        <input type="radio" name="q1" value="correct"> Option B<br>
-        <button onclick="checkQuiz()">Submit Answer</button>
-    </div>
-
-    <button id="certBtn" onclick="generateCertificate()">Download Original Certificate</button>
-</div>
-
 <script>
-    const modules = [
-        { 
-            title: "Module 1: Introduction", 
-            video: "https://www.youtube.com/embed/fmpqeJA5xt4", 
-            takeaways: ["Data basics", "Analyst role"],
-            quiz: "What is the main goal of Data Analytics?",
-            ans: "correct"
-        },
-        { 
-            title: "Module 2: SQL & Analysis", 
-            video: "https://www.youtube.com/embed/HXV3zeQKqGY", 
-            takeaways: ["SQL queries", "Filtering"],
-            quiz: "Is SQL used for data analysis?",
-            ans: "correct"
+    // --- Yahan apna naya data paste karo ---
+    const courseData = {
+        modules: [
+            { 
+                title: "Module 1: Introduction", 
+                video: "https://www.youtube.com/embed/fmpqeJA5xt4", 
+                quizzes: [
+                    {q: "What is Data Analytics?", a: "Decision making"},
+                    {q: "What is an analyst role?", a: "Data processing"},
+                    // ... aise hi 5 sawal
+                ] 
+            },
+            // ... baaki 4 modules ka data yahan
+        ],
+        finalAssessment: {
+            title: "Final Assessment",
+            questions: [
+                // ... yahan 10 questions
+            ]
         }
-        // ... aise hi baki modules add karo
-    ];
+    };
 
+    // --- Iske niche baaki ka logic (loadModule function etc.) rahega ---
+    
     function loadModule(index) {
-        const mod = modules[index];
-        document.getElementById('lessonTitle').innerText = mod.title;
-        document.getElementById('videoPlayer').src = mod.video;
-        document.getElementById('takeawaysList').innerHTML = mod.takeaways.map(t => `<li>${t}</li>`).join('');
-        document.getElementById('quizQuestion').innerText = mod.quiz;
+        // ... ab yahan 'courseData.modules[index]' ka use karo
     }
-
-    function checkQuiz() {
-        if(document.querySelector('input[value="correct"]:checked')) {
-            alert("Correct! Quiz cleared.");
-            document.getElementById('certBtn').style.display = "block";
-        } else {
-            alert("Wrong! Try again.");
-        }
-    }
-
-    function generateCertificate() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('landscape');
-        doc.text("Certificate of Completion - Google Data Analytics", 50, 50);
-        doc.save("Certificate.pdf");
-    }
-
-    const list = document.getElementById('moduleList');
-    modules.forEach((mod, index) => {
-        const div = document.createElement('div');
-        div.className = 'module-item';
-        div.innerText = mod.title;
-        div.onclick = () => loadModule(index);
-        list.appendChild(div);
-    });
-
-    loadModule(0);
 </script>
-</body>
-</html>
