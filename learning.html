@@ -1,11 +1,55 @@
-<style>
-    #module-container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-        line-height: 1.6;
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { display: flex; font-family: sans-serif; margin: 0; }
+        #sidebar { width: 300px; background: #f4f4f4; height: 100vh; padding: 20px; border-right: 1px solid #ccc; }
+        #main-content { flex-grow: 1; padding: 40px; }
+        .module-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #ddd; }
+        .module-item:hover { background: #e0e0e0; }
+        iframe { width: 100%; height: 450px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div id="sidebar">
+    <h2>Modules</h2>
+    <div id="moduleList"></div>
+</div>
+
+<div id="main-content">
+    <h1 id="lessonTitle">Welcome</h1>
+    <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+    <div id="lessonDescription" style="margin-top: 20px;"></div>
+</div>
+
+<script>
+    // Ye aapka Data hai (yahan aap apne 5 modules ke link daaloge)
+    const modules = [
+        { title: "Introduction to Data Analytics", video: "https://www.youtube.com/embed/fmpqeJA5xt4", desc: "Data analytics kya hota hai aur iska role." },
+        { title: "Prepare Data for Exploration", video: "https://www.youtube.com/embed/dQw4w9WgXcQ", desc: "Data collection aur cleaning ki basics." },
+        // ... aise hi baki 3 aur add karo
+    ];
+
+    function loadModule(index) {
+        const mod = modules[index];
+        document.getElementById('lessonTitle').innerText = mod.title;
+        document.getElementById('videoPlayer').src = mod.video;
+        document.getElementById('lessonDescription').innerText = mod.desc;
     }
-    #lessonTitle { color: #2c3e50; border-bottom: 2px solid #3498db; }
-    h3 { color: #34495e; margin-top: 20px; }
-    p { color: #555; }
-</style>
+
+    const list = document.getElementById('moduleList');
+    modules.forEach((mod, index) => {
+        const div = document.createElement('div');
+        div.className = 'module-item';
+        div.innerText = mod.title;
+        div.onclick = () => loadModule(index);
+        list.appendChild(div);
+    });
+
+    // Pehla module load karo
+    loadModule(0);
+</script>
+
+</body>
+</html>
