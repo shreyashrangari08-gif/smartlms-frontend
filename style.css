@@ -1,37 +1,21 @@
 body {
     margin: 0;
-    padding: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Professional gradient background */
-    background: linear-gradient(135deg, #e0e9f8 0%, #d1d9e6 100%);
-    font-family: 'Segoe UI', sans-serif;
+    background: #e0e9f8; /* Professional background */
+    font-family: sans-serif;
 }
-
 .login-box {
     display: flex;
     background: white;
-    width: 90%;
-    max-width: 800px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 800px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     overflow: hidden;
 }
-
-.left-panel {
-    background: #007bff;
-    color: white;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 40%;
-}
-
-.right-panel {
-    padding: 40px;
-    width: 60%;
-}
+.left-panel { background: #007bff; color: white; width: 40%; padding: 40px; text-align: center; }
+.right-panel { padding: 40px; width: 60%; }
+input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+.otp-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; cursor: pointer; }
