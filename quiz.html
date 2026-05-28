@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body style="margin: 0; display: flex; font-family: sans-serif;">
+    <div style="width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; position: fixed;">
+        <h3>Menu</h3>
+        <p><a href="learning.html" style="color: white; text-decoration: none;">Dashboard</a></p>
+        <p><a href="sqlanalysis.html" style="color: white; text-decoration: none;">SQL & Analysis</a></p>
+        <p><b>Quiz</b></p>
+    </div>
+
+    <div style="margin-left: 290px; padding: 40px; width: 70%;">
+        <h1>Data Analytics Quiz</h1>
+        <form id="quizForm">
+            <div id="questions">
+                <p>1. What is the main purpose of data analytics?</p>
+                <input type="radio" name="q1" value="A"> A) Create games<br>
+                <input type="radio" name="q1" value="B"> B) Analyze data and make decisions<br>
+                <input type="radio" name="q1" value="C"> C) Repair computers<br>
+                <input type="radio" name="q1" value="D"> D) Design websites<br>
+
+                <p>2. Which tool is mainly used for querying databases? ...</p>
+                </div>
+            
+            <button type="button" onclick="calculateResult()" style="margin-top:20px; padding:10px 20px; background:blue; color:white; border:none;">Submit Quiz</button>
+        </form>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function calculateResult() {
+            const correctAnswers = { q1: "B", q2: "C", q3: "A", q4: "A", q5: "B", q6: "C", q7: "C", q8: "C", q9: "B", q10: "B" };
+            let score = 0;
+            const form = document.forms['quizForm'];
+            
+            for (let q in correctAnswers) {
+                if (form[q].value === correctAnswers[q]) score++;
+            }
+
+            let grade = score >= 9 ? "A (Excellent!)" : score >= 7 ? "B (Good Job!)" : "C (Needs Improvement)";
+            document.getElementById('result').innerHTML = "You scored: " + score + "/10. Your Grade: " + grade;
+        }
+    </script>
+</body>
+</html>
+
