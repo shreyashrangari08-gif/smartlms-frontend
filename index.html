@@ -1,12 +1,22 @@
-<script>
-    function handleLogin(e) { 
-        e.preventDefault(); 
-        // Yahan aap apna email check kar rahe hain
-        if (document.getElementById('email').value === "shreyashrangari08@gmail.com") {
-            // Yahan hum dashboard.html par bhej rahe hain
-            window.location.href = "dashboard.html"; 
-        } else {
-            alert("Invalid Credentials!"); 
+<!DOCTYPE html>
+<html>
+<body style="font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f7f6;">
+    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px;">
+        <h2>Login</h2>
+        <input type="text" id="email" placeholder="Enter Email" style="width: 100%; padding: 10px; margin-bottom: 10px;"><br>
+        <button onclick="handleLogin()" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer;">Log In</button>
+    </div>
+
+    <script>
+        function handleLogin() {
+            // Check email
+            var email = document.getElementById('email').value;
+            if (email !== "") {
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Please enter your email");
+            }
         }
-    }
-</script>
+    </script>
+</body>
+</html>
