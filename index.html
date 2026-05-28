@@ -1,44 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #f4f7f6; }
-        .header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-        .hero { background: white; padding: 40px; margin: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
-        .btn { padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin: 5px; }
-        .btn-enroll { background: #3498db; color: white; }
-        .btn-continue { background: #27ae60; color: white; }
-        .progress-section { margin-top: 30px; }
-        .bar { width: 100%; background: #ddd; height: 12px; border-radius: 10px; overflow: hidden; }
-        .fill { height: 100%; background: #27ae60; width: 0%; transition: width 0.5s; }
-    </style>
-</head>
-<body>
+<div class="login-container">
+    <!-- Left Side: Brand Panel -->
+    <div class="left-panel">
+        <img src="your-logo.png" alt="Logo">
+        <h2>Online Learning System</h2>
+        <div class="slider"> <!-- Yahan tum apni images dal sakte ho --> </div>
+    </div>
 
-<div class="header">
-    <h1>Data Analytics Pro</h1>
-</div>
-
-<div class="hero">
-    <h2>Google Data Analytics Professional Certificate</h2>
-    <p>A comprehensive 8-course series on Data Analytics.</p>
-    
-    <button class="btn btn-enroll" onclick="alert('Enrolled Successfully!')">Enroll Now</button>
-    <a href="learning.html"><button class="btn btn-continue">Continue Learning</button></a>
-
-    <div class="progress-section">
-        <p>Your Learning Journey</p>
-        <div class="bar"><div id="progressBar" class="fill"></div></div>
-        <p><span id="progText">0</span>% Completed</p>
+    <!-- Right Side: Login Form -->
+    <div class="right-panel">
+        <h3>Log In</h3>
+        <div class="user-tabs">
+            <button>As Student</button>
+            <button>As T-POC/Admin/Trainer</button>
+        </div>
+        <div class="login-methods">
+            <label><input type="radio" name="login" checked> Email</label>
+            <label><input type="radio" name="login"> Mobile</label>
+        </div>
+        <input type="text" placeholder="Enter Mobile Number">
+        <button class="otp-btn">Send OTP</button>
     </div>
 </div>
-
-<script>
-    // Progress load karo
-    let savedProg = localStorage.getItem('courseProgress') || 0;
-    document.getElementById('progressBar').style.width = savedProg + "%";
-    document.getElementById('progText').innerText = savedProg;
-</script>
-
-</body>
-</html>
