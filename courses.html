@@ -1,8 +1,21 @@
-<div id="quiz-container">
-    <h3>Final Assessment (10 Questions)</h3>
-    <form id="quiz-form">
-        <div id="questions-list"></div>
-        <button type="button" onclick="calculateResult()" class="otp-btn">Submit Final Test</button>
-    </form>
-    <h2 id="result-display" style="margin-top:20px;"></h2>
+<div class="main-layout">
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <p>Module 1: Introduction</p>
+        <p>Module 2: SQL & Analysis</p>
+        <p>Module 3: Analysis Using SQL</p>
+        <p>Module 4: SQL Practice</p>
+        <p>Module 5: Visualization</p>
+        <p><b>Final Assessment</b></p>
+    </div>
+
+    <!-- Quiz Area -->
+    <div class="content-area">
+        <h3>Final Assessment (10 Questions)</h3>
+        <div id="questions-list">
+            <!-- Questions yahan dynamic load honge -->
+        </div>
+        <button onclick="calculateResult()" class="otp-btn">Submit Final Test</button>
+        <h2 id="result-display" style="margin-top:20px;"></h2>
+    </div>
 </div>
