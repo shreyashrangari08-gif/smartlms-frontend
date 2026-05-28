@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html>
 <body style="margin: 0; padding: 40px; font-family: sans-serif; background-color: #f4f7f6;">
+
     <h1 style="color: #2c3e50;">Final Assessment Quiz</h1>
     <form id="quizForm">
-        <!-- Questions... (Baki 10 questions yahan waise hi rahenge) -->
-        <p>1. What is the main purpose of data analytics? <br>
+        <p>1. What is the main purpose of data analytics?<br>
            <input type="radio" name="q1" value="A"> A) Create games <input type="radio" name="q1" value="B"> B) Analyze data and make decisions <input type="radio" name="q1" value="C"> C) Repair computers <input type="radio" name="q1" value="D"> D) Design websites</p>
-        <!-- (Baki 9 questions yahan add karein) -->
+        
+        <p>2. Which tool is mainly used for querying databases?<br>
+           <input type="radio" name="q2" value="A"> A) Photoshop <input type="radio" name="q2" value="B"> B) Tableau <input type="radio" name="q2" value="C"> C) SQL <input type="radio" name="q2" value="D"> D) PowerPoint</p>
 
-        <button type="button" onclick="calculateResult()" style="padding: 12px 25px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
-            Submit Quiz
-        </button>
+        <p>3. What does SQL stand for?<br>
+           <input type="radio" name="q3" value="A"> A) Structured Query Language <input type="radio" name="q3" value="B"> B) Simple Question Language <input type="radio" name="q3" value="C"> C) System Query Logic <input type="radio" name="q3" value="D"> D) Structured Quick Logic</p>
+
+        <p>4. Which of the following is used for data visualization?<br>
+           <input type="radio" name="q4" value="A"> A) Tableau <input type="radio" name="q4" value="B"> B) MS Paint <input type="radio" name="q4" value="C"> C) Notepad <input type="radio" name="q4" value="D"> D) Calculator</p>
+
+        <p>5. What is the purpose of the WHERE clause in SQL?<br>
+           <input type="radio" name="q5" value="A"> A) Delete tables <input type="radio" name="q5" value="B"> B) Filter records <input type="radio" name="q5" value="C"> C) Create charts <input type="radio" name="q5" value="D"> D) Rename columns</p>
+
+        <p>6. Which programming language is introduced in the Google Data Analytics Certificate?<br>
+           <input type="radio" name="q6" value="A"> A) Java <input type="radio" name="q6" value="B"> B) Python <input type="radio" name="q6" value="C"> C) R Programming <input type="radio" name="q6" value="D"> D) C++</p>
+
+        <p>7. What does a data analyst mainly do?<br>
+           <input type="radio" name="q7" value="A"> A) Repair hardware <input type="radio" name="q7" value="B"> B) Create animations <input type="radio" name="q7" value="C"> C) Collects and analyzes data <input type="radio" name="q7" value="D"> D) Develops mobile phones</p>
+
+        <p>8. Which SQL command is used to retrieve data from a table?<br>
+           <input type="radio" name="q8" value="A"> A) INSERT <input type="radio" name="q8" value="B"> B) UPDATE <input type="radio" name="q8" value="C"> C) SELECT <input type="radio" name="q8" value="D"> D) DELETE</p>
+
+        <p>9. What is the final major project in the certificate called?<br>
+           <input type="radio" name="q9" value="A"> A) Annual Report <input type="radio" name="q9" value="B"> B) Capstone Project <input type="radio" name="q9" value="C"> C) Final Coding Test <input type="radio" name="q9" value="D"> D) Dashboard Report</p>
+
+        <p>10. Which of the following is an important step in data cleaning?<br>
+           <input type="radio" name="q10" value="A"> A) Adding viruses <input type="radio" name="q10" value="B"> B) Removing duplicate data <input type="radio" name="q10" value="C"> C) Deleting all records <input type="radio" name="q10" value="D"> D) Ignoring missing values</p>
+
+        <button type="button" onclick="calculateResult()" style="padding: 12px 25px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit Quiz</button>
     </form>
 
-    <!-- Result Box (Jo quiz submit hone ke baad dikhega) -->
-    <div id="resultBox" style="margin-top: 30px; padding: 25px; border-radius: 10px; display: none; text-align: center;">
-        <h2 id="congratsText" style="color: #28a745;"></h2>
+    <div id="resultBox" style="margin-top: 30px; padding: 25px; border-radius: 10px; display: none; text-align: center; border: 2px solid;">
+        <h2 id="congratsText"></h2>
         <h3 id="scoreText"></h3>
-        <p id="gradeText" style="font-size: 20px; font-weight: bold;"></p>
+        <p id="gradeText" style="font-size: 22px; font-weight: bold;"></p>
+        <a href="sqlanalysis.html" style="display:inline-block; margin-top:15px; padding:10px 20px; background:#333; color:white; text-decoration:none; border-radius:5px;">Back to Course</a>
     </div>
 
     <script>
@@ -25,22 +49,24 @@
             const answers = { q1: "B", q2: "C", q3: "A", q4: "A", q5: "B", q6: "C", q7: "C", q8: "C", q9: "B", q10: "B" };
             let score = 0;
             const form = document.forms['quizForm'];
-            for (let q in answers) { if (form[q].value === answers[q]) score++; }
+            for (let i = 1; i <= 10; i++) {
+                let qName = "q" + i;
+                if (form[qName] && form[qName].value === answers[qName]) score++;
+            }
 
-            // Logic for Grade
-            let grade, msg, color;
-            if (score >= 9) { grade = "A"; msg = "Congratulations! Excellent work!"; color = "#28a745"; }
-            else if (score >= 7) { grade = "B"; msg = "Well done! You performed great."; color = "#007bff"; }
-            else { grade = "C"; msg = "Keep learning! You can do better."; color = "#dc3545"; }
-
-            // Display Result
-            const box = document.getElementById('resultBox');
+            let box = document.getElementById('resultBox');
             box.style.display = "block";
-            box.style.backgroundColor = color + "22"; // Light background
-            box.style.border = "2px solid " + color;
-            document.getElementById('congratsText').innerText = msg;
-            document.getElementById('scoreText').innerText = "Your Score: " + score + "/10";
-            document.getElementById('gradeText').innerText = "Final Grade: " + grade;
+            if (score >= 9) { 
+                box.style.borderColor = "#28a745"; document.getElementById('congratsText').innerHTML = "Congratulations!"; 
+                document.getElementById('gradeText').innerHTML = "Grade: A"; 
+            } else if (score >= 7) { 
+                box.style.borderColor = "#007bff"; document.getElementById('congratsText').innerHTML = "Good Job!"; 
+                document.getElementById('gradeText').innerHTML = "Grade: B"; 
+            } else { 
+                box.style.borderColor = "#dc3545"; document.getElementById('congratsText').innerHTML = "Keep Practicing!"; 
+                document.getElementById('gradeText').innerHTML = "Grade: C"; 
+            }
+            document.getElementById('scoreText').innerHTML = "Your Score: " + score + "/10";
         }
     </script>
 </body>
