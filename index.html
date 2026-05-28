@@ -4,15 +4,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="login-box">
-        <div class="left-panel">
-            <h2>Online Learning System</h2>
-        </div>
-        <div class="right-panel">
-            <h3>Log In</h3>
-            <input type="email" id="email" placeholder="Email">
-            <input type="password" id="password" placeholder="Password">
-            <button class="otp-btn" onclick="checkLogin()">Log In</button>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <div class="left-panel">
+                <h2>Online Learning System</h2>
+            </div>
+            <div class="right-panel">
+                <h3>Log In</h3>
+                <label>Email:</label>
+                <input type="email" id="email" placeholder="Enter Email">
+                <label>Password:</label>
+                <input type="password" id="password" placeholder="Enter Password">
+                <button class="otp-btn" onclick="checkLogin()">Log In</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
