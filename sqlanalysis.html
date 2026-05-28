@@ -1,58 +1,7 @@
-<!DOCTYPE html>
-<html>
-<body style="font-family: sans-serif; margin: 0; display: flex;">
-
-    <!-- Sidebar -->
-    <div style="width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px;">
-        <h3>Menu</h3>
-        <p><a href="dashboard.html" style="color:white; text-decoration:none;">Dashboard</a></p>
-        <p><a href="introduction.html" style="color:white; text-decoration:none;">Introduction</a></p>
-        <p><b>SQL & Analysis</b></p>
-    </div>
-
-    <!-- Main Content -->
-    <div style="padding: 40px; flex-grow: 1; max-width: 800px;">
-        <h2>SQL & Analysis</h2>
-        
-        <!-- Video Section -->
-        <div style="margin-bottom: 20px;">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <p>SQL (Structured Query Language) is the most important skill in the Google Data Analytics Professional Certificate. It is used to communicate with databases and retrieve useful information.</p>
-        
-        <h3>Core SQL Commands:</h3>
-        <ul>
-            <li><b>SELECT:</b> Used to retrieve data.</li>
-            <li><b>WHERE:</b> Used to filter records.</li>
-            <li><b>JOIN:</b> Used to combine tables.</li>
-        </ul>
-
-        <!-- Status & Navigation -->
-        <div id="lessonBox" style="margin-top: 30px; padding: 20px; background: #f9f9f9; border: 1px solid #ddd;">
-            <p>Status: <span id="statusText">Not Started</span></p>
-            <button id="compBtn" onclick="completeLesson()" style="padding: 10px 20px; background: #00c853; color: white; border: none; cursor: pointer;">
-                Mark as Complete
-            </button>
-            <div id="nextBtn" style="display:none; margin-top:10px;">
-                <a href="quiz.html" style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Go to Quiz</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        window.onload = function() {
-            if (localStorage.getItem('week1') === 'completed') {
-                document.getElementById('statusText').innerText = "Completed ✅";
-                document.getElementById('compBtn').style.display = "none";
-                document.getElementById('nextBtn').style.display = "block";
-            }
-        };
-
-        function completeLesson() {
-            localStorage.setItem('week1', 'completed');
-            location.reload();
-        }
-    </script>
-</body>
-</html>
+<!-- Sidebar -->
+<div style="width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px;">
+    <h3>Menu</h3>
+    <p><a href="dashboard.html" style="color:white; text-decoration:none;">Dashboard</a></p>
+    <p><a href="introduction.html" style="color:white; text-decoration:none;">Introduction</a></p>
+    <p><a href="sqlanalysis.html" style="color:white; text-decoration:none;">SQL & Analysis</a></p>
+</div>
