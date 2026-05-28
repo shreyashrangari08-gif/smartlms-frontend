@@ -1,7 +1,29 @@
-<div class="left-panel">
-    <!-- Logo add kiya -->
-    <a href="index.html">
-        <img src="logo.png" alt="Logo" style="width:150px; margin-bottom:15px;">
-    </a>
-    <h2>Online Learning System</h2>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-box">
+        <div class="left-panel">
+            <a href="index.html">
+              <img src="logo.png" alt="Online Learning System Logo" width="150">
+            </a>
+            <h2>Online Learning System</h2>
+        </div>
+        <div class="right-panel">
+            <h3>Log In</h3>
+            <label>Email:</label>
+            <input type="email" id="email" value="shreyashrangari08@gmail.com">
+            <label>Password:</label>
+            <input type="password" id="password" value="Shreyash123">
+            <button class="otp-btn" onclick="checkLogin()">Log In</button>
+            <p style="text-align:center; margin-top:10px;">
+                <a href="#" style="color:#007bff;">Forgot Password?</a>
+            </p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
