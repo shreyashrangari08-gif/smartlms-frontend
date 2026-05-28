@@ -1,27 +1,24 @@
-// Login Logic
-function checkLogin() {
-    let email = document.getElementById('email').value;
-    let pass = document.getElementById('password').value;
-    if(email === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
-        window.location.href = 'courses.html';
-    } else {
-        alert("Invalid Login!");
-    }
-}
+const correctAnswers = ["a", "b", "c", "a", "b", "c", "a", "b", "c", "a"]; // Apne sahi jawab yahan daal do
 
-// Quiz Logic
-function loadQuestions() {
-    let questions = ["Q1?", "Q2?", "Q3?", "Q4?", "Q5?", "Q6?", "Q7?", "Q8?", "Q9?", "Q10?"];
+function loadQuiz() {
+    let quizDiv = document.getElementById('quiz-section');
     let html = "";
-    questions.forEach((q, i) => {
-        html += `<p>${q}</p><input type="text" id="a${i}" style="width:100%; margin-bottom:10px;">`;
-    });
-    document.getElementById('questions-list').innerHTML = html;
+    for(let i=0; i<10; i++) {
+        html += `<p>${i+1}. Sawal yahan...</p>
+                 <input type="text" id="q${i}" style="width:100%; margin-bottom:10px;">`;
+    }
+    quizDiv.innerHTML = html;
 }
 
-function calculateResult() {
-    // Yahan apna scoring logic daalo
-    document.getElementById('result-display').innerHTML = "Your Percentage: 100%";
+function checkAssessment() {
+    let score = 0;
+    for(let i=0; i<10; i++) {
+        let ans = document.getElementById(`q${i}`).value.toLowerCase();
+        if(ans === correctAnswers[i]) score++;
+    }
+    
+    let grade = (score >= 8) ? "Grade: A (Pass)" : (score >= 5) ? "Grade: B (Average)" : "Grade: F (Fail)";
+    document.getElementById('grade-display').innerHTML = `Score: ${score}/10 - ${grade}`;
 }
 
-if(window.location.pathname.includes("courses.html")) window.onload = loadQuestions;
+window.onload = loadQuiz;
