@@ -1,22 +1,19 @@
-// Replace everything in script.js with this
-async function submitAuth(type) {
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const messageDiv = document.getElementById('message');
+function showForgot() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('forgot-form').style.display = 'block';
+}
 
-    try {
-        const response = await fetch(`https://lms-backrnd.onrender.com/${type}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, email })
-        });
-        const data = await response.json();
-        messageDiv.innerText = data.message;
-        
-        if (response.ok && type === 'login') {
-            window.location.href = 'courses.html';
-        }
-    } catch (err) {
-        messageDiv.innerText = "Error: " + err.message;
+function showLogin() {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('forgot-form').style.display = 'none';
+}
+
+function checkLogin() {
+    let email = document.getElementById('email').value;
+    let pass = document.getElementById('password').value;
+    if(email === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
+        window.location.href = 'courses.html';
+    } else {
+        alert("Invalid Details!");
     }
 }
