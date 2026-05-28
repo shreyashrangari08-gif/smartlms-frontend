@@ -1,40 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; }
-        
-        /* Modern Header */
-        .header { background: #1a237e; color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        
-        /* Main Container */
-        .container { padding: 40px; max-width: 900px; margin: auto; }
-        
-        /* Course Card Styling */
-        .course-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-left: 6px solid #00c853; }
-        
-        /* Button Styling */
-        .btn { display: inline-block; text-decoration: none; background: #007bff; color: white; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
-        .btn:hover { background: #0056b3; }
-    </style>
-</head>
-<body>
-
-    <!-- Header Section -->
-    <div class="header">
-        <h2 style="margin: 0;">Online Learning System</h2>
-        <div style="font-weight: 500;">Student Dashboard</div>
+<div id="progressContainer" style="background: white; padding: 25px; border-radius: 12px; margin-top: 20px;">
+    <h4>Learning Journey</h4>
+    <div style="height: 8px; background: #e0e0e0; border-radius: 4px; margin: 20px 0;">
+        <div id="dynamicBar" style="height: 100%; width: 0%; background: #00c853; border-radius: 4px; transition: 1s;"></div>
     </div>
+</div>
 
-    <!-- Course Section -->
-    <div class="container">
-        <h3>My Courses</h3>
-        <div class="course-card">
-            <h2 style="margin-top: 0; color: #333;">AI Deployment & Automation</h2>
-            <p style="color: #666;">Cohort 16</p>
-            <a href="learning.html" class="btn">Continue Learning</a>
-        </div>
-    </div>
-
-</body>
-</html>
+<script>
+    // Check karein kitne weeks complete huye
+    let completedWeeks = 0;
+    for(let i=1; i<=8; i++) {
+        if(localStorage.getItem('week' + i) === 'completed') completedWeeks++;
+    }
+    
+    // Progress bar width calculate karein
+    let width = (completedWeeks / 8) * 100;
+    document.getElementById('dynamicBar').style.width = width + "%";
+</script>
