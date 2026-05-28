@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="login-wrapper">
-        <div class="login-box">
-            <div class="left-panel">
-                <h2>Online Learning System</h2>
-            </div>
-            <div class="right-panel">
-                <h3>Log In</h3>
-                <label>Email:</label>
-                <input type="email" id="email" placeholder="Enter Email">
-                <label>Password:</label>
-                <input type="password" id="password" placeholder="Enter Password">
-                <button class="otp-btn" onclick="checkLogin()">Log In</button>
-            </div>
-        </div>
+<div style="display: flex; width: 80%; margin: 50px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; font-family: Arial;">
+    <div style="background-color: #007bff; color: white; padding: 40px; flex: 1; text-align: center;">
+        <h2>OLS</h2>
+        <p>Online Learning System</p>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+    <div style="padding: 40px; flex: 1; background: white;">
+        <h2>Log In</h2>
+        <form>
+            <label>Email:</label><br>
+            <input type="email" style="width: 100%; margin-bottom: 15px;"><br>
+            <label>Password:</label><br>
+            <input type="password" style="width: 100%; margin-bottom: 15px;"><br>
+            <button style="width: 100%; background: #007bff; color: white; border: none; padding: 10px;">Log In</button>
+        </form>
+    </div>
+</div>
