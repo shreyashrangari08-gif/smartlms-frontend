@@ -1,7 +1,5 @@
-body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f6f8; font-family: sans-serif; }
-.login-box { display: flex; background: white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; width: 800px; }
-.left-panel { background-color: #007bff; color: white; padding: 40px; text-align: center; width: 40%; }
-.right-panel { padding: 40px; width: 60%; }
-.logo-icon { font-size: 50px; font-weight: bold; background: rgba(255,255,255,0.2); width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 20px; line-height: 100px; }
-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; }
-.otp-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; cursor: pointer; }
+label { display: block; margin-top: 10px; font-weight: bold; }
+input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+.forgot-btn { background: #f8f9fa; border: 1px solid #007bff; color: #007bff; cursor: pointer; }
+.otp-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; margin-top: 15px; cursor: pointer; }
+
