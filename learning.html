@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html>
-<body style="margin: 0; display: flex; font-family: sans-serif;">
-    <div style="width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px;">
-        <h3>Menu</h3>
-        <p><a href="learning.html" style="color:white;">Dashboard</a></p>
-        <p><a href="introduction.html" style="color:white;">Introduction</a></p>
-        <p><a href="sql_analysis.html" style="color:white;">SQL & Analysis</a></p>
+<body style="font-family: sans-serif; background: #f4f7f6; margin: 0; padding: 20px;">
+
+    <!-- Back to Dashboard -->
+    <a href="dashboard.html" style="text-decoration: none; color: #1a237e; font-weight: bold;">← Back to Dashboard</a>
+
+    <h2 style="color: #333;">Lesson 1: Introduction to AI</h2>
+    
+    <!-- Video Placeholder -->
+    <div style="background: black; width: 100%; max-width: 600px; height: 300px; display: flex; align-items: center; justify-content: center; color: white;">
+        Video Player
     </div>
-    <div style="padding: 20px; flex: 1;">
-        <h3>YouTube Video</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/fmpqeJA5xt4" allowfullscreen></iframe>
-        <div style="margin-top: 20px;">
-            <h3>Final Assessment (10 Questions)</h3>
-            <button style="padding: 10px 20px; background: green; color: white; border: none;">Start Assessment</button>
-        </div>
+
+    <!-- Mark as Complete Section -->
+    <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px; width: 300px;">
+        <p>Lesson Status: <span id="statusText">Not Started</span></p>
+        <button id="compBtn" onclick="completeLesson()" style="padding: 10px 20px; background: #00c853; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Mark Week 1 as Complete
+        </button>
     </div>
+
+    <script>
+        // Check current status on page load
+        window.onload = function() {
+            if (localStorage.getItem('week1') === 'completed') {
+                document.getElementById('statusText').innerText = "Completed ✅";
+                document.getElementById('compBtn').disabled = true;
+                document.getElementById('compBtn').style.background = "#ccc";
+            }
+        };
+
+        function completeLesson() {
+            localStorage.setItem('week1', 'completed');
+            alert("Week 1 Progress Saved!");
+            location.reload();
+        }
+    </script>
 </body>
 </html>
