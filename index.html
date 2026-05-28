@@ -1,19 +1,33 @@
-<div class="right-panel">
-    <h3>Log In</h3>
-    <!-- Login Form -->
-    <div id="login-form">
-        <input type="email" id="email" value="shreyashrangari08@gmail.com" placeholder="Email">
-        <input type="password" id="password" value="Shreyash123" placeholder="Password">
-        <button class="otp-btn" onclick="checkLogin()">Log In</button>
-        <p onclick="showForgot()" style="cursor:pointer; color:#007bff;">Forgot Password?</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <div class="left-panel">
+                <div class="logo-icon">OLS</div>
+                <h2>Online Learning System</h2>
+            </div>
+            <div class="right-panel">
+                <div id="login-form">
+                    <h3>Log In</h3>
+                    <input type="text" id="email" value="shreyashrangari08@gmail.com">
+                    <input type="password" id="password" value="Shreyash123">
+                    <button class="otp-btn" onclick="checkLogin()">Log In</button>
+                    <p onclick="showForgot()" style="cursor:pointer; color:#007bff; margin-top:10px;">Forgot Password?</p>
+                </div>
+                <div id="forgot-form" style="display:none;">
+                    <h3>Reset Password</h3>
+                    <input type="password" placeholder="New Password">
+                    <input type="password" placeholder="Confirm Password">
+                    <button class="otp-btn">Update</button>
+                    <p onclick="showLogin()" style="cursor:pointer; color:#007bff; margin-top:10px;">Back</p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Forgot Password Form (Hidden by default) -->
-    <div id="forgot-form" style="display:none;">
-        <h3>Reset Password</h3>
-        <input type="password" placeholder="New Password">
-        <input type="password" placeholder="Confirm Password">
-        <button class="otp-btn">Update Password</button>
-        <p onclick="showLogin()" style="cursor:pointer; color:#007bff;">Back to Login</p>
-    </div>
-</div>
+    <script src="script.js"></script>
+</body>
+</html>
