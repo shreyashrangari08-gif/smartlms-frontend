@@ -1,16 +1,13 @@
-function loadQuiz() {
-    let quizDiv = document.getElementById('quiz-section');
-    let html = "";
-    for(let i=0; i<10; i++) {
-        html += `<p>${i+1}. Sawal yahan...</p><input type="text" id="q${i}" style="width:100%; padding:8px; margin-bottom:10px;">`;
+function checkLogin() {
+    // Input values get karo
+    let email = document.getElementById('email').value;
+    let pass = document.getElementById('password').value;
+
+    // Yahan apni login condition check karo
+    if(email === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
+        // Redirection
+        window.location.href = 'courses.html';
+    } else {
+        alert("Invalid Email or Password!");
     }
-    quizDiv.innerHTML = html;
 }
-
-function checkAssessment() {
-    let score = 0;
-    // Yahan tum logic laga sakte ho
-    document.getElementById('grade-display').innerHTML = "Assessment Submitted! Grade: A";
-}
-
-window.onload = loadQuiz;
