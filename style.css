@@ -4,18 +4,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #e0e9f8; /* Professional background */
+    background: #e0e9f8;
     font-family: sans-serif;
 }
 .login-box {
     display: flex;
     background: white;
-    width: 800px;
+    width: 750px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     overflow: hidden;
 }
-.left-panel { background: #007bff; color: white; width: 40%; padding: 40px; text-align: center; }
+.left-panel { background: #007bff; color: white; width: 40%; padding: 40px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .right-panel { padding: 40px; width: 60%; }
-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-.otp-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; cursor: pointer; }
+input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+.otp-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
