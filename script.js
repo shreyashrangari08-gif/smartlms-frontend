@@ -1,23 +1,24 @@
-const correctAnswers = ["a", "b", "c", "a", "b", "c", "a", "b", "c", "a"]; // 10 sahi jawab
-
 function loadQuestions() {
+    let questions = [
+        "Data ka matlab kya hai?",
+        "SQL kya hota hai?",
+        "Visualization kyu zaruri hai?",
+        "Database kya hai?",
+        "Query kaise likhte hain?",
+        "Table kaise join karein?",
+        "Dashboard kya hota hai?",
+        "Data cleaning kya hai?",
+        "Aggregates kya hote hain?",
+        "Final step kya hai?"
+    ];
+    
     let html = "";
-    for(let i=1; i<=10; i++) {
-        html += `<p>${i}. Sawal yahan likho?</p>
-                 <input type="text" name="q${i}" class="q-input" placeholder="Enter answer a, b, or c">`;
+    for(let i=0; i<10; i++) {
+        html += `<p>${i+1}. ${questions[i]}</p>
+                 <input type="text" id="q${i}" style="width:100%; margin-bottom:10px;">`;
     }
     document.getElementById('questions-list').innerHTML = html;
 }
 
-function calculateResult() {
-    let score = 0;
-    for(let i=1; i<=10; i++) {
-        let val = document.getElementsByName(`q${i}`)[0].value.toLowerCase();
-        if(val === correctAnswers[i-1]) score++;
-    }
-    let percentage = (score / 10) * 100;
-    document.getElementById('result-display').innerHTML = `Your Score: ${percentage}%`;
-}
-
-// Page load hote hi sawal load honge
-loadQuestions();
+// Page load hote hi loadQuestions() call karo
+window.onload = loadQuestions;
