@@ -1,17 +1,37 @@
-.login-container {
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
     display: flex;
-    width: 800px;
-    margin: 50px auto;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f6f8;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.login-box {
+    display: flex;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .left-panel {
-    background-color: #007bff; /* Wahi blue color jaisa 1000182285.jpg mein hai */
+    background-color: #007bff;
     color: white;
     flex: 1;
-    padding: 20px;
+    padding: 40px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .right-panel {
@@ -19,11 +39,31 @@
     padding: 40px;
 }
 
-.otp-btn {
-    background-color: #007bff;
+.tabs button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+
+.tabs button.active {
+    background: #007bff;
     color: white;
+}
+
+.otp-btn {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+input[type="text"] {
     width: 100%;
     padding: 10px;
-    border: none;
-    cursor: pointer;
+    margin-top: 5px;
+    border: 1px solid #ccc;
 }
