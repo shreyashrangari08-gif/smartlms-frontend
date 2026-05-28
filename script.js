@@ -1,24 +1,23 @@
 function loadQuestions() {
     let questions = [
-        "Data ka matlab kya hai?",
-        "SQL kya hota hai?",
-        "Visualization kyu zaruri hai?",
-        "Database kya hai?",
-        "Query kaise likhte hain?",
-        "Table kaise join karein?",
-        "Dashboard kya hota hai?",
-        "Data cleaning kya hai?",
-        "Aggregates kya hote hain?",
-        "Final step kya hai?"
+        "1. Data analysis ka pehla step kya hai?",
+        "2. SQL mein data filter kaise karte hain?",
+        "3. Table join karne ka command kya hai?",
+        "4. Aggregation function kaunsa hai?",
+        "5. Visualization ke liye best tool?",
+        "6. Primary key ka kya kaam hai?",
+        "7. Null value ka matlab kya hai?",
+        "8. Data cleaning kyu zaruri hai?",
+        "9. Dashboard ka purpose kya hai?",
+        "10. Final report kaise banate hain?"
     ];
     
     let html = "";
-    for(let i=0; i<10; i++) {
-        html += `<p>${i+1}. ${questions[i]}</p>
-                 <input type="text" id="q${i}" style="width:100%; margin-bottom:10px;">`;
+    for(let i=0; i<questions.length; i++) {
+        html += `<p>${questions[i]}</p>
+                 <input type="text" id="ans${i}" style="width:100%; margin-bottom:15px; padding:8px;">`;
     }
     document.getElementById('questions-list').innerHTML = html;
 }
 
-// Page load hote hi loadQuestions() call karo
 window.onload = loadQuestions;
