@@ -1,3 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f6f8;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-box {
+    display: flex;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 800px;
+}
+
+.left-panel {
+    background-color: #007bff;
+    color: white;
+    padding: 40px;
+    text-align: center;
+    width: 40%;
+}
+
+.right-panel {
+    padding: 40px;
+    width: 60%;
+}
+
 .logo-icon {
     font-size: 50px;
     font-weight: bold;
@@ -5,32 +43,7 @@
     background: rgba(255,255,255,0.2);
     width: 100px;
     height: 100px;
-    line-height: 100px;
     border-radius: 50%;
     margin: 0 auto 20px;
-}
-
-.left-panel h2 {
-    font-size: 24px;
-    margin-top: 10px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.otp-btn {
-    width: 100%;
-    padding: 12px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-weight: bold;
+    line-height: 100px;
 }
