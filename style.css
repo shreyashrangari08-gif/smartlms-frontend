@@ -1,21 +1,3 @@
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #e0e9f8;
-    font-family: sans-serif;
-}
-.login-box {
-    display: flex;
-    background: white;
-    width: 750px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
-.left-panel { background: #007bff; color: white; width: 40%; padding: 40px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.right-panel { padding: 40px; width: 60%; }
-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-.otp-btn { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+.main-layout { display: flex; }
+.side-menu { width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; }
+.content-area { padding: 40px; flex-grow: 1; }
