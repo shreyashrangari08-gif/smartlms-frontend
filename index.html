@@ -1,29 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head><style>
-    body { font-family: sans-serif; background: #eef2f7; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-    .card { display: flex; width: 600px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
-    .left { background: #007bff; color: white; padding: 40px; flex: 1; text-align: center; }
-    .right { padding: 40px; flex: 1; }
-    input { width: 100%; margin: 10px 0; padding: 8px; box-sizing: border-box; }
-    button { width: 100%; background: #007bff; color: white; border: none; padding: 10px; cursor: pointer; }
-</style></head>
-<body>
-    <div class="card">
-        <div class="left"><h2>OLS</h2><p>Online Learning System</p></div>
-        <div class="right">
-            <h2>Log In</h2>
-            <form onsubmit="handleLogin(event)">
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Log In</button>
-            </form>
-        </div>
-    </div>
-    <script>
-        function handleLogin(e) { e.preventDefault(); 
-            if (document.getElementById('email').value === "shreyashrangari08@gmail.com") window.location.href = "learning.html";
-            else alert("Invalid Credentials!"); }
-    </script>
-</body>
-</html>
+<script>
+    function handleLogin(e) { 
+        e.preventDefault(); 
+        // Yahan aap apna email check kar rahe hain
+        if (document.getElementById('email').value === "shreyashrangari08@gmail.com") {
+            // Yahan hum dashboard.html par bhej rahe hain
+            window.location.href = "dashboard.html"; 
+        } else {
+            alert("Invalid Credentials!"); 
+        }
+    }
+</script>
