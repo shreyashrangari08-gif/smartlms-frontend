@@ -1,18 +1,44 @@
-<div id="progressContainer" style="background: white; padding: 25px; border-radius: 12px; margin-top: 20px;">
-    <h4>Learning Journey</h4>
-    <div style="height: 8px; background: #e0e0e0; border-radius: 4px; margin: 20px 0;">
-        <div id="dynamicBar" style="height: 100%; width: 0%; background: #00c853; border-radius: 4px; transition: 1s;"></div>
-    </div>
-</div>
+<!DOCTYPE html>
+<html>
+<body style="font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding-bottom: 50px;">
 
-<script>
-    // Check karein kitne weeks complete huye
-    let completedWeeks = 0;
-    for(let i=1; i<=8; i++) {
-        if(localStorage.getItem('week' + i) === 'completed') completedWeeks++;
-    }
-    
-    // Progress bar width calculate karein
-    let width = (completedWeeks / 8) * 100;
-    document.getElementById('dynamicBar').style.width = width + "%";
-</script>
+    <!-- Header -->
+    <div style="background: #1a237e; color: white; padding: 20px 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h2 style="margin: 0;">Online Learning System</h2>
+    </div>
+
+    <div style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+        
+        <!-- Course Box -->
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-left: 6px solid #00c853;">
+            <h2 style="margin-top: 0;">AI Deployment & Automation</h2>
+            <p style="color: #666;">Cohort 16</p>
+            <a href="learning.html" style="display: inline-block; text-decoration: none; background: #007bff; color: white; padding: 12px 24px; border-radius: 6px; font-weight: bold;">Continue Learning</a>
+        </div>
+
+        <!-- Learning Journey Section -->
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); margin-top: 30px;">
+            <h4 style="margin-top: 0;">🚀 Learning Journey</h4>
+            
+            <!-- Progress Line -->
+            <div style="height: 8px; background: #e0e0e0; border-radius: 4px; margin: 30px 0; position: relative;">
+                <div id="dynamicBar" style="height: 100%; width: 0%; background: #00c853; border-radius: 4px; transition: 1s;"></div>
+            </div>
+
+            <!-- Labels -->
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #666; text-align: center;">
+                <div>✅<br>W1</div> <div>--<br>W2</div> <div>--<br>W3</div> <div>--<br>W4</div> 
+                <div>--<br>W5</div> <div>--<br>W6</div> <div>--<br>W7</div> <div>--<br>W8</div> 
+                <div>--<br>SCORE</div> <div>--<br>GRADE</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress update logic
+        if (localStorage.getItem('week1') === 'completed') {
+            document.getElementById('dynamicBar').style.width = "12.5%";
+        }
+    </script>
+</body>
+</html>
