@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html>
-<body style="font-family: sans-serif; background: #f4f7f6; margin: 0; padding: 20px;">
+<head>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; }
+        
+        /* Modern Header */
+        .header { background: #1a237e; color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* Main Container */
+        .container { padding: 40px; max-width: 900px; margin: auto; }
+        
+        /* Course Card Styling */
+        .course-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-left: 6px solid #00c853; }
+        
+        /* Button Styling */
+        .btn { display: inline-block; text-decoration: none; background: #007bff; color: white; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 15px; transition: 0.3s; }
+        .btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
 
-    <!-- Top Header -->
-    <div style="background: white; padding: 15px; border-bottom: 2px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
-        <h2 style="margin: 0;">EduSkills Portal</h2>
-        <div style="font-weight: bold;">Student Dashboard</div>
+    <!-- Header Section -->
+    <div class="header">
+        <h2 style="margin: 0;">Online Learning System</h2>
+        <div style="font-weight: 500;">Student Dashboard</div>
     </div>
 
     <!-- Course Section -->
-    <div style="margin-top: 30px; padding: 20px;">
+    <div class="container">
         <h3>My Courses</h3>
-        
-        <!-- Course Card -->
-        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 400px; border-left: 5px solid #007bff;">
-            <h3 style="margin-top: 0;">AI Deployment & Automation</h3>
+        <div class="course-card">
+            <h2 style="margin-top: 0; color: #333;">AI Deployment & Automation</h2>
             <p style="color: #666;">Cohort 16</p>
-            
-            <a href="learning.html" style="display: inline-block; text-decoration: none; background: #007bff; color: white; padding: 12px 25px; border-radius: 5px; font-weight: bold;">
-                Continue Learning
-            </a>
+            <a href="learning.html" class="btn">Continue Learning</a>
         </div>
     </div>
 
 </body>
 </html>
-
