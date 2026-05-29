@@ -3,21 +3,21 @@
 <head>
     <style>
         body { margin: 0; padding: 0; display: flex; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; }
-        .sidebar { width: 280px; background: #1c2e3d; padding: 20px; border-right: 1px solid #4facfe; }
-        .content { flex-grow: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        .sidebar { width: 280px; background: #1c2e3d; padding: 20px; border-right: 2px solid #4facfe; }
+        .content { flex-grow: 1; padding: 40px; }
         .link { color: #4facfe; cursor: pointer; display: block; margin: 15px 0; font-weight: bold; text-decoration: none; }
         .progress-bar-bg { width: 100%; background: #222; height: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #4facfe; }
         .progress-bar-fill { height: 100%; background: #28a745; width: 0%; border-radius: 10px; transition: 0.5s; }
-        iframe { width: 80%; height: 400px; border-radius: 10px; border: 2px solid white; }
+        iframe { width: 100%; height: 400px; border-radius: 10px; border: 2px solid white; }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <h3>Course Content</h3>
-        <span class="link" onclick="loadVideo('yZvFH7B6gKI')">1. Introduction</span>
-        <span class="link" onclick="loadVideo('hiS_mWZmmI0')">2. Environment</span>
-        <span class="link" onclick="loadVideo('kbKty5ZVKMY')">3. SQL Queries</span>
-        <span class="link" onclick="loadVideo('MiiANxRHSv4')">4. Visualization</span>
+        <span class="link" onclick="loadContent('Introduction', 'yZvFH7B6gKI')">1. Introduction</span>
+        <span class="link" onclick="loadContent('Environment', 'hiS_mWZmmI0')">2. Environment</span>
+        <span class="link" onclick="loadContent('SQL Queries', 'kbKty5ZVKMY')">3. SQL Queries</span>
+        <span class="link" onclick="loadContent('Visualization', 'MiiANxRHSv4')">4. Visualization</span>
         <hr>
         <a class="link" style="color:yellow;" href="assessment.html">🚀 Take Quiz</a>
         <a class="link" style="color:green;" href="certificate.html">Get Certificate</a>
@@ -26,15 +26,17 @@
     </div>
     
     <div class="content" id="main">
-        <h2 id="title">Welcome! Select a module from the sidebar.</h2>
-        <div id="video-container"></div>
-        <button id="done-btn" style="display:none; margin-top:20px; padding:10px 20px;" onclick="markDone()">Mark as Done</button>
+        <h1 id="header">Welcome to Data Analytics Portal</h1>
+        <p id="subtext">Select a module from the left menu to start your learning.</p>
+        <div id="video-box"></div>
+        <button id="done-btn" style="display:none; margin-top:20px; padding:10px 20px; background:#28a745; color:white; border:none; cursor:pointer;" onclick="markDone()">Mark as Done</button>
     </div>
 
     <script>
-        function loadVideo(id) {
-            document.getElementById('title').innerText = "Module Content";
-            document.getElementById('video-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${id}"></iframe>`;
+        function loadContent(title, vidId) {
+            document.getElementById('header').innerText = title;
+            document.getElementById('subtext').innerText = "Watch the video below to complete this module.";
+            document.getElementById('video-box').innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}"></iframe>`;
             document.getElementById('done-btn').style.display = 'block';
         }
         function markDone() {
@@ -42,8 +44,8 @@
             let currentWidth = parseInt(prog.style.width) || 0;
             if(currentWidth < 100) {
                 prog.style.width = (currentWidth + 25) + "%";
+                alert("Great! Module completed.");
             }
-            alert("Module Marked Done!");
         }
     </script>
 </body>
