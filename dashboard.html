@@ -4,20 +4,16 @@
     <link rel="stylesheet" href="style.css">
     <title>Dashboard</title>
 </head>
-<body style="background-color: #f4f7f6;">
+<body id="dashboard-page">
 
-    <div class="dashboard-page">
-        <div class="dashboard-header">
-            <h1>Online Learning System</h1>
-        </div>
-        
-        <div class="course-container">
-            <div class="course-box">
-                <h2>Data Analytics Course</h2>
-                <p>Master SQL, R, and Tableau.</p>
-                <button class="btn-enroll" id="enroll-btn" onclick="enrollCourse()">Enroll Now</button>
-                <button class="btn-continue" id="continue-btn" onclick="window.location.href='sqlanalysis.html'">Continue Learning</button>
-            </div>
+    <h1>Online Learning System</h1>
+    
+    <div class="course-container">
+        <div class="course-box">
+            <h3>Data Analytics Course</h3>
+            <p>Master SQL, R, and Tableau.</p>
+            <button class="btn-enroll" id="enroll-btn" onclick="enrollCourse()">Enroll Now</button>
+            <button class="btn-continue" id="continue-btn" onclick="window.location.href='sqlanalysis.html'">Continue Learning</button>
         </div>
     </div>
 
@@ -28,6 +24,5 @@
             alert("Enrollment Successful!");
         }
     </script>
-
 </body>
 </html>
