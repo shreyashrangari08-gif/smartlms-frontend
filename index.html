@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link rel="stylesheet" href="style.css">
-    <title>Login - Online Learning System</title>
+    <title>Login / Sign Up</title>
+    <style>
+        body { font-family: sans-serif; background: #0b1a26; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin:0; }
+        .box { background: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center; color: black; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 95%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    </style>
 </head>
-<body id="login-page">
-
-    <div class="login-container">
-        <h2>Online Learning System</h2>
-        
-        <div id="login-section">
-            <input type="text" id="username" placeholder="Email">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="checkLogin()">Login</button>
-            <button class="link-btn" onclick="toggleMode()">Forgot Password?</button>
-        </div>
-
-        <div id="forgot-section" style="display: none;">
-            <h2>Reset Password</h2>
-            <input type="password" placeholder="New Password">
-            <input type="password" placeholder="Confirm Password">
-            <button onclick="alert('Password Updated!')">Update Password</button>
-            <button class="link-btn" onclick="toggleMode()">Back to Login</button>
-        </div>
+<body>
+    <div class="box">
+        <h2 id="formTitle">Login</h2>
+        <input type="text" id="name" placeholder="Full Name (for Sign Up)">
+        <input type="text" id="user" placeholder="Email">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="handleAuth()" id="btnAction">Login</button>
+        <p id="toggleText" onclick="toggleForm()" style="cursor:pointer; color:blue; font-size:14px;">New here? Sign Up</p>
     </div>
-
     <script>
-        function toggleMode() {
-            var loginSec = document.getElementById('login-section');
-            var forgotSec = document.getElementById('forgot-section');
-            loginSec.style.display = (loginSec.style.display === "none") ? "block" : "none";
-            forgotSec.style.display = (forgotSec.style.display === "none") ? "block" : "none";
+        let isSignup = false;
+        function toggleForm() {
+            isSignup = !isSignup;
+            document.getElementById('formTitle').innerText = isSignup ? "Sign Up" : "Login";
+            document.getElementById('btnAction').innerText = isSignup ? "Sign Up" : "Login";
+            document.getElementById('toggleText').innerText = isSignup ? "Already have an account? Login" : "New here? Sign Up";
         }
-
-        function checkLogin() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-            if (user === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
-                window.location.href = "dashboard.html";
+        function handleAuth() {
+            let n = document.getElementById('name').value;
+            let u = document.getElementById('user').value;
+            let p = document.getElementById('pass').value;
+            if(isSignup) {
+                localStorage.setItem(u + "_pass", p);
+                localStorage.setItem(u + "_name", n);
+                alert("Sign Up Successful! Now Login.");
+                toggleForm();
             } else {
-                alert("Invalid Credentials!");
+                if(localStorage.getItem(u + "_pass") === p) {
+                    localStorage.setItem('currentUser', u);
+                    localStorage.setItem('userName', localStorage.getItem(u + "_name"));
+                    window.location.href = 'sqlanalysis.html';
+                } else { alert("Invalid Credentials!"); }
             }
         }
     </script>
