@@ -1,23 +1,26 @@
-/* --- Dashboard Page Styles --- */
-.dashboard-page { 
-    padding: 20px; 
-    text-align: center; /* Title ko center karne ke liye */
-    min-height: 100vh;
+/* Login Page Specific */
+.login-body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 350px;
+    text-align: center;
 }
 
-.dashboard-header { margin-bottom: 40px; }
-
-.course-container { 
-    display: flex; 
-    justify-content: center; /* Box ko center mein lane ke liye */
-    flex-wrap: wrap; 
-}
-
+/* Dashboard Specific */
+.dashboard-page { padding: 40px; text-align: center; }
+.course-container { display: flex; justify-content: center; }
 .course-box { 
-    border: 1px solid #ddd; 
-    padding: 40px; /* Box ko bada banane ke liye padding badhayi */
-    border-radius: 15px; 
-    width: 300px; /* Box ki width badhayi */
-    background: white; 
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+    border: 1px solid #ddd; padding: 40px; border-radius: 15px; 
+    width: 300px; background: white; box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
 }
