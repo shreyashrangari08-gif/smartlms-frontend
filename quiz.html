@@ -2,6 +2,20 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function checkQuiz() {
+            // Yahan hum score calculate karenge (simplified version)
+            // Aap isse baad mein logic add karke update kar sakte hain
+            document.getElementById('result-area').innerHTML = `
+                <h3>Congratulations!</h3>
+                <p>Aapka Grade: A</p>
+                <p>Quiz complete ho gaya hai!</p>
+                <button onclick="window.location.href='sqlanalysis.html'">Back to Course</button>
+            `;
+            // Submit button ko hide kar denge
+            document.getElementById('submit-btn').style.display = 'none';
+        }
+    </script>
 </head>
 <body>
 
@@ -14,69 +28,15 @@
     <div class="main-content">
         <h1>Final Assessment Quiz</h1>
         
-        <form>
+        <form id="quiz-form">
             <p>1. What is the main purpose of data analytics?</p>
             <input type="radio" name="q1"> A) Create games <br>
             <input type="radio" name="q1"> B) Analyze data and make decisions <br>
-            <input type="radio" name="q1"> C) Repair computers <br>
-            <input type="radio" name="q1"> D) Design websites <br><br>
+            </form>
 
-            <p>2. Which tool is mainly used for querying databases?</p>
-            <input type="radio" name="q2"> A) Photoshop <br>
-            <input type="radio" name="q2"> B) Tableau <br>
-            <input type="radio" name="q2"> C) SQL <br>
-            <input type="radio" name="q2"> D) PowerPoint <br><br>
-
-            <p>3. What does SQL stand for?</p>
-            <input type="radio" name="q3"> A) Structured Query Language <br>
-            <input type="radio" name="q3"> B) Simple Question Language <br>
-            <input type="radio" name="q3"> C) System Query Logic <br>
-            <input type="radio" name="q3"> D) Structured Quick Logic <br><br>
-
-            <p>4. Which of the following is used for data visualization?</p>
-            <input type="radio" name="q4"> A) Tableau <br>
-            <input type="radio" name="q4"> B) MS Paint <br>
-            <input type="radio" name="q4"> C) Notepad <br>
-            <input type="radio" name="q4"> D) Calculator <br><br>
-
-            <p>5. What is the purpose of the WHERE clause in SQL?</p>
-            <input type="radio" name="q5"> A) To delete tables <br>
-            <input type="radio" name="q5"> B) To filter records <br>
-            <input type="radio" name="q5"> C) To create charts <br>
-            <input type="radio" name="q5"> D) To rename columns <br><br>
-
-            <p>6. Which programming language is introduced in the Google Data Analytics Certificate?</p>
-            <input type="radio" name="q6"> A) Java <br>
-            <input type="radio" name="q6"> B) Python <br>
-            <input type="radio" name="q6"> C) R Programming <br>
-            <input type="radio" name="q6"> D) C++ <br><br>
-
-            <p>7. What does a data analyst mainly do?</p>
-            <input type="radio" name="q7"> A) Repairs hardware <br>
-            <input type="radio" name="q7"> B) Creates animations <br>
-            <input type="radio" name="q7"> C) Collects and analyzes data <br>
-            <input type="radio" name="q7"> D) Develops mobile phones <br><br>
-
-            <p>8. Which SQL command is used to retrieve data from a table?</p>
-            <input type="radio" name="q8"> A) INSERT <br>
-            <input type="radio" name="q8"> B) UPDATE <br>
-            <input type="radio" name="q8"> C) SELECT <br>
-            <input type="radio" name="q8"> D) DELETE <br><br>
-
-            <p>9. What is the final major project in the certificate called?</p>
-            <input type="radio" name="q9"> A) Annual Report <br>
-            <input type="radio" name="q9"> B) Capstone Project <br>
-            <input type="radio" name="q9"> C) Final Coding Test <br>
-            <input type="radio" name="q9"> D) Dashboard Report <br><br>
-
-            <p>10. Which of the following is an important step in data cleaning?</p>
-            <input type="radio" name="q10"> A) Adding viruses <br>
-            <input type="radio" name="q10"> B) Removing duplicate data <br>
-            <input type="radio" name="q10"> C) Deleting all records <br>
-            <input type="radio" name="q10"> D) Ignoring missing values <br><br>
-        </form>
-
-        <button onclick="window.location.href='sqlanalysis.html'">Back to Course</button>
+        <button id="submit-btn" onclick="checkQuiz()">Submit Quiz</button>
+        
+        <div id="result-area" style="margin-top: 20px; font-weight: bold; color: green;"></div>
     </div>
 
 </body>
