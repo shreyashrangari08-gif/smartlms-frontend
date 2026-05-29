@@ -2,27 +2,24 @@
 <html>
 <head>
     <style>
-        body { margin: 0; padding: 0; display: flex; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; }
-        .sidebar { width: 280px; background: #1c2e3d; padding: 20px; border-right: 2px solid #4facfe; }
+        body { margin: 0; display: flex; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; }
+        .sidebar { width: 280px; background: #1c2e3d; padding: 20px; border-right: 2px solid #4facfe; display: none; } /* Sidebar hidden by default */
         .content { flex-grow: 1; padding: 40px; }
-        .link { color: #4facfe; cursor: pointer; display: block; margin: 15px 0; font-weight: bold; text-decoration: none; }
-        .progress-bar-bg { width: 100%; background: #222; height: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #4facfe; }
-        .progress-bar-fill { height: 100%; background: #28a745; width: 0%; border-radius: 10px; transition: 0.5s; }
         .dash-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 300px; }
+        .link { color: #4facfe; cursor: pointer; display: block; margin: 15px 0; font-weight: bold; text-decoration: none; }
+        iframe { width: 100%; height: 400px; border-radius: 10px; }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <h3>Course Content</h3>
         <span class="link" onclick="loadContent('Introduction', 'yZvFH7B6gKI')">1. Introduction</span>
         <span class="link" onclick="loadContent('Environment', 'hiS_mWZmmI0')">2. Environment</span>
         <span class="link" onclick="loadContent('SQL Queries', 'kbKty5ZVKMY')">3. SQL Queries</span>
         <span class="link" onclick="loadContent('Visualization', 'MiiANxRHSv4')">4. Visualization</span>
         <hr>
-        <a class="link" style="color:yellow;" href="assessment.html">🚀 Take Quiz</a>
-        <a class="link" style="color:green;" href="certificate.html">Get Certificate</a>
-        <p>Progress:</p>
-        <div class="progress-bar-bg"><div id="main-progress" class="progress-bar-fill"></div></div>
+        <a class="link" href="assessment.html">🚀 Take Quiz</a>
+        <a class="link" href="certificate.html">Get Certificate</a>
     </div>
     
     <div class="content" id="main">
@@ -31,35 +28,30 @@
             <div class="dash-card">
                 <h3>Data Analytics Course</h3>
                 <p>Master SQL, R, and Tableau.</p>
-                <button onclick="loadContent('Introduction', 'yZvFH7B6gKI')" style="padding:10px; cursor:pointer;">Start Course</button>
+                <button id="enroll-btn" onclick="startCourse()" style="padding:10px 20px; cursor:pointer;">Enroll Now</button>
             </div>
         </div>
-        <div id="module-view" style="display:none;">
-            <h2 id="header"></h2>
+        <div id="content-view" style="display:none;">
+            <h2 id="header">Introduction</h2>
             <div id="video-box"></div>
-            <button id="done-btn" style="margin-top:20px; padding:10px 20px; background:#28a745; color:white; border:none; cursor:pointer;" onclick="markDone()">Mark as Done</button>
-            <br><button onclick="showDashboard()" style="margin-top:10px;">Back to Dashboard</button>
         </div>
     </div>
 
     <script>
+        function startCourse() {
+            // Button badal kar "Continue Learning" kar diya
+            document.getElementById('enroll-btn').innerText = "Continue Learning";
+            // Sidebar dikha diya
+            document.getElementById('sidebar').style.display = 'block';
+            // Pehla content load kiya
+            loadContent('Introduction', 'yZvFH7B6gKI');
+        }
+
         function loadContent(title, vidId) {
             document.getElementById('dashboard-view').style.display = 'none';
-            document.getElementById('module-view').style.display = 'block';
+            document.getElementById('content-view').style.display = 'block';
             document.getElementById('header').innerText = title;
-            document.getElementById('video-box').innerHTML = `<iframe width="100%" height="400" src="https://www.youtube.com/embed/${vidId}"></iframe>`;
-        }
-        function showDashboard() {
-            document.getElementById('dashboard-view').style.display = 'block';
-            document.getElementById('module-view').style.display = 'none';
-        }
-        function markDone() {
-            let prog = document.getElementById('main-progress');
-            let currentWidth = parseInt(prog.style.width) || 0;
-            if(currentWidth < 100) {
-                prog.style.width = (currentWidth + 25) + "%";
-                alert("Great! Module completed.");
-            }
+            document.getElementById('video-box').innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}"></iframe>`;
         }
     </script>
 </body>
