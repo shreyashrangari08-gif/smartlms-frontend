@@ -1,43 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Course Assessment</title>
-    <style>
-        body { font-family: Arial; background: #0b1a26; color: white; padding: 20px; }
-        .q-box { margin-bottom: 20px; background: #1c2e3d; padding: 15px; border-radius: 8px; }
-        button { padding: 12px 25px; cursor: pointer; background: #4facfe; border: none; color: white; border-radius: 5px; font-weight: bold; }
-        .grade-box { margin-top: 20px; padding: 15px; border-radius: 5px; display: inline-block; font-size: 18px; }
-    </style>
-</head>
+<head><style>body{background:#0b1a26; color:white; font-family:sans-serif; padding:20px;}</style></head>
 <body>
-    <h1>Data Analytics Assessment</h1>
-    <div id="quiz"></div>
-    <button onclick="submitQuiz()">Complete Assessment</button>
-    <div id="result"></div>
+    <h2>Data Analytics Quiz (10 Questions)</h2>
+    <form id="quizForm">
+        <script>
+            const qs = ["SQL full form?", "What is Data?", "Python use?", "PowerBI?", "Tableau?", "Mean?", "Median?", "Mode?", "Database?", "Cloud?"];
+            for(let i=1; i<=10; i++) {
+                document.write(`<p>${i}. ${qs[i-1]}</p>
+                <input type="radio" name="q${i}" value="1"> Correct <input type="radio" name="q${i}" value="0"> Wrong<br>`);
+            }
+        </script>
+        <button type="button" onclick="submitQuiz()" style="margin-top:20px;">Submit Quiz</button>
+    </form>
     <script>
-        const questions = [
-            {q: "What is the main purpose of Data Analytics?", a: "B", options: ["A) Playing games", "B) Collecting and analyzing data for insights", "C) Creating animations", "D) Designing logos"]},
-            {q: "Which tool is commonly used for data visualization?", a: "C", options: ["A) MS Paint", "B) Canva", "C) Tableau", "D) VLC Player"]},
-            {q: "What does SQL stand for?", a: "A", options: ["A) Structured Query Language", "B) Simple Question Language", "C) Sequential Query Logic", "D) Standard Quick Language"]},
-            {q: "Which file format is commonly used for datasets?", a: "B", options: ["A) MP4", "B) CSV", "C) PNG", "D) APK"]},
-            {q: "Which step comes first in the data analysis process?", a: "C", options: ["A) Data Visualization", "B) Data Cleaning", "C) Data Collection", "D) Reporting"]},
-            {q: "Which chart is best for showing percentages?", a: "A", options: ["A) Pie Chart", "B) Scatter Plot", "C) Histogram", "D) Area Chart"]},
-            {q: "Which programming language is widely used in Data Analytics?", a: "A", options: ["A) Python", "B) HTML", "C) CSS", "D) PHP"]},
-            {q: "What is data cleaning?", a: "B", options: ["A) Deleting all data", "B) Organizing and fixing incorrect data", "C) Creating games", "D) Compressing files"]},
-            {q: "Which Microsoft tool is commonly used for basic data analysis?", a: "B", options: ["A) MS Word", "B) MS Excel", "C) MS Paint", "D) OneNote"]},
-            {q: "What is the use of a dashboard in analytics?", a: "C", options: ["A) To watch movies", "B) To store songs", "C) To display data visually in one place", "D) To edit photos"]},
-            {q: "Which SQL command is used to get data from a table?", a: "C", options: ["A) DELETE", "B) UPDATE", "C) SELECT", "D) DROP"]},
-            {q: "Which type of analytics predicts future outcomes?", a: "B", options: ["A) Descriptive Analytics", "B) Predictive Analytics", "C) Diagnostic Analytics", "D) Manual Analytics"]}
-        ];
-        let quizDiv = document.getElementById('quiz');
-        questions.forEach((item, index) => { quizDiv.innerHTML += `<div class="q-box"><p>${index+1}. ${item.q}</p>${item.options.map(opt => `<input type="radio" name="q${index}" value="${opt[0]}">${opt}<br>`).join('')}</div>`; });
         function submitQuiz() {
             let score = 0;
-            questions.forEach((item, index) => { let val = document.querySelector(`input[name="q${index}"]:checked`); if(val && val.value === item.a) score++; });
-            let resultDiv = document.getElementById('result');
-            if (score > 5) { resultDiv.innerHTML = `<div class="grade-box" style="background:#28a745;">Congratulations 🎉! We have successfully taken assessment.<br>Grade: Pass<br>Score: ${score}/12</div><br><br>`; } 
-            else { resultDiv.innerHTML = `<div class="grade-box" style="background:#dc3545;">Keep Learning!<br>Grade: Fail<br>Score: ${score}/12</div><br><br>`; }
-            resultDiv.innerHTML += `<button onclick="window.location.href='sqlanalysis.html'">Back to Modules</button>`;
+            for(let i=1; i<=10; i++) {
+                if(document.querySelector(`input[name="q${i}"]:checked`)?.value == "1") score++;
+            }
+            alert("Quiz Submitted! Your Score: " + score + "/10");
+            window.location.href = 'sqlanalysis.html';
         }
     </script>
 </body>
