@@ -1,4 +1,4 @@
-/* --- Login Page --- */
+/* --- Login Page (No change here) --- */
 #login-page {
     margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
@@ -11,12 +11,27 @@
 #login-page input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
 #login-page button { width: 100%; padding: 12px; background-color: #595959; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/* --- Dashboard --- */
-#dashboard-page { background-color: #f4f7f6; font-family: sans-serif; padding: 20px; }
-#dashboard-page .header { text-align: center; margin-bottom: 30px; }
-#dashboard-page .course-container { display: flex; justify-content: flex-start; }
-#dashboard-page .course-box { 
-    background: white; padding: 20px; border-radius: 15px; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 250px; 
+/* --- Dashboard (Unique & Clean Design) --- */
+#dashboard-page { 
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Unique Dark Gradient */
+    min-height: 100vh; 
+    font-family: 'Segoe UI', sans-serif; 
+    padding: 20px; 
+    color: white; 
 }
-#dashboard-page .btn-enroll { background: #28a745; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+#dashboard-page .header { text-align: center; margin-bottom: 50px; }
+#dashboard-page .course-container { 
+    display: flex; justify-content: flex-start; flex-wrap: wrap; 
+}
+#dashboard-page .course-box { 
+    background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 25px; border-radius: 20px; 
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37); 
+    width: 280px; color: white;
+}
+#dashboard-page .btn-enroll { 
+    background: #4facfe; color: white; border: none; padding: 12px; 
+    width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
+}
