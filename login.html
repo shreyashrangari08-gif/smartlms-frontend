@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Portal</title>
+    <style>
+        body { font-family: Arial; background: #0b1a26; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin:0; }
+        .box { background: #1c2e3d; padding: 30px; border-radius: 10px; width: 300px; text-align: center; border: 1px solid #4facfe; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+        button { width: 100%; padding: 10px; background: #4facfe; border: none; color: white; cursor: pointer; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Login</h2>
+        <input type="text" id="user" placeholder="Email">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="auth()">Login</button>
+    </div>
+
+    <script>
+        // Aapka permanent credentials setup
+        localStorage.setItem("shreyashrangari08@gmail.com_pass", "Shreyash123");
+        localStorage.setItem("shreyashrangari08@gmail.com_name", "Shreyash Rangari");
+
+        function auth() {
+            let u = document.getElementById('user').value;
+            let p = document.getElementById('pass').value;
+            if(localStorage.getItem(u + "_pass") === p) {
+                localStorage.setItem('currentUser', u);
+                localStorage.setItem('userName', localStorage.getItem(u + "_name"));
+                window.location.href = 'sqlanalysis.html';
+            } else { alert("Invalid Credentials!"); }
+        }
+    </script>
+</body>
+</html>
