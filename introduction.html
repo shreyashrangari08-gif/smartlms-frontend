@@ -1,13 +1,25 @@
-<!-- Sidebar (Left Fixed) -->
-<div style="width: 250px; background: #2c3e50; color: white; height: 100vh; position: fixed; top: 0; left: 0; padding: 20px; z-index: 9999;">
-    <h3>Menu</h3>
-    <!-- Links ko alag se block styling di hai takki click area bada ho -->
-    <a href="dashboard.html" style="color:white; text-decoration:none; display:block; padding:15px 0; font-size:18px;">Dashboard</a>
-    <a href="introduction.html" style="color:white; text-decoration:none; display:block; padding:15px 0; font-size:18px;">Introduction</a>
-    <a href="sqlanalysis.html" style="color:white; text-decoration:none; display:block; padding:15px 0; font-size:18px;">SQL & Analysis</a>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<!-- Main Content (Ise margin-left dena zaroori hai) -->
-<div style="margin-left: 270px; padding: 40px;">
-    <!-- Yahan apna baaki content daalein -->
-</div>
+    <div class="sidebar">
+        <a href="DASHBOARD.HTML">Dashboard</a>
+        <a href="INTRODUCTION.HTML">Introduction</a>
+        <a href="SQLANALYSIS.HTML">SQL & Analysis</a>
+    </div>
+
+    <div class="main-content">
+        <h1>SQL & Analysis</h1>
+        <p>SQL is the most important skill in Data Analysis.</p>
+        
+        <div class="status-box">
+            <p>Status: Completed ✅</p>
+            <button onclick="window.location.href='QUIZ.HTML'">Go to Quiz</button>
+        </div>
+    </div>
+
+</body>
+</html>
