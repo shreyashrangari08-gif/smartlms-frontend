@@ -8,7 +8,7 @@
         .link { color: #4facfe; cursor: pointer; display: block; margin: 15px 0; font-weight: bold; text-decoration: none; }
         .progress-bar-bg { width: 100%; background: #222; height: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #4facfe; }
         .progress-bar-fill { height: 100%; background: #28a745; width: 0%; border-radius: 10px; transition: 0.5s; }
-        iframe { width: 100%; height: 400px; border-radius: 10px; border: 2px solid white; }
+        .dash-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 300px; }
     </style>
 </head>
 <body>
@@ -26,18 +26,32 @@
     </div>
     
     <div class="content" id="main">
-        <h1 id="header">Welcome to Data Analytics Portal</h1>
-        <p id="subtext">Select a module from the left menu to start your learning.</p>
-        <div id="video-box"></div>
-        <button id="done-btn" style="display:none; margin-top:20px; padding:10px 20px; background:#28a745; color:white; border:none; cursor:pointer;" onclick="markDone()">Mark as Done</button>
+        <div id="dashboard-view">
+            <h1>Online Learning System</h1>
+            <div class="dash-card">
+                <h3>Data Analytics Course</h3>
+                <p>Master SQL, R, and Tableau.</p>
+                <button onclick="loadContent('Introduction', 'yZvFH7B6gKI')" style="padding:10px; cursor:pointer;">Start Course</button>
+            </div>
+        </div>
+        <div id="module-view" style="display:none;">
+            <h2 id="header"></h2>
+            <div id="video-box"></div>
+            <button id="done-btn" style="margin-top:20px; padding:10px 20px; background:#28a745; color:white; border:none; cursor:pointer;" onclick="markDone()">Mark as Done</button>
+            <br><button onclick="showDashboard()" style="margin-top:10px;">Back to Dashboard</button>
+        </div>
     </div>
 
     <script>
         function loadContent(title, vidId) {
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('module-view').style.display = 'block';
             document.getElementById('header').innerText = title;
-            document.getElementById('subtext').innerText = "Watch the video below to complete this module.";
-            document.getElementById('video-box').innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}"></iframe>`;
-            document.getElementById('done-btn').style.display = 'block';
+            document.getElementById('video-box').innerHTML = `<iframe width="100%" height="400" src="https://www.youtube.com/embed/${vidId}"></iframe>`;
+        }
+        function showDashboard() {
+            document.getElementById('dashboard-view').style.display = 'block';
+            document.getElementById('module-view').style.display = 'none';
         }
         function markDone() {
             let prog = document.getElementById('main-progress');
