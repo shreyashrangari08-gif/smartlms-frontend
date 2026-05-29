@@ -6,22 +6,24 @@
 </head>
 <body style="background-color: #f4f7f6;">
 
-    <div class="dashboard-container">
-        <h1>Online Learning System</h1>
-        
-        <div class="course-box" id="course-card">
-            <h3>Data Analytics Course</h3>
-            <p>Master SQL, R, and Tableau.</p>
-            
-            <button class="btn-enroll" id="enroll-btn" onclick="enrollCourse()">Enroll Now</button>
-            
-            <button class="btn-continue" id="continue-btn" onclick="window.location.href='sqlanalysis.html'">Continue Learning</button>
+    <div class="dashboard-page">
+        <div class="dashboard-header">
+            <h1>Online Learning System</h1>
         </div>
+        
+        <div class="course-container">
+            <div class="course-box">
+                <h3>Data Analytics Course</h3>
+                <p>Master SQL, R, and Tableau.</p>
+                <button class="btn-enroll" id="enroll-btn" onclick="enrollCourse()">Enroll Now</button>
+                <button class="btn-continue" id="continue-btn" onclick="window.location.href='sqlanalysis.html'">Continue Learning</button>
+            </div>
+            
+            </div>
     </div>
 
     <script>
         function enrollCourse() {
-            // Enroll button hide aur Continue button show
             document.getElementById('enroll-btn').style.display = 'none';
             document.getElementById('continue-btn').style.display = 'block';
             alert("Enrollment Successful!");
