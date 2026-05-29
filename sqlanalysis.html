@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Course Content</title>
+    <title>Data Analytics Course</title>
 </head>
 <body id="dashboard-page" style="padding: 20px;">
 
@@ -10,31 +10,69 @@
         <h1>Data Analytics Course</h1>
     </div>
 
-    <div class="course-container" style="display: flex; gap: 20px;">
+    <div class="course-container" style="display: flex; gap: 20px; flex-wrap: wrap;">
         
-        <div class="course-box" style="width: 300px;">
+        <!-- Sidebar Navigation -->
+        <div class="course-box" style="width: 300px; flex-shrink: 0;">
             <h3>Course Content</h3>
             <p><strong>Module 1: Introduction</strong></p>
-            <ul>
-                <li>Introduction to Data</li>
-                <li>Setting up Environment</li>
+            <ul style="list-style: none; padding: 0;">
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 5px;" onclick="showContent('data')">• Introduction to Data</li>
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 5px;" onclick="showContent('env')">• Setting up Environment</li>
             </ul>
             <p><strong>Module 2: SQL Basics</strong></p>
-            <ul>
-                <li>Queries & Filters</li>
+            <ul style="list-style: none; padding: 0;">
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 5px;" onclick="showContent('sql')">• Queries & Filters</li>
             </ul>
-            <p><strong>Module 3: Advanced Analysis</strong></p>
-            <ul>
-                <li>Data Visualization</li>
+            <p><strong>Module 3: Advanced</strong></p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 5px;" onclick="showContent('viz')">• Data Visualization</li>
             </ul>
+            <br>
+            <button class="btn-enroll" onclick="window.location.href='dashboard.html'" style="background: #6c757d;">Back to Dashboard</button>
         </div>
 
-        <div class="course-box" style="flex-grow: 1;">
-            <h2>Introduction to Data Analytics</h2>
-            <p>Welcome to the course! In this module, you will learn the basics of data, how to store it, and how to query it effectively using SQL.</p>
-            <button class="btn-enroll" onclick="window.location.href='dashboard.html'" style="background: #6c757d;">Back to Dashboard</button>
+        <!-- Main Content Area -->
+        <div class="course-box" style="flex-grow: 1; min-height: 500px; background: rgba(255,255,255,0.05);" id="content-area">
+            <h2>Welcome to the Course!</h2>
+            <p>Select a lesson from the left sidebar to start reading your study material.</p>
         </div>
     </div>
 
+    <script>
+        const content = {
+            'data': `<h2>Introduction to Data Analytics</h2>
+                    <p><strong>What is Data Analytics?</strong> Raw data ko analyze karke useful information nikalna. Importance: Better decisions, customer understanding, fraud detection, cost reduction.</p>
+                    <p><strong>Types:</strong> Descriptive (Past), Diagnostic (Why), Predictive (Future), Prescriptive (Action).</p>
+                    <p><strong>Process:</strong> 1. Collection, 2. Cleaning, 3. Analysis, 4. Visualization, 5. Decision Making.</p>`,
+            
+            'env': `<h2>Setting up Environment</h2>
+                    <p><strong>Required Tools:</strong> SQL, Excel, Python, Power BI, Tableau.</p>
+                    <p><strong>SQL Database Setup:</strong></p>
+                    <pre style="background:#000; padding:10px; color:#0f0;">CREATE DATABASE StudentDB;
+CREATE TABLE Students (
+    id INT, name VARCHAR(50), marks INT
+);</pre>`,
+            
+            'sql': `<h2>Queries & Filters</h2>
+                    <p><strong>Commands:</strong> DDL (CREATE, ALTER), DML (INSERT, DELETE), DQL (SELECT).</p>
+                    <pre style="background:#000; padding:10px; color:#0f0;">INSERT INTO Students VALUES (1, 'Rahul', 85);
+SELECT * FROM Students WHERE marks > 80;
+SELECT AVG(marks) FROM Students;
+ORDER BY marks DESC;</pre>`,
+            
+            'viz': `<h2>Advanced Analysis</h2>
+                    <p><strong>Visualization:</strong> Using Bar, Pie, Line charts for trend analysis.</p>
+                    <p><strong>Python Basic:</strong></p>
+                    <pre style="background:#000; padding:10px; color:#0f0;">print("Hello Data Analytics")
+marks = [80, 90, 70, 85]
+average = sum(marks) / len(marks)</pre>
+                    <p><strong>Project:</strong> Student Performance Analysis System.</p>`
+        };
+
+        function showContent(id) {
+            document.getElementById('content-area').innerHTML = content[id];
+        }
+    </script>
 </body>
 </html>
