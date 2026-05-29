@@ -1,54 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Online Learning System</title>
+    <title>Login - Online Learning System</title>
 </head>
-<body>
+<body id="login-page">
 
-<div class="login-container">
-    <div id="login-section">
+    <div class="login-container">
         <h2>Online Learning System</h2>
-        <input type="text" id="username" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="checkLogin()">Login</button>
-        <button class="link-btn" onclick="toggleMode()">Forgot Password?</button>
-    </div>
-
-    <div id="forgot-section" style="display: none;">
-        <h2>Reset Password</h2>
-        <input type="password" placeholder="New Password">
-        <input type="password" placeholder="Confirm Password">
-        <button onclick="alert('Password Updated Successfully!')">Update Password</button>
-        <button class="link-btn" onclick="toggleMode()">Back to Login</button>
-    </div>
-</div>
-
-<script>
-    function toggleMode() {
-        var loginSec = document.getElementById('login-section');
-        var forgotSec = document.getElementById('forgot-section');
         
-        // Agar login dikh raha hai toh hide karo, aur reset dikhao
-        if (loginSec.style.display === "none") {
-            loginSec.style.display = "block";
-            forgotSec.style.display = "none";
-        } else {
-            loginSec.style.display = "none";
-            forgotSec.style.display = "block";
-        }
-    }
+        <div id="login-section">
+            <input type="text" id="username" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="checkLogin()">Login</button>
+            <button class="link-btn" onclick="toggleMode()">Forgot Password?</button>
+        </div>
 
-    function checkLogin() {
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-        if (user === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
-            window.location.href = "dashboard.html";
-        } else {
-            alert("Invalid Credentials!");
-        }
-    }
-</script>
+        <div id="forgot-section" style="display: none;">
+            <h2>Reset Password</h2>
+            <input type="password" placeholder="New Password">
+            <input type="password" placeholder="Confirm Password">
+            <button onclick="alert('Password Updated!')">Update Password</button>
+            <button class="link-btn" onclick="toggleMode()">Back to Login</button>
+        </div>
+    </div>
 
+    <script>
+        function toggleMode() {
+            var loginSec = document.getElementById('login-section');
+            var forgotSec = document.getElementById('forgot-section');
+            loginSec.style.display = (loginSec.style.display === "none") ? "block" : "none";
+            forgotSec.style.display = (forgotSec.style.display === "none") ? "block" : "none";
+        }
+
+        function checkLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            if (user === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Invalid Credentials!");
+            }
+        }
+    </script>
 </body>
 </html>
