@@ -2,26 +2,40 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Student Profile</title>
+    <title>Edit Profile</title>
 </head>
 <body id="dashboard-page">
 
     <div class="header">
         <h1>Online Learning System</h1>
-        <h2>Student Profile</h2>
+        <h2>Edit Student Profile</h2>
     </div>
 
-    <div class="course-container" style="display: block; max-width: 600px; margin: auto;">
-        <div class="course-box" style="width: 100%;">
-            <h3>Shreyash Shivkumar Rangari</h3>
-            <p><strong>Email:</strong> shreyashrangari08@jdcoem.ac.in</p>
-            <p><strong>Contact:</strong> 9699343711</p>
-            <hr>
-            <p><strong>Address:</strong> Khaperkheda ward no.5 chankapur, Maharashtra</p>
-            <br>
-            <button onclick="window.history.back()" class="btn-enroll">Back to Dashboard</button>
+    <div class="course-container" style="display: block; max-width: 500px; margin: auto;">
+        <div class="course-box" style="width: 100%; text-align: left;">
+            <label>Name:</label>
+            <input type="text" id="name" value="Shreyash Shivkumar Rangari" style="width: 100%; margin-bottom: 10px;">
+            
+            <label>Email:</label>
+            <input type="email" id="email" value="shreyashrangari08@jdcoem.ac.in" style="width: 100%; margin-bottom: 10px;">
+            
+            <label>Contact:</label>
+            <input type="text" id="phone" value="9699343711" style="width: 100%; margin-bottom: 10px;">
+            
+            <label>Address:</label>
+            <textarea id="address" style="width: 100%; margin-bottom: 15px;">Khaperkheda ward no.5 chankapur, Maharashtra</textarea>
+
+            <button onclick="saveProfile()" class="btn-enroll" style="margin-bottom: 10px;">Save Changes</button>
+            <button onclick="window.location.href='dashboard.html'" class="btn-enroll" style="background:#6c757d;">Back to Dashboard</button>
         </div>
     </div>
 
+    <script>
+        function saveProfile() {
+            // Yahan hum data save karenge (Abhi ke liye alert dikhayenge)
+            alert("Profile updated successfully!");
+            // Real project mein yahan se data database/local storage mein save hoga
+        }
+    </script>
 </body>
 </html>
