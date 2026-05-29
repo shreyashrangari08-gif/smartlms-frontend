@@ -3,14 +3,15 @@
 <head>
     <title>Data Analytics Course</title>
     <style>
-        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #0b1a26; color: white; }
+        body { margin: 0; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b1a26; color: white; }
         .header { margin-bottom: 20px; text-align: center; }
         .course-container { display: flex; gap: 25px; width: 100%; height: 85vh; }
-        .sidebar { width: 25%; min-width: 280px; padding: 20px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid #4facfe; }
-        .content-area { width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 40px; border: 1px solid #4facfe; color: #dcdcdc; }
-        .lesson-link { cursor: pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold; }
+        .sidebar { width: 25%; min-width: 280px; padding: 20px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid #4facfe; border-radius: 10px; }
+        .content-area { width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 40px; border: 1px solid #4facfe; border-radius: 10px; color: #dcdcdc; }
+        .lesson-link { cursor: pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold; transition: 0.3s; }
+        .lesson-link:hover { color: #ffffff; }
         pre { background: #000; padding: 20px; color: #0f0; border-radius: 10px; border: 1px solid #333; overflow-x: auto; }
-        .video-box { margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .video-box { margin-bottom: 30px; border-bottom: 1px solid #4facfe; padding-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -32,12 +33,12 @@
             <p><strong>Module 4: Data Cleaning</strong></p>
             <ul><li class="lesson-link" onclick="showContent('mod4')">• Cleaning & Preprocessing</li></ul>
             <br>
-            <button onclick="window.location.href='dashboard.html'" style="width: 100%; padding: 10px; background: #6c757d; border: none; color: white; cursor: pointer;">Back to Dashboard</button>
+            <button onclick="window.location.href='dashboard.html'" style="width: 100%; padding: 10px; background: #6c757d; border: none; color: white; cursor: pointer; border-radius: 5px;">Back to Dashboard</button>
         </div>
 
         <div class="content-area" id="content-area">
-            <h2>Welcome!</h2>
-            <p>Select a module from the left sidebar to start your learning.</p>
+            <h2>Welcome to your Learning Portal!</h2>
+            <p>Select a lesson from the left sidebar to start your learning journey. You can watch videos and read the detailed syllabus below.</p>
         </div>
     </div>
 
@@ -45,19 +46,32 @@
         const content = {
             'data': `<h2>1. Introduction to Data</h2>
                      <div class="video-box"><h3>Video: Intro to Data Analytics</h3>
-                     <iframe width="100%" height="350" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe></div>`,
+                     <iframe width="100%" height="350" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe></div>
+                     <h3>Learning Syllabus:</h3>
+                     <p>Data analytics is the process of examining raw data to extract valuable insights. Key topics: Descriptive, Diagnostic, Predictive, and Prescriptive analytics.</p>`,
             
             'env': `<h2>2. Setting up Environment</h2>
                     <div class="video-box"><h3>Video: Environment Setup</h3>
-                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe></div>`,
+                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe></div>
+                    <h3>Learning Syllabus:</h3>
+                    <p>Setting up your workspace with tools like SQL, Excel, and Python. Basic database creation:</p>
+                    <pre>CREATE DATABASE StudentDB;
+CREATE TABLE Students (id INT, name VARCHAR(50), marks INT);</pre>`,
             
             'sql': `<h2>3. Queries & Filters</h2>
-                    <div class="video-box"><h3>Video: SQL Basics</h3>
-                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe></div>`,
+                    <div class="video-box"><h3>Video: SQL Queries & Filters</h3>
+                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe></div>
+                    <h3>Learning Syllabus:</h3>
+                    <p>Mastering filtering and sorting data:</p>
+                    <pre>SELECT * FROM Students WHERE marks > 80;
+SELECT AVG(marks) FROM Students;
+ORDER BY marks DESC;</pre>`,
             
             'viz': `<h2>4. Data Visualization</h2>
                     <div class="video-box"><h3>Video: Visualization Techniques</h3>
-                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe></div>`,
+                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe></div>
+                    <h3>Learning Syllabus:</h3>
+                    <p>Turning raw numbers into charts. Using Bar, Pie, and Line charts to identify business trends and performance metrics.</p>`,
             
             'mod4': `<h2>Module 4: Data Cleaning & Preprocessing</h2>
                      <div class="video-box"><h3>1. Complete Data Cleaning</h3>
@@ -66,8 +80,8 @@
                      <iframe width="100%" height="350" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe></div>
                      <h3>Learning Syllabus:</h3>
                      <p>1. Missing Data (NULL), Duplicate Records, Incorrect Data.<br>
-                     2. Cleaning: SELECT DISTINCT, IS NOT NULL, UPDATE.<br>
-                     3. Python Pandas: df.dropna(), df.drop_duplicates().</p>`
+                     2. Cleaning methods: SELECT DISTINCT, IS NOT NULL, UPDATE.<br>
+                     3. Python Pandas basics for cleaning: df.dropna(), df.drop_duplicates().</p>`
         };
 
         function showContent(id) {
