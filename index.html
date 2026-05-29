@@ -15,19 +15,28 @@
         <button class="link-btn" onclick="toggleMode()">Forgot Password?</button>
     </div>
 
-    <div id="forgot-section" class="hidden">
+    <div id="forgot-section" style="display: none;">
         <h2>Reset Password</h2>
         <input type="password" placeholder="New Password">
         <input type="password" placeholder="Confirm Password">
-        <button onclick="alert('Password Updated!')">Update Password</button>
+        <button onclick="alert('Password Updated Successfully!')">Update Password</button>
         <button class="link-btn" onclick="toggleMode()">Back to Login</button>
     </div>
 </div>
 
 <script>
     function toggleMode() {
-        document.getElementById('login-section').classList.toggle('hidden');
-        document.getElementById('forgot-section').classList.toggle('hidden');
+        var loginSec = document.getElementById('login-section');
+        var forgotSec = document.getElementById('forgot-section');
+        
+        // Agar login dikh raha hai toh hide karo, aur reset dikhao
+        if (loginSec.style.display === "none") {
+            loginSec.style.display = "block";
+            forgotSec.style.display = "none";
+        } else {
+            loginSec.style.display = "none";
+            forgotSec.style.display = "block";
+        }
     }
 
     function checkLogin() {
