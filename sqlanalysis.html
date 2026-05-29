@@ -4,8 +4,10 @@
     <style>
         body { margin:0; padding:20px; background:#0b1a26; color:white; display:flex; gap:20px; font-family:sans-serif; }
         .sidebar { width:250px; background:#1c2e3d; padding:20px; border-radius:10px; }
-        .content { flex-grow:1; background:rgba(0,0,0,0.5); padding:20px; border-radius:10px; }
+        .content { flex-grow:1; background:rgba(0,0,0,0.5); padding:20px; border-radius:10px; min-height: 400px; }
         .link { color:#4facfe; cursor:pointer; display:block; margin:15px 0; font-weight:bold; }
+        .progress-bar-bg { width: 100%; background: #222; height: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #4facfe; }
+        .progress-bar-fill { height: 100%; background: #28a745; width: 0%; border-radius: 10px; transition: 0.5s; }
     </style>
 </head>
 <body>
@@ -18,12 +20,33 @@
         <hr>
         <span class="link" style="color:yellow;" onclick="window.location.href='assessment.html'">🚀 Take Quiz</span>
         <a href="certificate.html" style="color:green; display:block; margin-top:20px;">Get Certificate</a>
+        <p>Progress:</p>
+        <div class="progress-bar-bg"><div id="main-progress" class="progress-bar-fill"></div></div>
     </div>
-    <div class="content" id="main"><h2>Welcome! Select a module to start your learning.</h2></div>
+    <div class="content" id="main">
+        <h2>Welcome! Select a module to start your learning.</h2>
+    </div>
     <script>
         function load(id) {
-            const vids = { 'data': 'yZvFH7B6gKI', 'env': 'hiS_mWZmmI0', 'sql': 'kbKty5ZVKMY', 'viz': 'MiiANxRHSv4' };
-            document.getElementById('main').innerHTML = `<h2>Module</h2><iframe width="100%" height="400" src="https://www.youtube.com/embed/${vids[id]}"></iframe>`;
+            const vids = { 
+                'data': 'yZvFH7B6gKI', 
+                'env': 'hiS_mWZmmI0', 
+                'sql': 'kbKty5ZVKMY', 
+                'viz': 'MiiANxRHSv4' 
+            };
+            document.getElementById('main').innerHTML = `
+                <h2>Module</h2>
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/${vids[id]}"></iframe>
+                <br><br>
+                <button onclick="markDone()" style="padding:10px 20px; cursor:pointer;">Mark as Done</button>
+            `;
+        }
+        function markDone() {
+            let prog = document.getElementById('main-progress');
+            let currentWidth = parseInt(prog.style.width) || 0;
+            if(currentWidth < 100) {
+                prog.style.width = (currentWidth + 25) + "%";
+            }
         }
     </script>
 </body>
