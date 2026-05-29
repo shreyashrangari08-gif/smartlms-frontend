@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Course Certificate</title>
+    <style>
+        body { background: #0b1a26; text-align: center; color: white; padding-top: 50px; font-family: sans-serif; }
+        canvas { max-width: 90%; border: 5px solid #4facfe; border-radius: 10px; }
+        button { padding: 15px 30px; font-size: 18px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <canvas id="certCanvas" width="1000" height="700"></canvas>
+    <br>
+    <button onclick="downloadCert()">Download Certificate</button>
+
+    <script>
+        // Check if user is logged in before showing certificate
+        if(!localStorage.getItem('currentUser')) { window.location.href = 'login.html'; }
+
+        const canvas = document.getElementById('certCanvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        
+        // Aapke image ka file name jo aapne upload kiya hai
+        img.src = '1000182664.png'; 
+        
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0, 1000, 700);
+            
+            // Text styling
+            ctx.fillStyle = "#1a2a40"; // Dark blue text color
+            ctx.font = "italic bold 60px Georgia";
+            
+            // Name ko canvas par center mein likhna
+            let userName = localStorage.getItem('userName') || "Shreyash Rangari";
+            let textWidth = ctx.measureText(userName).width;
+            ctx.fillText(userName, 500 - (textWidth / 2), 380);
+        }
+
+        function downloadCert() {
+            let link = document.createElement('a');
+            link.download = 'Data_Analytics_Certificate.png';
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }
+    </script>
+</body>
+</html>
