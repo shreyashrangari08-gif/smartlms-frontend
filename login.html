@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Login / Sign Up</title>
-    <style>
-        body { font-family: sans-serif; background: #0b1a26; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .box { background: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center; color: black; }
-        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { width: 95%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    <div class="box">
-        <h2 id="formTitle">Login</h2>
-        <input type="text" id="name" placeholder="Full Name (for Sign Up)">
-        <input type="text" id="user" placeholder="Email">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="handleAuth()" id="btnAction">Login</button>
-        <p id="toggleText" onclick="toggleForm()" style="cursor:pointer; color:blue; font-size:14px;">New here? Sign Up</p>
+<body style="background:#0b1a26; font-family:sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;">
+    <div style="background:white; padding:30px; border-radius:10px; width:300px; text-align:center;">
+        <h2 id="title">Login</h2>
+        <input type="text" id="name" placeholder="Full Name (for Signup)" style="width:90%; padding:10px; margin:5px;">
+        <input type="email" id="email" placeholder="Email" style="width:90%; padding:10px; margin:5px;">
+        <input type="password" id="pass" placeholder="Password" style="width:90%; padding:10px; margin:5px;">
+        <button id="btn" onclick="auth()" style="width:95%; padding:10px; background:#007bff; color:white; border:none; cursor:pointer;">Login</button>
+        <p id="toggle" onclick="toggleMode()" style="color:blue; cursor:pointer; font-size:14px; margin-top:10px;">New user? Sign Up</p>
     </div>
     <script>
         let isSignup = false;
-        function toggleForm() {
+        function toggleMode() {
             isSignup = !isSignup;
-            document.getElementById('formTitle').innerText = isSignup ? "Sign Up" : "Login";
-            document.getElementById('btnAction').innerText = isSignup ? "Sign Up" : "Login";
-            document.getElementById('toggleText').innerText = isSignup ? "Already have an account? Login" : "New here? Sign Up";
+            document.getElementById('title').innerText = isSignup ? "Sign Up" : "Login";
+            document.getElementById('btn').innerText = isSignup ? "Sign Up" : "Login";
+            document.getElementById('toggle').innerText = isSignup ? "Already have account? Login" : "New user? Sign Up";
         }
-        function handleAuth() {
-            let n = document.getElementById('name').value;
-            let u = document.getElementById('user').value;
+        function auth() {
+            let e = document.getElementById('email').value;
             let p = document.getElementById('pass').value;
+            let n = document.getElementById('name').value;
             if(isSignup) {
-                localStorage.setItem(u + "_pass", p);
-                localStorage.setItem(u + "_name", n);
-                alert("Sign Up Successful! Now Login.");
-                toggleForm();
+                localStorage.setItem(e+"_pass", p);
+                localStorage.setItem(e+"_name", n);
+                alert("Signup Success!"); toggleMode();
             } else {
-                if(localStorage.getItem(u + "_pass") === p) {
-                    localStorage.setItem('currentUser', u);
-                    localStorage.setItem('userName', localStorage.getItem(u + "_name"));
+                if(localStorage.getItem(e+"_pass") === p) {
+                    localStorage.setItem('user', e);
+                    localStorage.setItem('userName', localStorage.getItem(e+"_name"));
                     window.location.href = 'sqlanalysis.html';
-                } else { alert("Invalid Credentials!"); }
+                } else { alert("Wrong credentials!"); }
             }
         }
     </script>
