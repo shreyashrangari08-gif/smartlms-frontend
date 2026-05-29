@@ -4,22 +4,16 @@
     <title>Data Analytics Course</title>
     <style>
         body { margin: 0; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b1a26; color: white; }
-        .header { margin-bottom: 20px; text-align: center; }
         .course-container { display: flex; gap: 25px; width: 100%; height: 85vh; }
-        .sidebar { width: 25%; min-width: 280px; padding: 20px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid #4facfe; border-radius: 10px; }
+        .sidebar { width: 25%; min-width: 280px; padding: 20px; background: rgba(0,0,0,0.3); border: 1px solid #4facfe; border-radius: 10px; }
         .content-area { width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 40px; border: 1px solid #4facfe; border-radius: 10px; color: #dcdcdc; }
         .lesson-link { cursor: pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold; }
         .btn-done { background: #28a745; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-top: 15px; border-radius: 5px; font-weight: bold; }
         .progress-bar-bg { width: 100%; background: #222; height: 15px; border-radius: 10px; margin: 10px 0; border: 1px solid #4facfe; }
         .progress-bar-fill { height: 100%; background: #28a745; width: 0%; border-radius: 10px; transition: 0.5s; }
-        .sql-link { color: #4facfe; text-decoration: none; border: 1px solid #4facfe; padding: 10px; border-radius: 5px; display: inline-block; margin-top: 10px; }
-        .video-box { margin-bottom: 30px; border-bottom: 1px solid #4facfe; padding-bottom: 20px; }
     </style>
 </head>
 <body>
-
-    <div class="header"><h1>Data Analytics Course</h1></div>
-
     <div class="course-container">
         <div class="sidebar">
             <h3>Course Content</h3>
@@ -34,50 +28,55 @@
             <p><strong>Test</strong></p>
             <ul><li class="lesson-link" onclick="window.location.href='assessment.html'">• Take Assessment</li></ul>
             
-            <div style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px;">
+            <div id="cert-section" style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px;">
                 <strong>Total Progress:</strong>
                 <div class="progress-bar-bg"><div id="main-progress" class="progress-bar-fill"></div></div>
-                <button class="btn-done" style="width:100%" onclick="alert('Aapka Total Progress: ' + getProgress() + '%')">Track Progress</button>
+                <button class="btn-done" style="width:100%" onclick="alert('Progress: ' + getProgress() + '%')">Track Progress</button>
             </div>
-            <br>
-            <button onclick="window.location.href='dashboard.html'" style="width: 100%; padding: 10px; background: #6c757d; border: none; color: white; cursor: pointer; border-radius: 5px; margin-top: 10px;">Back to Dashboard</button>
         </div>
 
         <div class="content-area" id="content-area">
-            <h2>Welcome to your Learning Portal!</h2>
-            <p>Yahan aap modules explore kar sakte hain.</p>
-            <h3>Quick SQL Reference</h3>
-            <a href="https://www.w3schools.com/sql/" target="_blank" class="sql-link">Click here for SQL Tutorial</a>
+            <h2>Welcome <span id="displayName"></span>!</h2>
+            <p>Aapke portal par swagat hai. Modules select karein.</p>
         </div>
     </div>
 
     <script>
-        let progress = JSON.parse(localStorage.getItem('myProgress')) || { data:0, env:0, sql:0, viz:0, mod4:0 };
+        // Login check
+        let currentUser = localStorage.getItem('currentUser');
+        if(!currentUser) { window.location.href = 'login.html'; }
+        
+        document.getElementById('displayName').innerText = localStorage.getItem('userName');
+        let progress = JSON.parse(localStorage.getItem(currentUser + '_prog')) || { data:0, env:0, sql:0, viz:0, mod4:0 };
 
         function getProgress() { return Object.values(progress).reduce((a, b) => a + b, 0); }
-        function updateUI() { document.getElementById('main-progress').style.width = getProgress() + "%"; }
+        
+        function updateUI() { 
+            document.getElementById('main-progress').style.width = getProgress() + "%";
+            let certSection = document.getElementById('cert-section');
+            if (getProgress() >= 100 && !document.getElementById('cert-link')) {
+                certSection.innerHTML += `<div id="cert-link" style="background:#28a745; margin-top:10px; padding:10px; border-radius:5px; text-align:center;">
+                    🎉 Congratulations!<br><a href="certificate.html" style="color:white; font-weight:bold;">Get Certificate</a></div>`;
+            }
+        }
 
-        function markDone(id) {
-            progress[id] = 20;
-            localStorage.setItem('myProgress', JSON.stringify(progress));
-            updateUI();
-            alert("Module Marked as Completed!");
+        function markDone(id) { 
+            progress[id] = 20; 
+            localStorage.setItem(currentUser + '_prog', JSON.stringify(progress)); 
+            updateUI(); 
+            alert("Module Marked as Completed!"); 
         }
 
         const content = {
-            'welcome': `<h2>Welcome!</h2><p>Learning portal par aapka swagat hai.</p><h3>Quick SQL Reference</h3><a href="https://www.w3schools.com/sql/" target="_blank" class="sql-link">Click here for SQL Tutorial</a>`,
-            'data': `<h2>1. Introduction</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('data')">Mark as Done</button>`,
-            'env': `<h2>2. Environment Setup</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('env')">Mark as Done</button>`,
-            'sql': `<h2>3. SQL Queries</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('sql')">Mark as Done</button>`,
-            'viz': `<h2>4. Visualization</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('viz')">Mark as Done</button>`,
-            'mod4': `<h2>5. Data Cleaning</h2><div class="video-box"><iframe width="100%" height="250" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe></div><div class="video-box"><iframe width="100%" height="250" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('mod4')">Mark as Done</button>`
+            'welcome': `<h2>Welcome!</h2><p>Course explore karein.</p>`,
+            'data': `<h2>1. Introduction</h2><iframe width="100%" height="300" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe><button class="btn-done" onclick="markDone('data')">Mark as Done</button>`,
+            'env': `<h2>2. Environment Setup</h2><iframe width="100%" height="300" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe><button class="btn-done" onclick="markDone('env')">Mark as Done</button>`,
+            'sql': `<h2>3. SQL Queries</h2><iframe width="100%" height="300" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe><button class="btn-done" onclick="markDone('sql')">Mark as Done</button>`,
+            'viz': `<h2>4. Visualization</h2><iframe width="100%" height="300" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe><button class="btn-done" onclick="markDone('viz')">Mark as Done</button>`,
+            'mod4': `<h2>5. Data Cleaning</h2><iframe width="100%" height="250" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe><button class="btn-done" onclick="markDone('mod4')">Mark as Done</button>`
         };
 
-        function showContent(id) { 
-            if(content[id]) {
-                document.getElementById('content-area').innerHTML = content[id]; 
-            }
-        }
+        function showContent(id) { document.getElementById('content-area').innerHTML = content[id]; }
         updateUI();
     </script>
 </body>
