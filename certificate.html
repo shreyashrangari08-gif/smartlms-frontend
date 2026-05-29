@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body style="background:#0b1a26; text-align:center; color:white; padding-top:50px;">
-    <canvas id="certCanvas" width="1000" height="700" style="max-width:90%; border:5px solid #fff;"></canvas>
+    <canvas id="certCanvas" width="1000" height="700" style="max-width:90%; border:2px solid white;"></canvas>
     <br><br>
-    <button onclick="window.print()" style="padding:15px 30px; font-size:18px; cursor:pointer;">Download Certificate</button>
+    <button onclick="window.print()" style="padding:15px 30px; cursor:pointer;">Download Certificate</button>
     <script>
         const canvas = document.getElementById('certCanvas');
         const ctx = canvas.getContext('2d');
@@ -11,11 +11,9 @@
         img.src = '1000182664.png'; 
         img.onload = function() {
             ctx.drawImage(img, 0, 0, 1000, 700);
-            ctx.fillStyle = "#1a2a40";
-            ctx.font = "italic bold 60px Georgia";
+            ctx.fillStyle = "#1a2a40"; ctx.font = "italic bold 60px Georgia";
             ctx.textAlign = "center";
-            let name = localStorage.getItem('userName') || "Student";
-            ctx.fillText(name, 500, 380);
+            ctx.fillText(localStorage.getItem('userName') || "Student", 500, 380);
         }
     </script>
 </body>
