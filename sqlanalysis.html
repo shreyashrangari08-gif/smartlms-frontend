@@ -40,7 +40,7 @@
                 <button class="btn-done" style="width:100%" onclick="alert('Aapka Total Progress: ' + getProgress() + '%')">Track Progress</button>
             </div>
             <br>
-            <button onclick="window.location.href='dashboard.html'" style="width: 100%; padding: 10px; background: #6c757d; border: none; color: white; cursor: pointer; border-radius: 5px;">Back to Dashboard</button>
+            <button onclick="window.location.href='dashboard.html'" style="width: 100%; padding: 10px; background: #6c757d; border: none; color: white; cursor: pointer; border-radius: 5px; margin-top: 10px;">Back to Dashboard</button>
         </div>
 
         <div class="content-area" id="content-area">
@@ -61,12 +61,24 @@
             progress[id] = 20;
             localStorage.setItem('myProgress', JSON.stringify(progress));
             updateUI();
-            alert("Module Marked as Completed! Progress Updated.");
+            alert("Module Marked as Completed!");
         }
 
         const content = {
             'welcome': `<h2>Welcome!</h2><p>Learning portal par aapka swagat hai.</p><h3>Quick SQL Reference</h3><a href="https://www.w3schools.com/sql/" target="_blank" class="sql-link">Click here for SQL Tutorial</a>`,
-            'data': `<h2>1. Introduction</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/yZvFH7B6gKI"></iframe></div><button class="btn-done" onclick="markDone('data')">Mark as Done</button>`,
-            'env': `<h2>2. Environment Setup</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/hiS_mWZmmI0"></iframe></div><button class="btn-done" onclick="markDone('env')">Mark as Done</button>`,
-            'sql': `<h2>3. SQL Queries</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/kbKty5ZVKMY"></iframe></div><button class="btn-done" onclick="markDone('sql')">Mark as Done</button>`,
-            'viz': `<h2>4. Visualization</h2><div class="video-box"><iframe width="100%" height="300" src="
+            'data': `<h2>1. Introduction</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('data')">Mark as Done</button>`,
+            'env': `<h2>2. Environment Setup</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('env')">Mark as Done</button>`,
+            'sql': `<h2>3. SQL Queries</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('sql')">Mark as Done</button>`,
+            'viz': `<h2>4. Visualization</h2><div class="video-box"><iframe width="100%" height="300" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('viz')">Mark as Done</button>`,
+            'mod4': `<h2>5. Data Cleaning</h2><div class="video-box"><iframe width="100%" height="250" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe></div><div class="video-box"><iframe width="100%" height="250" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe></div><button class="btn-done" onclick="markDone('mod4')">Mark as Done</button>`
+        };
+
+        function showContent(id) { 
+            if(content[id]) {
+                document.getElementById('content-area').innerHTML = content[id]; 
+            }
+        }
+        updateUI();
+    </script>
+</body>
+</html>
