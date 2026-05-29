@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
-<body style="background:#0b1a26; text-align:center; color:white;">
+<body style="background:#0b1a26; text-align:center; color:white; padding-top:50px;">
     <canvas id="c" width="1000" height="700" style="max-width:90%; border:2px solid white;"></canvas>
-    <br><button onclick="window.print()">Download</button>
+    <br><button onclick="window.print()">Download Certificate</button>
     <script>
-        const canvas = document.getElementById('c');
-        const ctx = canvas.getContext('2d');
+        const ctx = document.getElementById('c').getContext('2d');
         const img = new Image();
-        img.src = '1000182664.png'; 
+        img.src = '1000182664.png';
         img.onload = () => {
             ctx.drawImage(img, 0, 0, 1000, 700);
-            ctx.fillStyle = "#1a2a40"; ctx.font = "italic 60px Georgia";
-            ctx.fillText(localStorage.getItem('userName') || "User", 500, 380);
+            ctx.font = "italic 60px Georgia";
+            ctx.fillText(localStorage.getItem('userName') || "Student", 500, 380);
         }
     </script>
 </body>
