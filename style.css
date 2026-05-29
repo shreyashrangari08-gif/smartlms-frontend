@@ -1,7 +1,8 @@
+/* --- 1. Login Page Styles --- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6); /* Attractive gradient background */
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +22,15 @@ h2 { color: #333; margin-bottom: 20px; }
 input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
 button { width: 100%; padding: 12px; background-color: #595959; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px; }
 button:hover { background-color: #333; }
-
 .link-btn { background: none; color: #007bff; border: none; cursor: pointer; font-size: 14px; margin-top: 10px; }
 .hidden { display: none; }
+
+/* --- 2. Dashboard Specific Styles --- */
+.dashboard-container { padding: 40px; text-align: center; background: white; margin: 20px; border-radius: 15px; }
+.course-box { 
+    border: 1px solid #ddd; padding: 20px; border-radius: 10px; 
+    width: 250px; background: #f9f9f9; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    display: inline-block; margin-top: 20px;
+}
+.btn-enroll { background: #28a745; color: white; border: none; padding: 10px; cursor: pointer; width: 100%; border-radius: 5px; }
+.btn-continue { background: #007bff; color: white; border: none; padding: 10px; cursor: pointer; width: 100%; border-radius: 5px; display: none; }
