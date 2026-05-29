@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Login - Online Learning System</title>
+    <title>Online Learning System</title>
 </head>
 <body>
 
-    <div class="login-container">
+<div class="login-container">
+    <div id="login-section">
         <h2>Online Learning System</h2>
-        
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username (Email)" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+        <input type="text" id="username" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkLogin()">Login</button>
+        <button class="link-btn" onclick="toggleMode()">Forgot Password?</button>
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+    <div id="forgot-section" class="hidden">
+        <h2>Reset Password</h2>
+        <input type="password" placeholder="New Password">
+        <input type="password" placeholder="Confirm Password">
+        <button onclick="alert('Password Updated!')">Update Password</button>
+        <button class="link-btn" onclick="toggleMode()">Back to Login</button>
+    </div>
+</div>
 
-            if (user === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
-                window.location.href = "dashboard.html";
-            } else {
-                alert("Invalid Credentials! Try again.");
-            }
-        });
-    </script>
+<script>
+    function toggleMode() {
+        document.getElementById('login-section').classList.toggle('hidden');
+        document.getElementById('forgot-section').classList.toggle('hidden');
+    }
+
+    function checkLogin() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        if (user === "shreyashrangari08@gmail.com" && pass === "Shreyash123") {
+            window.location.href = "dashboard.html";
+        } else {
+            alert("Invalid Credentials!");
+        }
+    }
+</script>
 
 </body>
 </html>
