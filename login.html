@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Portal</title>
+    <title>Login / Sign Up</title>
     <style>
-        body { font-family: Arial; background: #0b1a26; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin:0; }
-        .box { background: #1c2e3d; padding: 30px; border-radius: 10px; width: 300px; text-align: center; border: 1px solid #4facfe; }
-        input { width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
-        button { width: 100%; padding: 10px; background: #4facfe; border: none; color: white; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        body { font-family: sans-serif; background: #0b1a26; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin:0; }
+        .box { background: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center; color: black; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 95%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>Login</h2>
+        <h2 id="formTitle">Login</h2>
+        <input type="text" id="name" placeholder="Full Name (for Sign Up)">
         <input type="text" id="user" placeholder="Email">
         <input type="password" id="pass" placeholder="Password">
-        <button onclick="auth()">Login</button>
+        <button onclick="handleAuth()" id="btnAction">Login</button>
+        <p id="toggleText" onclick="toggleForm()" style="cursor:pointer; color:blue; font-size:14px;">New here? Sign Up</p>
     </div>
-
     <script>
-        // Aapka permanent credentials setup
-        localStorage.setItem("shreyashrangari08@gmail.com_pass", "Shreyash123");
-        localStorage.setItem("shreyashrangari08@gmail.com_name", "Shreyash Rangari");
-
-        function auth() {
+        let isSignup = false;
+        function toggleForm() {
+            isSignup = !isSignup;
+            document.getElementById('formTitle').innerText = isSignup ? "Sign Up" : "Login";
+            document.getElementById('btnAction').innerText = isSignup ? "Sign Up" : "Login";
+            document.getElementById('toggleText').innerText = isSignup ? "Already have an account? Login" : "New here? Sign Up";
+        }
+        function handleAuth() {
+            let n = document.getElementById('name').value;
             let u = document.getElementById('user').value;
             let p = document.getElementById('pass').value;
-            if(localStorage.getItem(u + "_pass") === p) {
-                localStorage.setItem('currentUser', u);
-                localStorage.setItem('userName', localStorage.getItem(u + "_name"));
-                window.location.href = 'sqlanalysis.html';
-            } else { alert("Invalid Credentials!"); }
+            if(isSignup) {
+                localStorage.setItem(u + "_pass", p);
+                localStorage.setItem(u + "_name", n);
+                alert("Sign Up Successful! Now Login.");
+                toggleForm();
+            } else {
+                if(localStorage.getItem(u + "_pass") === p) {
+                    localStorage.setItem('currentUser', u);
+                    localStorage.setItem('userName', localStorage.getItem(u + "_name"));
+                    window.location.href = 'sqlanalysis.html';
+                } else { alert("Invalid Email or Password!"); }
+            }
         }
     </script>
 </body>
