@@ -1,4 +1,4 @@
-/* --- Login Page --- */
+/* --- Login Page (Koi change nahi) --- */
 #login-page {
     margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
@@ -11,7 +11,7 @@
 #login-page input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
 #login-page button { width: 100%; padding: 12px; background-color: #595959; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/* --- Dashboard --- */
+/* --- Dashboard (Koi change nahi) --- */
 #dashboard-page { 
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
     min-height: 100vh; font-family: 'Segoe UI', sans-serif; padding: 20px; color: white; 
@@ -25,9 +25,9 @@
 }
 #dashboard-page .btn-enroll { background: #4facfe; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold; }
 
-/* --- Sidebar Style --- */
+/* --- Sidebar (Naya add kiya) --- */
 .sidebar {
-    height: 100%; width: 0; position: fixed; z-index: 1; top: 0; left: 0;
+    height: 100%; width: 0; position: fixed; z-index: 999; top: 0; left: 0;
     background-color: #111; overflow-x: hidden; transition: 0.5s; padding-top: 60px;
 }
 .sidebar a {
