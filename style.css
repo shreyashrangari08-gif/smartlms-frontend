@@ -1,4 +1,4 @@
-/* --- Login Page (No change here) --- */
+/* --- 1. Login Page Styles (ID based - No changes) --- */
 #login-page {
     margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
@@ -11,20 +11,18 @@
 #login-page input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
 #login-page button { width: 100%; padding: 12px; background-color: #595959; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/* --- Dashboard (Unique & Clean Design) --- */
+/* --- 2. Dashboard Styles (Unique Design) --- */
 #dashboard-page { 
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Unique Dark Gradient */
-    min-height: 100vh; 
-    font-family: 'Segoe UI', sans-serif; 
-    padding: 20px; 
-    color: white; 
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
+    min-height: 100vh; font-family: 'Segoe UI', sans-serif; 
+    padding: 20px; color: white; 
 }
 #dashboard-page .header { text-align: center; margin-bottom: 50px; }
 #dashboard-page .course-container { 
-    display: flex; justify-content: flex-start; flex-wrap: wrap; 
+    display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 20px;
 }
 #dashboard-page .course-box { 
-    background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+    background: rgba(255, 255, 255, 0.1); 
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 25px; border-radius: 20px; 
@@ -34,4 +32,15 @@
 #dashboard-page .btn-enroll { 
     background: #4facfe; color: white; border: none; padding: 12px; 
     width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
+}
+
+/* --- 3. Profile Button Style --- */
+#dashboard-page .profile-btn {
+    background: rgba(255, 255, 255, 0.2); 
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    text-decoration: none; 
+    color: white; 
+    font-weight: bold; 
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
