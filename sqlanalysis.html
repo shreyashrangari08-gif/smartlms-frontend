@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Data Analytics Course - Full View</title>
+    <title>Data Analytics Course</title>
 </head>
 <body id="dashboard-page" style="margin: 0; padding: 20px;">
 
@@ -10,9 +10,9 @@
         <h1>Data Analytics Course</h1>
     </div>
 
-    <div style="display: flex; gap: 20px; width: 100%; max-width: 100%;">
+    <div style="display: flex; gap: 20px; width: 100%; height: 85vh;">
         
-        <div class="course-box" style="width: 25%; min-width: 250px; height: 80vh;">
+        <div class="course-box" style="width: 25%; min-width: 250px; overflow-y: auto;">
             <h3>Course Content</h3>
             <p><strong>Module 1: Introduction</strong></p>
             <ul style="list-style: none; padding: 0;">
@@ -28,26 +28,27 @@
                 <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px;" onclick="showContent('viz')">• Data Visualization</li>
             </ul>
             <br>
-            <button class="btn-enroll" onclick="window.location.href='dashboard.html'" style="background: #6c757d;">Back to Dashboard</button>
+            <button class="btn-enroll" onclick="window.location.href='dashboard.html'" style="background: #6c757d; width: 100%;">Back to Dashboard</button>
         </div>
 
-        <div class="course-box" style="width: 70%; height: 80vh; overflow-y: auto; background: rgba(0,0,0,0.4); padding: 40px; border: 1px solid #4facfe;" id="content-area">
+        <div class="course-box" style="width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.4); padding: 40px; border: 1px solid #4facfe;" id="content-area">
             <h2 style="color: #4facfe;">Learning Module</h2>
             <p style="font-size: 18px;">Select a lesson from the left sidebar to start your learning journey.</p>
         </div>
     </div>
 
     <script>
+        // Yahan aapka pura content store hai
         const content = {
             'data': `<h2>Introduction to Data Analytics</h2>
-                    <p style="font-size:18px;"><strong>What is Data Analytics?</strong><br>Data Analytics raw data ko analyze karke useful information nikalna hai. Business decisions, customer behavior, aur market trends samajhne ke liye ye bahut zaruri hai.</p>
-                    <p style="font-size:18px;"><strong>Types of Analytics:</strong><br>1. Descriptive: Past data summarization.<br>2. Diagnostic: Reason find karna (Why it happened?).<br>3. Predictive: Future trends ki forecast karna.<br>4. Prescriptive: Solution ya strategy suggest karna.</p>
-                    <p style="font-size:18px;"><strong>The Data Process:</strong><br>Data Collection -> Cleaning -> Analysis -> Visualization -> Decision Making.</p>`,
+                    <p><strong>What is Data Analytics?</strong><br>Data Analytics raw data ko analyze karke useful information nikalna hai. Companies data ka use decisions lene, customer behavior samajhne aur business improve karne ke liye karti hain.</p>
+                    <p><strong>Types of Analytics:</strong><br>1. Descriptive: Past data summarization (e.g., Sales report).<br>2. Diagnostic: Problem ka reason find karna (e.g., Why sales dropped?).<br>3. Predictive: Future prediction (e.g., Next month sales).<br>4. Prescriptive: Action suggest karna.</p>
+                    <p><strong>Process:</strong> Collection -> Cleaning -> Analysis -> Visualization -> Decision Making.</p>`,
             
             'env': `<h2>Setting up Environment</h2>
-                    <p style="font-size:18px;"><strong>Required Tools:</strong> SQL, Excel, Python, Power BI, Tableau.</p>
-                    <p style="font-size:18px;"><strong>SQL Database Setup Steps:</strong></p>
-                    <pre style="background:#000; padding:20px; color:#0f0; font-size:16px; border-radius:10px;">CREATE DATABASE StudentDB;
+                    <p><strong>Required Tools:</strong> SQL, Excel, Python, Power BI, Tableau.</p>
+                    <p><strong>SQL Setup Example:</strong></p>
+                    <pre style="background:#000; padding:20px; color:#0f0; border-radius:10px;">CREATE DATABASE StudentDB;
 CREATE TABLE Students (
     id INT, 
     name VARCHAR(50), 
@@ -55,23 +56,29 @@ CREATE TABLE Students (
 );</pre>`,
             
             'sql': `<h2>Queries & Filters</h2>
-                    <p style="font-size:18px;"><strong>Important SQL Commands:</strong></p>
-                    <pre style="background:#000; padding:20px; color:#0f0; font-size:16px; border-radius:10px;">-- DML Commands
+                    <p><strong>Important SQL Commands:</strong></p>
+                    <pre style="background:#000; padding:20px; color:#0f0; border-radius:10px;">-- Insert Data
 INSERT INTO Students VALUES (1, 'Rahul', 85);
--- DQL Commands (Fetch Data)
+-- Fetch Data
 SELECT * FROM Students;
--- Filtering
+-- Conditional Filter
 SELECT * FROM Students WHERE marks > 80;
--- Aggregate Functions
-SELECT AVG(marks) FROM Students;
 -- Sorting
-ORDER BY marks DESC;</pre>`,
+SELECT * FROM Students ORDER BY marks DESC;</pre>`,
             
-            'viz': `<h2>Advanced Analysis & Visualization</h2>
-                    <p style="font-size:18px;"><strong>Visualization:</strong> Data ko charts (Bar, Pie, Line) mein represent karna takki insights turant samajh aayein.</p>
-                    <p style="font-size:18px;"><strong>Python for Analytics:</strong></p>
-                    <pre style="background:#000; padding:20px; color:#0f0; font-size:16px; border-radius:10px;">print("Hello Data Analytics")
+            'viz': `<h2>Data Visualization</h2>
+                    <p><strong>Visualization:</strong> Data ko charts (Bar, Pie, Line) mein represent karna takki trends samajh aayein.</p>
+                    <p><strong>Python Basics:</strong></p>
+                    <pre style="background:#000; padding:20px; color:#0f0; border-radius:10px;">print("Hello Data Analytics")
 marks = [80, 90, 70, 85]
 average = sum(marks) / len(marks)
 print(average)</pre>
-                    <p style="font-size:18px;">
+                    <p><strong>Mini Project:</strong> Student Performance Analysis System.</p>`
+        };
+
+        function showContent(id) {
+            document.getElementById('content-area').innerHTML = content[id];
+        }
+    </script>
+</body>
+</html>
