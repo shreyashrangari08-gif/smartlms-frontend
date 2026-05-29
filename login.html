@@ -12,7 +12,7 @@
 <body>
     <div class="box">
         <h2 id="formTitle">Login</h2>
-        <input type="text" id="name" placeholder="Full Name (for Sign Up only)">
+        <input type="text" id="name" placeholder="Full Name (for Sign Up)">
         <input type="text" id="user" placeholder="Email">
         <input type="password" id="pass" placeholder="Password">
         <button onclick="handleAuth()" id="btnAction">Login</button>
@@ -40,7 +40,7 @@
                     localStorage.setItem('currentUser', u);
                     localStorage.setItem('userName', localStorage.getItem(u + "_name"));
                     window.location.href = 'sqlanalysis.html';
-                } else { alert("Invalid Email or Password!"); }
+                } else { alert("Invalid Credentials!"); }
             }
         }
     </script>
