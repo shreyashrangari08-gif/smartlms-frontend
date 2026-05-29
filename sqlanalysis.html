@@ -4,76 +4,81 @@
     <link rel="stylesheet" href="style.css">
     <title>Data Analytics Course</title>
 </head>
-<body id="dashboard-page" style="margin: 0; padding: 20px;">
+<body id="dashboard-page" style="margin: 0; padding: 20px; font-family: Arial, sans-serif;">
 
-    <div class="header">
+    <div class="header" style="margin-bottom: 20px;">
         <h1>Data Analytics Course</h1>
     </div>
 
-    <div style="display: flex; gap: 20px; width: 100%; height: 85vh;">
+    <div style="display: flex; gap: 25px; width: 100%; height: 85vh;">
         
-        <div class="course-box" style="width: 25%; min-width: 250px; overflow-y: auto;">
-            <h3>Course Content</h3>
+        <div class="course-box" style="width: 25%; min-width: 280px; padding: 20px; overflow-y: auto;">
+            <h3 style="border-bottom: 1px solid #4facfe; padding-bottom: 10px;">Course Content</h3>
             <p><strong>Module 1: Introduction</strong></p>
             <ul style="list-style: none; padding: 0;">
-                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px;" onclick="showContent('data')">• Introduction to Data</li>
-                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px;" onclick="showContent('env')">• Setting up Environment</li>
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold;" onclick="showContent('data')">• Introduction to Data</li>
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold;" onclick="showContent('env')">• Setting up Environment</li>
             </ul>
             <p><strong>Module 2: SQL Basics</strong></p>
             <ul style="list-style: none; padding: 0;">
-                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px;" onclick="showContent('sql')">• Queries & Filters</li>
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold;" onclick="showContent('sql')">• Queries & Filters</li>
             </ul>
             <p><strong>Module 3: Advanced</strong></p>
             <ul style="list-style: none; padding: 0;">
-                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px;" onclick="showContent('viz')">• Data Visualization</li>
+                <li style="cursor:pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold;" onclick="showContent('viz')">• Data Visualization</li>
             </ul>
             <br>
-            <button class="btn-enroll" onclick="window.location.href='dashboard.html'" style="background: #6c757d; width: 100%;">Back to Dashboard</button>
+            <button class="btn-enroll" onclick="window.location.href='dashboard.html'" style="background: #6c757d; width: 100%; padding: 10px; color: white; border: none; cursor: pointer;">Back to Dashboard</button>
         </div>
 
-        <div class="course-box" style="width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.4); padding: 40px; border: 1px solid #4facfe;" id="content-area">
-            <h2 style="color: #4facfe;">Learning Module</h2>
-            <p style="font-size: 18px;">Select a lesson from the left sidebar to start your learning journey.</p>
+        <div class="course-box" style="width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 50px; border: 1px solid #4facfe; color: #e0e0e0;" id="content-area">
+            <h2 style="color: #4facfe; font-size: 32px;">Welcome to the Learning Module</h2>
+            <p style="font-size: 20px; line-height: 1.6;">Select a lesson from the sidebar to begin. The content will appear here in full-page detail, ready for you to scroll and study.</p>
         </div>
     </div>
 
     <script>
-        // Yahan aapka pura content store hai
         const content = {
-            'data': `<h2>Introduction to Data Analytics</h2>
-                    <p><strong>What is Data Analytics?</strong><br>Data Analytics raw data ko analyze karke useful information nikalna hai. Companies data ka use decisions lene, customer behavior samajhne aur business improve karne ke liye karti hain.</p>
-                    <p><strong>Types of Analytics:</strong><br>1. Descriptive: Past data summarization (e.g., Sales report).<br>2. Diagnostic: Problem ka reason find karna (e.g., Why sales dropped?).<br>3. Predictive: Future prediction (e.g., Next month sales).<br>4. Prescriptive: Action suggest karna.</p>
-                    <p><strong>Process:</strong> Collection -> Cleaning -> Analysis -> Visualization -> Decision Making.</p>`,
+            'data': `<h2 style="color:#4facfe; font-size:36px;">Introduction to Data Analytics</h2>
+                    <p style="font-size:20px; line-height:1.8;">Data Analytics ek process hai jisme hum raw data ko examine karte hain taaki usmein se hidden patterns, trends aur insights nikal sakein. Ye business ke liye bahut zaroori hai.</p>
+                    <h3 style="font-size:28px;">Types of Analytics:</h3>
+                    <p style="font-size:20px; line-height:1.8;"><strong>1. Descriptive:</strong> Ye batata hai ki 'kya hua tha' (Past data analysis).<br><strong>2. Diagnostic:</strong> Ye batata hai ki 'kyun hua tha' (Root cause analysis).<br><strong>3. Predictive:</strong> Ye batata hai ki 'kya ho sakta hai' (Future trends).<br><strong>4. Prescriptive:</strong> Ye best rasta ya action suggest karta hai.</p>`,
             
-            'env': `<h2>Setting up Environment</h2>
-                    <p><strong>Required Tools:</strong> SQL, Excel, Python, Power BI, Tableau.</p>
-                    <p><strong>SQL Setup Example:</strong></p>
-                    <pre style="background:#000; padding:20px; color:#0f0; border-radius:10px;">CREATE DATABASE StudentDB;
+            'env': `<h2 style="color:#4facfe; font-size:36px;">Setting up Environment</h2>
+                    <p style="font-size:20px; line-height:1.8;">Analytics ke liye aapko SQL database aur Python environment ki zaroorat hoti hai. Niche ek basic setup diya gaya hai.</p>
+                    <pre style="background:#000; padding:30px; color:#0f0; font-size:18px; border-radius:10px; border: 1px solid #333;">-- Database Creation
+CREATE DATABASE StudentDB;
+USE StudentDB;
+
+-- Table Creation
 CREATE TABLE Students (
-    id INT, 
+    id INT PRIMARY KEY, 
     name VARCHAR(50), 
     marks INT
 );</pre>`,
             
-            'sql': `<h2>Queries & Filters</h2>
-                    <p><strong>Important SQL Commands:</strong></p>
-                    <pre style="background:#000; padding:20px; color:#0f0; border-radius:10px;">-- Insert Data
+            'sql': `<h2 style="color:#4facfe; font-size:36px;">Queries & Filters</h2>
+                    <p style="font-size:20px; line-height:1.8;">SQL ka use karke hum data ko filter aur sort karte hain. Ye kuch basic commands hain:</p>
+                    <pre style="background:#000; padding:30px; color:#0f0; font-size:18px; border-radius:10px; border: 1px solid #333;">-- Inserting record
 INSERT INTO Students VALUES (1, 'Rahul', 85);
--- Fetch Data
-SELECT * FROM Students;
--- Conditional Filter
+INSERT INTO Students VALUES (2, 'Priya', 92);
+
+-- Filtering Data
 SELECT * FROM Students WHERE marks > 80;
--- Sorting
+
+-- Aggregate Calculations
+SELECT AVG(marks) AS Average_Score FROM Students;
+
+-- Sorting Result
 SELECT * FROM Students ORDER BY marks DESC;</pre>`,
             
-            'viz': `<h2>Data Visualization</h2>
-                    <p><strong>Visualization:</strong> Data ko charts (Bar, Pie, Line) mein represent karna takki trends samajh aayein.</p>
-                    <p><strong>Python Basics:</strong></p>
-                    <pre style="background:#000; padding:20px; color:#0f0; border-radius:10px;">print("Hello Data Analytics")
+            'viz': `<h2 style="color:#4facfe; font-size:36px;">Data Visualization</h2>
+                    <p style="font-size:20px; line-height:1.8;">Data visualization ka matlab hai numbers ko charts aur graphs mein badalna. Ye analysis ka sabse important part hai.</p>
+                    <pre style="background:#000; padding:30px; color:#0f0; font-size:18px; border-radius:10px; border: 1px solid #333;"># Python code example
 marks = [80, 90, 70, 85]
 average = sum(marks) / len(marks)
-print(average)</pre>
-                    <p><strong>Mini Project:</strong> Student Performance Analysis System.</p>`
+print(f"The average is: {average}")</pre>
+                    <p style="font-size:20px; line-height:1.8;"><strong>Project:</strong> Hum ek Student Performance Analysis system banayenge jahan marks ka summary live charts ke zariye dikhega.</p>`
         };
 
         function showContent(id) {
