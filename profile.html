@@ -2,40 +2,40 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Edit Profile</title>
+    <title>Account Settings</title>
 </head>
-<body id="dashboard-page">
+<body id="dashboard-page" style="padding: 20px;">
 
     <div class="header">
-        <h1>Online Learning System</h1>
-        <h2>Edit Student Profile</h2>
+        <h1>Account Settings</h1>
     </div>
 
-    <div class="course-container" style="display: block; max-width: 500px; margin: auto;">
-        <div class="course-box" style="width: 100%; text-align: left;">
-            <label>Name:</label>
-            <input type="text" id="name" value="Shreyash Shivkumar Rangari" style="width: 100%; margin-bottom: 10px;">
-            
-            <label>Email:</label>
-            <input type="email" id="email" value="shreyashrangari08@jdcoem.ac.in" style="width: 100%; margin-bottom: 10px;">
-            
-            <label>Contact:</label>
-            <input type="text" id="phone" value="9699343711" style="width: 100%; margin-bottom: 10px;">
-            
-            <label>Address:</label>
-            <textarea id="address" style="width: 100%; margin-bottom: 15px;">Khaperkheda ward no.5 chankapur, Maharashtra</textarea>
+    <div class="course-container" style="max-width: 800px; margin: auto; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+        
+        <!-- Profile Section -->
+        <h3>👤 Profile Settings</h3>
+        <input type="text" placeholder="Full Name" style="width:100%; padding:10px; margin-bottom:10px;">
+        <input type="email" placeholder="Email Address" style="width:100%; padding:10px; margin-bottom:10px;">
+        <textarea placeholder="Bio/About section" style="width:100%; height:80px;"></textarea>
+        
+        <hr style="margin: 20px 0;">
 
-            <button onclick="saveProfile()" class="btn-enroll" style="margin-bottom: 10px;">Save Changes</button>
-            <button onclick="window.location.href='dashboard.html'" class="btn-enroll" style="background:#6c757d;">Back to Dashboard</button>
-        </div>
+        <!-- Security Section -->
+        <h3>🔒 Account Security</h3>
+        <button class="btn-enroll" style="background:#555;">Change Password</button>
+        <label style="display:block; margin-top:10px;"><input type="checkbox"> Enable 2FA Authentication</label>
+
+        <hr style="margin: 20px 0;">
+
+        <!-- Notifications -->
+        <h3>🔔 Notifications</h3>
+        <label><input type="checkbox" checked> Email Notifications</label><br>
+        <label><input type="checkbox"> Course Assignment Reminders</label>
+
+        <br><br>
+        <button onclick="alert('Settings Saved Successfully!')" class="btn-enroll">Save All Changes</button>
+        <button onclick="window.location.href='dashboard.html'" class="btn-enroll" style="background:transparent; border:1px solid white; margin-top:10px;">Back to Dashboard</button>
     </div>
 
-    <script>
-        function saveProfile() {
-            // Yahan hum data save karenge (Abhi ke liye alert dikhayenge)
-            alert("Profile updated successfully!");
-            // Real project mein yahan se data database/local storage mein save hoga
-        }
-    </script>
 </body>
 </html>
