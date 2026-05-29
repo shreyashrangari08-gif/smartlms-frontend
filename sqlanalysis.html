@@ -2,51 +2,65 @@
 <html>
 <head>
     <style>
-        body { margin: 0; display: flex; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; }
-        .sidebar { width: 280px; background: #1c2e3d; padding: 20px; border-right: 2px solid #4facfe; display: none; } /* Sidebar hidden by default */
-        .content { flex-grow: 1; padding: 40px; }
-        .dash-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 300px; }
+        body { margin: 0; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Header */
+        .header-bar { padding: 15px; background: #1c2e3d; text-align: center; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #4facfe; }
+        .menu-icon { cursor: pointer; font-size: 24px; padding-right: 10px; }
+        
+        /* Main Layout */
+        .main-container { display: flex; flex-grow: 1; }
+        .sidebar { width: 280px; background: #1c2e3d; padding: 20px; display: none; border-right: 1px solid #4facfe; }
+        .content { flex-grow: 1; padding: 40px; display: flex; justify-content: center; align-items: flex-start; }
+        
+        .dash-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 300px; text-align: center; }
         .link { color: #4facfe; cursor: pointer; display: block; margin: 15px 0; font-weight: bold; text-decoration: none; }
-        iframe { width: 100%; height: 400px; border-radius: 10px; }
+        iframe { width: 100%; height: 400px; border-radius: 10px; border: 2px solid white; }
     </style>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <h3>Course Content</h3>
-        <span class="link" onclick="loadContent('Introduction', 'yZvFH7B6gKI')">1. Introduction</span>
-        <span class="link" onclick="loadContent('Environment', 'hiS_mWZmmI0')">2. Environment</span>
-        <span class="link" onclick="loadContent('SQL Queries', 'kbKty5ZVKMY')">3. SQL Queries</span>
-        <span class="link" onclick="loadContent('Visualization', 'MiiANxRHSv4')">4. Visualization</span>
-        <hr>
-        <a class="link" href="assessment.html">🚀 Take Quiz</a>
-        <a class="link" href="certificate.html">Get Certificate</a>
+
+    <div class="header-bar">
+        <div></div> 
+        <h2 style="margin:0;">Online Learning System</h2>
+        <div class="menu-icon" onclick="showSettings()">⋮</div>
     </div>
-    
-    <div class="content" id="main">
-        <div id="dashboard-view">
-            <h1>Online Learning System</h1>
-            <div class="dash-card">
+
+    <div class="main-container">
+        <div class="sidebar" id="sidebar">
+            <h3>Course Content</h3>
+            <span class="link" onclick="loadContent('Introduction', 'yZvFH7B6gKI')">1. Introduction</span>
+            <span class="link" onclick="loadContent('Environment', 'hiS_mWZmmI0')">2. Environment</span>
+            <span class="link" onclick="loadContent('SQL Queries', 'kbKty5ZVKMY')">3. SQL Queries</span>
+            <span class="link" onclick="loadContent('Visualization', 'MiiANxRHSv4')">4. Visualization</span>
+            <hr>
+            <a class="link" href="assessment.html">🚀 Take Quiz</a>
+            <a class="link" href="certificate.html">Get Certificate</a>
+        </div>
+        
+        <div class="content" id="main">
+            <div id="dashboard-view" class="dash-card">
                 <h3>Data Analytics Course</h3>
                 <p>Master SQL, R, and Tableau.</p>
-                <button id="enroll-btn" onclick="startCourse()" style="padding:10px 20px; cursor:pointer;">Enroll Now</button>
+                <button id="enroll-btn" onclick="startCourse()" style="padding:10px 20px; cursor:pointer; background:#4facfe; border:none; color:white; border-radius:5px;">Enroll Now</button>
             </div>
-        </div>
-        <div id="content-view" style="display:none;">
-            <h2 id="header">Introduction</h2>
-            <div id="video-box"></div>
+            
+            <div id="content-view" style="display:none; width: 80%;">
+                <h2 id="header"></h2>
+                <div id="video-box"></div>
+            </div>
         </div>
     </div>
 
     <script>
+        function showSettings() {
+            alert("--- Profile Settings ---\nName: Shreyash Rangari\nEmail: shreyashrangari08@gmail.com\n\n- Personal Information\n- Account Settings\n- Log Out");
+        }
         function startCourse() {
-            // Button badal kar "Continue Learning" kar diya
             document.getElementById('enroll-btn').innerText = "Continue Learning";
-            // Sidebar dikha diya
             document.getElementById('sidebar').style.display = 'block';
-            // Pehla content load kiya
             loadContent('Introduction', 'yZvFH7B6gKI');
         }
-
         function loadContent(title, vidId) {
             document.getElementById('dashboard-view').style.display = 'none';
             document.getElementById('content-view').style.display = 'block';
