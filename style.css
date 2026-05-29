@@ -1,5 +1,5 @@
-/* Login Page Specific */
-.login-body {
+/* --- 1. Login Page Styles (ID based) --- */
+#login-page {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
@@ -8,7 +8,7 @@
     align-items: center;
     height: 100vh;
 }
-.login-container {
+#login-page .login-container {
     background: white;
     padding: 30px;
     border-radius: 15px;
@@ -16,11 +16,20 @@
     width: 350px;
     text-align: center;
 }
+#login-page input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+#login-page button { width: 100%; padding: 12px; background-color: #595959; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/* Dashboard Specific */
-.dashboard-page { padding: 40px; text-align: center; }
-.course-container { display: flex; justify-content: center; }
-.course-box { 
-    border: 1px solid #ddd; padding: 40px; border-radius: 15px; 
-    width: 300px; background: white; box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+/* --- 2. Dashboard Styles (ID based) --- */
+#dashboard-page { padding: 40px; font-family: sans-serif; }
+.course-container { 
+    display: flex; 
+    flex-wrap: wrap; /* Automatic line break for new courses */
+    gap: 20px; 
+    justify-content: flex-start; /* Boxes left side se shuru honge */
 }
+.course-box { 
+    border: 1px solid #ddd; padding: 20px; border-radius: 10px; 
+    width: 250px; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+.btn-enroll { background: #28a745; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; border-radius: 5px; }
+.btn-continue { background: #007bff; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; border-radius: 5px; display: none; }
