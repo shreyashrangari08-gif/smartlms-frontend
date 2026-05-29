@@ -6,8 +6,15 @@
 </head>
 <body id="dashboard-page">
 
-    <div style="text-align: right; padding: 20px;">
-        <a href="profile.html" style="background: rgba(255, 255, 255, 0.2); padding: 10px 20px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; border: 1px solid rgba(255, 255, 255, 0.3);">👤 Student Profile</a>
+    <div style="padding: 20px;">
+        <span style="font-size:30px; cursor:pointer; color:white;" onclick="openNav()">&#9776;</span>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="profile.html">👤 Student Profile</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="index.html">🚪 Log Out</a>
     </div>
 
     <div class="header">
@@ -17,7 +24,7 @@
     <div class="course-container">
         <div class="course-box">
             <h3>Data Analytics Course</h3>
-            <p style="opacity: 0.8;">Master SQL, R, and Tableau with our industry experts.</p>
+            <p style="opacity: 0.8;">Master SQL, R, and Tableau.</p>
             <br>
             <button class="btn-enroll" id="enroll-btn" onclick="enrollCourse()">Enroll Now</button>
             <button id="continue-btn" style="display:none; width: 100%; padding: 12px; background: #00f2fe; color: black; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;" onclick="window.location.href='sqlanalysis.html'">Continue Learning</button>
@@ -25,6 +32,8 @@
     </div>
 
     <script>
+        function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
+        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
         function enrollCourse() {
             document.getElementById('enroll-btn').style.display = 'none';
             document.getElementById('continue-btn').style.display = 'block';
