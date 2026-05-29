@@ -13,6 +13,7 @@
         pre { background: #000; padding: 20px; color: #0f0; border-radius: 10px; border: 1px solid #333; overflow-x: auto; }
         .video-box { margin-bottom: 30px; border-bottom: 1px solid #4facfe; padding-bottom: 20px; }
         .btn-assessment { display: block; width: 100%; padding: 15px; background: #28a745; color: white; text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; }
+        .sql-link { color: #4facfe; font-size: 1.2em; text-decoration: none; border: 1px solid #4facfe; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -24,6 +25,7 @@
             <h3>Course Content</h3>
             <p><strong>Modules</strong></p>
             <ul style="list-style: none; padding: 0;">
+                <li class="lesson-link" onclick="showContent('welcome')">• Home</li>
                 <li class="lesson-link" onclick="showContent('data')">• Introduction to Data</li>
                 <li class="lesson-link" onclick="showContent('env')">• Setting up Environment</li>
                 <li class="lesson-link" onclick="showContent('sql')">• Queries & Filters</li>
@@ -38,46 +40,22 @@
 
         <div class="content-area" id="content-area">
             <h2>Welcome to your Learning Portal!</h2>
-            <p>Select a lesson from the left sidebar to start your learning journey.</p>
+            <p>Yahan aap Data Analytics ke modules explore kar sakte hain.</p>
+            <hr style="border: 0; border-top: 1px solid #4facfe; margin: 20px 0;">
+            <h3>Quick SQL Reference</h3>
+            <p>Agar aapko SQL practice karni hai, toh aap W3Schools ka use kar sakte hain:</p>
+            <a href="https://www.w3schools.com/sql/" target="_blank" class="sql-link">Click here for SQL Tutorial</a>
         </div>
     </div>
 
     <script>
         const content = {
-            'data': `<h2>1. Introduction to Data</h2>
-                     <div class="video-box"><h3>Video: Intro to Data Analytics</h3>
-                     <iframe width="100%" height="350" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe></div>
-                     <h3>Learning Syllabus:</h3>
-                     <p>Data analytics is the process of examining raw data to extract valuable insights.</p>`,
-            
-            'env': `<h2>2. Setting up Environment</h2>
-                    <div class="video-box"><h3>Video: Environment Setup</h3>
-                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe></div>
-                    <h3>Learning Syllabus:</h3>
-                    <p>Required tools: SQL, Excel, and Python.</p>`,
-            
-            'sql': `<h2>3. Queries & Filters</h2>
-                    <div class="video-box"><h3>Video: SQL Queries & Filters</h3>
-                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe></div>
-                    <h3>Learning Syllabus:</h3>
-                    <p>Mastering filtering and sorting data using SELECT, WHERE, and ORDER BY.</p>`,
-            
-            'viz': `<h2>4. Data Visualization</h2>
-                    <div class="video-box"><h3>Video: Visualization Techniques</h3>
-                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe></div>
-                    <h3>Learning Syllabus:</h3>
-                    <p>Turning raw numbers into charts. Using Bar, Pie, and Line charts.</p>`,
-            
-            'mod4': `<h2>Module 4: Data Cleaning & Preprocessing</h2>
-                     <div class="video-box"><h3>1. Complete Data Cleaning</h3>
-                     <iframe width="100%" height="350" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe></div>
-                     <div class="video-box"><h3>2. SQL Data Cleaning</h3>
-                     <iframe width="100%" height="350" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe></div>
-                     <h3>Learning Syllabus:</h3>
-                     <p>1. Missing Data (NULL), Duplicate Records.<br>
-                     2. Cleaning methods: SELECT DISTINCT, IS NOT NULL.<br>
-                     3. Python Pandas: df.dropna(), df.drop_duplicates().</p>
-                     <a href="assessment.html" class="btn-assessment">Take Assessment</a>`
+            'welcome': `<h2>Welcome to your Learning Portal!</h2><p>Yahan aap Data Analytics ke modules explore kar sakte hain.</p><h3>Quick SQL Reference</h3><a href="https://www.w3schools.com/sql/" target="_blank" class="sql-link">Click here for SQL Tutorial</a>`,
+            'data': `<h2>1. Introduction to Data</h2><div class="video-box"><h3>Video: Intro to Data Analytics</h3><iframe width="100%" height="350" src="https://www.youtube.com/embed/yZvFH7B6gKI" frameborder="0" allowfullscreen></iframe></div><h3>Learning Syllabus:</h3><p>Data analytics is the process of examining raw data to extract valuable insights.</p>`,
+            'env': `<h2>2. Setting up Environment</h2><div class="video-box"><h3>Video: Environment Setup</h3><iframe width="100%" height="350" src="https://www.youtube.com/embed/hiS_mWZmmI0" frameborder="0" allowfullscreen></iframe></div><h3>Learning Syllabus:</h3><p>Required tools: SQL, Excel, and Python.</p>`,
+            'sql': `<h2>3. Queries & Filters</h2><div class="video-box"><h3>Video: SQL Queries & Filters</h3><iframe width="100%" height="350" src="https://www.youtube.com/embed/kbKty5ZVKMY" frameborder="0" allowfullscreen></iframe></div><h3>Learning Syllabus:</h3><p>Mastering filtering and sorting data using SELECT, WHERE, and ORDER BY.</p>`,
+            'viz': `<h2>4. Data Visualization</h2><div class="video-box"><h3>Video: Visualization Techniques</h3><iframe width="100%" height="350" src="https://www.youtube.com/embed/MiiANxRHSv4" frameborder="0" allowfullscreen></iframe></div><h3>Learning Syllabus:</h3><p>Turning raw numbers into charts. Using Bar, Pie, and Line charts.</p>`,
+            'mod4': `<h2>Module 4: Data Cleaning & Preprocessing</h2><div class="video-box"><h3>1. Complete Data Cleaning</h3><iframe width="100%" height="350" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe></div><div class="video-box"><h3>2. SQL Data Cleaning</h3><iframe width="100%" height="350" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe></div><h3>Learning Syllabus:</h3><p>1. Missing Data (NULL), Duplicate Records.<br>2. Cleaning methods: SELECT DISTINCT, IS NOT NULL.<br>3. Python Pandas: df.dropna(), df.drop_duplicates().</p><a href="assessment.html" class="btn-assessment">Take Assessment</a>`
         };
 
         function showContent(id) {
