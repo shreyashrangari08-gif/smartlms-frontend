@@ -1,32 +1,70 @@
-<script>
-    const content = {
-        // Purane modules...
-        'data': `...`, // (Puraane modules waise hi rahenge)
-        'env': `...`,
-        'sql': `...`,
-        'viz': `...`,
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Analytics Course</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #0b1a26; color: white; }
+        .header { margin-bottom: 20px; text-align: center; }
+        .course-container { display: flex; gap: 25px; width: 100%; height: 85vh; }
+        .sidebar { width: 25%; min-width: 280px; padding: 20px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid #4facfe; }
+        .content-area { width: 75%; height: 100%; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 40px; border: 1px solid #4facfe; }
+        .lesson-link { cursor: pointer; color: #4facfe; margin-bottom: 15px; font-weight: bold; }
+        pre { background: #000; padding: 20px; color: #0f0; border-radius: 10px; border: 1px solid #333; overflow-x: auto; }
+    </style>
+</head>
+<body>
 
-        // Module 4 - Updated with Videos & Learning Syllabus
-        'mod4': `
-            <h2 style="color: #4facfe;">Module 4: Data Cleaning & Preprocessing</h2>
-            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-                <iframe width="48%" height="250" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe>
-                <iframe width="48%" height="250" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div style="font-size: 18px; line-height: 1.7; color: #fff;">
-                <h3>Learning Syllabus:</h3>
-                <p><strong>1. Data Issues:</strong> Missing Data, Duplicate Records, Incorrect Data.</p>
-                <p><strong>2. SQL Methods:</strong> SELECT DISTINCT, IS NOT NULL, UPDATE commands.</p>
-                <p><strong>3. Python Pandas:</strong> df.dropna(), df.drop_duplicates().</p>
-                <p><strong>4. Transformation:</strong> Normalization, Standardization, Encoding.</p>
-            </div>
-        `,
+    <div class="header"><h1>Data Analytics Course</h1></div>
 
-        // Module 5 ke liye jagah bana di hai
-        'mod5': `<h2 style="color: #4facfe;">Module 5: Coming Soon...</h2><p>Content yahan update hoga.</p>`
-    };
+    <div class="course-container">
+        <div class="sidebar">
+            <h3>Course Content</h3>
+            <p><strong>Module 1: Introduction</strong></p>
+            <ul style="list-style: none; padding: 0;">
+                <li class="lesson-link" onclick="showContent('data')">• Introduction to Data</li>
+                <li class="lesson-link" onclick="showContent('env')">• Setting up Environment</li>
+            </ul>
+            <p><strong>Module 2: SQL Basics</strong></p>
+            <ul><li class="lesson-link" onclick="showContent('sql')">• Queries & Filters</li></ul>
+            <p><strong>Module 3: Advanced</strong></p>
+            <ul><li class="lesson-link" onclick="showContent('viz')">• Data Visualization</li></ul>
+            <p><strong>Module 4: Data Cleaning</strong></p>
+            <ul><li class="lesson-link" onclick="showContent('mod4')">• Cleaning & Preprocessing</li></ul>
+            <br>
+            <button onclick="window.location.href='dashboard.html'" style="width: 100%; padding: 10px; background: #6c757d; border: none; color: white; cursor: pointer;">Back to Dashboard</button>
+        </div>
 
-    function showContent(id) {
-        document.getElementById('content-area').innerHTML = content[id];
-    }
-</script>
+        <div class="content-area" id="content-area">
+            <h2>Welcome!</h2>
+            <p>Select a lesson from the left sidebar to start your learning.</p>
+        </div>
+    </div>
+
+    <script>
+        const content = {
+            'data': `<h2>Introduction to Data Analytics</h2><p>Data Analytics raw data ko analyze karke useful information nikalna hai.</p><p>Types: Descriptive, Diagnostic, Predictive, Prescriptive.</p>`,
+            'env': `<h2>Setting up Environment</h2><p>SQL Database Setup:</p><pre>CREATE DATABASE StudentDB;
+CREATE TABLE Students (id INT, name VARCHAR(50), marks INT);</pre>`,
+            'sql': `<h2>Queries & Filters</h2><pre>-- Filtered Data
+SELECT * FROM Students WHERE marks > 80;
+SELECT AVG(marks) FROM Students;
+ORDER BY marks DESC;</pre>`,
+            'viz': `<h2>Data Visualization</h2><p>Using Bar, Pie, Line charts for trend analysis.</p><pre>print("Hello Data Analytics")
+average = sum(marks) / len(marks)</pre>`,
+            'mod4': `<h2>Module 4: Data Cleaning</h2>
+                     <div style="display:flex; gap:10px; margin-bottom:20px;">
+                        <iframe width="48%" height="250" src="https://www.youtube.com/embed/ITy8R4278sk" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="48%" height="250" src="https://www.youtube.com/embed/4UltKCnnnTA" frameborder="0" allowfullscreen></iframe>
+                     </div>
+                     <h3>Learning Syllabus:</h3>
+                     <p>1. Missing Data (NULL), Duplicate Records, Incorrect Data.<br>
+                     2. Cleaning: SELECT DISTINCT, IS NOT NULL, UPDATE.<br>
+                     3. Python Pandas: df.dropna(), df.drop_duplicates().</p>`
+        };
+
+        function showContent(id) {
+            document.getElementById('content-area').innerHTML = content[id];
+        }
+    </script>
+</body>
+</html>
