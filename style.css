@@ -1,44 +1,22 @@
-/* --- Login Page Design --- */
+/* --- Login Page --- */
 #login-page {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    display: flex; justify-content: center; align-items: center;
 }
 #login-page .login-container {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    width: 350px;
-    text-align: center;
+    background: white; padding: 30px; border-radius: 15px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 350px; text-align: center;
 }
 #login-page input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
 #login-page button { width: 100%; padding: 12px; background-color: #595959; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/* --- Dashboard Design --- */
-#dashboard-page {
-    background-color: #f4f7f6;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-}
-#dashboard-page .header {
-    text-align: center; /* Title center mein */
-    margin-bottom: 40px;
-}
-#dashboard-page .course-container {
-    display: flex;
-    justify-content: flex-start; /* Box left mein */
-}
-#dashboard-page .course-box {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    width: 250px;
+/* --- Dashboard --- */
+#dashboard-page { background-color: #f4f7f6; font-family: sans-serif; padding: 20px; }
+#dashboard-page .header { text-align: center; margin-bottom: 30px; }
+#dashboard-page .course-container { display: flex; justify-content: flex-start; }
+#dashboard-page .course-box { 
+    background: white; padding: 20px; border-radius: 15px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 250px; 
 }
 #dashboard-page .btn-enroll { background: #28a745; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
