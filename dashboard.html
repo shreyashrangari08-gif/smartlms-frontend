@@ -90,9 +90,8 @@
             margin: 15px 0 25px 0;
         }
         
-        /* Button Styles */
         .enroll-btn {
-            background-color: #2dd4bf; /* Pehle wala cyan color */
+            background-color: #2dd4bf;
             color: #111827;
             border: none;
             padding: 12px 24px;
@@ -108,7 +107,7 @@
         }
         
         .continue-btn {
-            background-color: #38bdf8; /* Blue color continue ke liye */
+            background-color: #38bdf8;
             color: #111827;
             border: none;
             padding: 12px 24px;
@@ -150,7 +149,7 @@
             font-weight: 600;
         }
         .status-box h4 {
-            margin: 0 0 10px 0;
+            margin: 12px 0 10px 0;
             font-size: 20px;
             font-weight: bold;
         }
@@ -159,6 +158,29 @@
             font-size: 14px;
             color: #e5e7eb;
             line-height: 1.5;
+        }
+
+        /* NAYA: Progress Bar Styling */
+        .progress-container {
+            width: 100%;
+            background-color: #374151;
+            border-radius: 20px;
+            height: 10px;
+            margin: 10px 0 5px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%; /* Dynamic fill */
+            border-radius: 20px;
+            transition: width 0.4s ease-in-out;
+        }
+        .progress-text {
+            font-size: 13px;
+            color: #9ca3af;
+            text-align: right;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
         @media (max-width: 768px) {
@@ -188,20 +210,23 @@
         <div class="welcome-card">
             <h2>Data Analytics Course</h2>
             <p>Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
-            
-            <div id="courseActionContainer">
-                </div>
+            <div id="courseActionContainer"></div>
         </div>
 
         <div id="dashboardStatusBox" class="status-box">
             <h3>Quiz Progress</h3>
+            
+            <div class="progress-text" id="progressPercentage">0% Completed</div>
+            <div class="progress-container">
+                <div id="courseProgressBar" class="progress-bar"></div>
+            </div>
+
             <h4 id="statusTitle"></h4>
             <p id="statusMsg"></p>
         </div>
     </div>
 
     <script>
-        // Function to handle enrollment click
         function enrollUser() {
             localStorage.setItem('isEnrolled', 'true');
             alert('Congratulations! Aapne course me successfully enroll kar liya hai.');
@@ -209,39 +234,72 @@
         }
 
         window.onload = function() {
-            // 1. Enrollment Button Logic Check
+            // 1. Enrollment Button Flow
             const isEnrolled = localStorage.getItem('isEnrolled');
             const actionContainer = document.getElementById('courseActionContainer');
 
             if (isEnrolled === 'true') {
-                // Agar enroll ho chuka hai toh "Go to Course Content" / Continue Learning button dikhao
                 actionContainer.innerHTML = `<a href="sqlanalysis.html" class="continue-btn">Go to Course Content</a>`;
             } else {
-                // Agar enroll nahi hai toh "Enroll Now" button dikhao jo click par function trigger karega
                 actionContainer.innerHTML = `<button onclick="enrollUser()" class="enroll-btn">Enroll Now</button>`;
             }
 
-            // 2. Quiz Status Box Logic Check
+            // 2. Dynamic Progress Calculation Logic
+            let totalItems = 6; // 5 Videos + 1 Quiz
+            let completedItems = 0;
+
+            // Check completed videos from localStorage
+            for (let i = 1; i <= 5; i++) {
+                if (localStorage.getItem('video_completed_' + i) === 'true') {
+                    completedItems++;
+                }
+            }
+
+            // Check if quiz is given
             const status = localStorage.getItem('quizStatus');
             const score = localStorage.getItem('quizScore');
+            if (status) {
+                completedItems++;
+            }
+
+            // Calculate percentage
+            let percentage = Math.round((completedItems / totalItems) * 100);
+
             const statusBox = document.getElementById('dashboardStatusBox');
             const statusTitle = document.getElementById('statusTitle');
             const statusMsg = document.getElementById('statusMsg');
+            const progressBar = document.getElementById('courseProgressBar');
+            const progressPercentage = document.getElementById('progressPercentage');
+
+            // Set progress bar width and text
+            progressPercentage.innerText = percentage + "% Completed";
+            progressBar.style.width = percentage + "%";
 
             if (status) {
                 statusBox.style.display = "block"; 
                 
                 if (status === 'PASS') {
                     statusBox.className = "status-box pass";
+                    progressBar.style.backgroundColor = "#10b981"; // Green color for pass
                     statusTitle.innerHTML = "Congratulations! 🎉";
                     statusTitle.style.color = "#10b981";
                     statusMsg.innerHTML = "Aapne Data Analytics quiz successfully clear kar liya hai! Aapka score <b>" + score + "/10</b> raha. Keep learning and shining!";
                 } else {
                     statusBox.className = "status-box fail";
+                    progressBar.style.backgroundColor = "#ef4444"; // Red color for fail
                     statusTitle.innerHTML = "Keep Trying! 👍";
                     statusTitle.style.color = "#ef4444";
                     statusMsg.innerHTML = "Aapka score <b>" + score + "/10</b> raha. Pass hone ke liye kam se kam 5 sahi jawab chahiye. Ek baar phir se try karein!";
                 }
+            } else if (completedItems > 0) {
+                // Agar quiz nahi diya par videos dekhi hain, toh bhi progress box show hoga neutral theme me
+                statusBox.style.display = "block";
+                statusBox.style.backgroundColor = "rgba(56, 189, 248, 0.05)";
+                statusBox.style.borderColor = "#38bdf8";
+                progressBar.style.backgroundColor = "#38bdf8"; // Blue color neutral progress ke liye
+                statusTitle.innerHTML = "Learning Mode 📖";
+                statusTitle.style.color = "#38bdf8";
+                statusMsg.innerHTML = "Aap course timeline track kar rahe hain. Videos dekhne ke baad Quiz section me jaakar test zaroor dein!";
             }
         };
     </script>
