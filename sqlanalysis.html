@@ -15,7 +15,6 @@
         .btn { padding: 12px 24px; background: #38bdf8; border: none; cursor: pointer; border-radius: 8px; color: #0b1120; font-weight: 600; margin-top: 10px; }
         .nav-link { cursor: pointer; padding: 12px; color: #94a3b8; display: block; border-radius: 8px; }
         .nav-link:hover { color: #38bdf8; background: #1e293b; }
-        
         .settings-item { padding: 15px; border-bottom: 1px solid #334155; cursor: pointer; color: #cbd5e1; }
         .settings-item:hover { color: #38bdf8; background: #1e293b; }
     </style>
@@ -48,8 +47,19 @@
                     <h3>Data Analytics Masterclass</h3>
                     <p id="course-status">Status: Not Enrolled</p>
                     <button id="course-enroll-btn" class="btn" onclick="enrollCourse()">Enroll Now</button>
-                    <button id="continue-btn" class="btn" style="display:none; background:#10b981;" onclick="alert('Starting Course...')">Continue Learning</button>
+                    <button id="continue-btn" class="btn" style="display:none; background:#10b981;" onclick="showSection('course-player')">Continue Learning</button>
                 </div>
+            </div>
+
+            <div id="course-player" class="section">
+                <h2>🎓 Data Analytics Masterclass</h2>
+                <div class="card">
+                    <h3>Course Content</h3>
+                    <div style="background:#000; height:300px; display:flex; align-items:center; justify-content:center; border-radius:10px;">
+                        <p>▶️ Playing: Introduction to SQL & Data Analytics</p>
+                    </div>
+                </div>
+                <button class="btn" onclick="showSection('my-courses')">Back to My Courses</button>
             </div>
 
             <div id="settings-menu" class="section">
@@ -70,17 +80,7 @@
     </div>
 
     <script>
-        // Page load par last section yaad rakhega
-        window.onload = () => {
-            const lastSection = localStorage.getItem('activeSection') || 'dashboard';
-            showSection(lastSection);
-            
-            // Agar enrolled hai toh button update rakhega
-            if(localStorage.getItem('isEnrolled') === 'true') {
-                updateEnrollUI();
-            }
-        };
-
+        // Logic to remember state and section
         function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             const target = document.getElementById(id);
@@ -102,6 +102,12 @@
             document.getElementById('continue-btn').style.display = 'block';
             document.getElementById('course-status').innerText = 'Status: In Progress';
         }
+
+        window.onload = () => {
+            const lastSection = localStorage.getItem('activeSection') || 'dashboard';
+            showSection(lastSection);
+            if(localStorage.getItem('isEnrolled') === 'true') updateEnrollUI();
+        };
     </script>
 </body>
 </html>
