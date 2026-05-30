@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <style>
-        /* Professional Deep Dark Theme */
         body { margin: 0; font-family: 'Inter', sans-serif; background: #0b1120; color: #e2e8f0; height: 100vh; display: flex; flex-direction: column; }
-        .navbar { display: flex; justify-content: space-between; padding: 15px 40px; background: #111827; border-bottom: 1px solid #1e293b; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3); }
+        .navbar { display: flex; justify-content: space-between; padding: 15px 40px; background: #111827; border-bottom: 1px solid #1e293b; }
         .main-wrapper { display: flex; flex-grow: 1; overflow: hidden; }
         .sidebar { width: 260px; background: #111827; padding: 20px; border-right: 1px solid #1e293b; }
         .content-area { flex-grow: 1; padding: 40px; overflow-y: auto; background: radial-gradient(circle at top right, #1e293b, #0b1120); }
@@ -12,22 +11,21 @@
         .section { display: none; }
         .active { display: block; }
         
-        /* Modern Cards */
-        .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); padding: 25px; border-radius: 16px; border: 1px solid rgba(56, 189, 248, 0.2); margin-bottom: 20px; transition: 0.3s; }
-        .card:hover { border-color: #38bdf8; }
-        
-        .nav-link { cursor: pointer; padding: 12px; margin-bottom: 5px; color: #94a3b8; display: block; border-radius: 8px; font-weight: 500; }
+        .card { background: rgba(30, 41, 59, 0.7); padding: 25px; border-radius: 16px; border: 1px solid rgba(56, 189, 248, 0.2); margin-bottom: 20px; }
+        .btn { padding: 12px 24px; background: #38bdf8; border: none; cursor: pointer; border-radius: 8px; color: #0b1120; font-weight: 600; margin-top: 10px; }
+        .nav-link { cursor: pointer; padding: 12px; color: #94a3b8; display: block; border-radius: 8px; }
         .nav-link:hover { color: #38bdf8; background: #1e293b; }
         
-        .btn { padding: 12px 24px; background: #38bdf8; border: none; cursor: pointer; border-radius: 8px; color: #0b1120; font-weight: 600; }
-        .btn:hover { background: #7dd3fc; }
+        .settings-item { padding: 15px; border-bottom: 1px solid #334155; cursor: pointer; color: #cbd5e1; }
+        .settings-item:hover { color: #38bdf8; background: #1e293b; }
+        input { width: 100%; padding: 10px; margin: 8px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <div class="navbar">
         <div><strong>LMS Learning</strong></div>
-        <div style="cursor:pointer;" onclick="showSection('settings-menu')">Notifications 🔔 | Profile ⚙️</div>
+        <div style="cursor:pointer;" onclick="showSection('settings-menu')">Profile ⚙️</div>
     </div>
 
     <div class="main-wrapper">
@@ -39,22 +37,43 @@
 
         <div class="content-area">
             <div id="dashboard" class="section active">
-                <h1>Dashboard</h1>
-                <div class="card"><h3>📊 System Overview</h3><p>Active Courses: 03 | Completed: 02</p></div>
-            </div>
-
-            <div id="my-courses" class="section">
-                <h2>📚 My Courses</h2>
+                <h1>Welcome, Student! 👋</h1>
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                    <div class="card"><h3>🚀 Fast Track</h3></div>
+                    <div class="card"><h3>💎 Certification</h3></div>
+                    <div class="card"><h3>👨‍🏫 Mentors</h3></div>
+                </div>
                 <div class="card">
-                    <h3>Data Analytics Masterclass</h3>
-                    <p>Status: In Progress</p>
-                    <button class="btn" onclick="alert('Starting Course...')">Continue Learning</button>
+                    <h3>Enrollment Hub</h3>
+                    <button id="enroll-btn" class="btn" onclick="enrollCourse()">Enroll Now</button>
+                    <button id="continue-btn" class="btn" style="display:none; background:#10b981;" onclick="showSection('my-courses')">Continue Learning</button>
                 </div>
             </div>
 
             <div id="settings-menu" class="section">
                 <h2>⚙️ Settings</h2>
-                <div class="card" onclick="showSection('profile-edit')">👤 Profile Settings</div>
+                <div class="settings-item" onclick="showSection('profile-edit')">👤 Profile</div>
+                <div class="settings-item">🎨 Appearance</div>
+                <div class="settings-item">🔔 Notifications</div>
+                <div class="settings-item">🌐 Language</div>
+                <div class="settings-item">📚 Learning Preferences</div>
+                <div class="settings-item">🏆 Certificates</div>
+                <div class="settings-item">🔒 Security</div>
+                <div class="settings-item" onclick="showSection('dashboard')">📊 Dashboard</div>
+                <div class="settings-item">💬 Support</div>
+                <div class="settings-item">ℹ️ About</div>
+                <div class="settings-item" style="color:#f87171;">🚪 Logout</div>
+            </div>
+
+            <div id="profile-edit" class="section">
+                <h2>Edit Profile</h2>
+                <div class="card">
+                    <input type="text" placeholder="Full Name">
+                    <input type="email" placeholder="Email">
+                    <input type="text" placeholder="Student ID">
+                    <button class="btn" onclick="alert('Profile Updated!')">Save Changes</button>
+                    <button class="btn" style="background:transparent; border:1px solid #38bdf8;" onclick="showSection('settings-menu')">Back</button>
+                </div>
             </div>
         </div>
     </div>
@@ -63,6 +82,11 @@
         function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+        }
+        function enrollCourse() {
+            document.getElementById('enroll-btn').style.display = 'none';
+            document.getElementById('continue-btn').style.display = 'block';
+            alert("Enrollment Successful!");
         }
     </script>
 </body>
