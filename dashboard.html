@@ -89,8 +89,10 @@
             line-height: 1.6;
             margin: 15px 0 25px 0;
         }
+        
+        /* Button Styles */
         .enroll-btn {
-            background-color: #38bdf8;
+            background-color: #2dd4bf; /* Pehle wala cyan color */
             color: #111827;
             border: none;
             padding: 12px 24px;
@@ -102,12 +104,28 @@
             transition: background 0.2s ease;
         }
         .enroll-btn:hover {
+            background-color: #14b8a6;
+        }
+        
+        .continue-btn {
+            background-color: #38bdf8; /* Blue color continue ke liye */
+            color: #111827;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s ease;
+        }
+        .continue-btn:hover {
             background-color: #0ea5e9;
         }
 
         /* Status Box Styling */
         .status-box {
-            display: none; /* Default mein hidden */
+            display: none; 
             max-width: 500px;
             padding: 20px;
             border-radius: 12px;
@@ -122,8 +140,6 @@
             background-color: rgba(239, 68, 68, 0.1);
             border-color: #ef4444;
         }
-        
-        /* Quiz Progress Heading Style */
         .status-box h3 {
             margin-top: 0;
             margin-bottom: 8px;
@@ -133,15 +149,11 @@
             color: #9ca3af;
             font-weight: 600;
         }
-        
-        /* Pass/Fail Main Text Style */
         .status-box h4 {
             margin: 0 0 10px 0;
             font-size: 20px;
             font-weight: bold;
         }
-        
-        /* Description Text Style */
         .status-box p {
             margin: 0;
             font-size: 14px;
@@ -176,7 +188,9 @@
         <div class="welcome-card">
             <h2>Data Analytics Course</h2>
             <p>Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
-            <a href="sqlanalysis.html" class="enroll-btn">Go to Course Content</a>
+            
+            <div id="courseActionContainer">
+                </div>
         </div>
 
         <div id="dashboardStatusBox" class="status-box">
@@ -187,7 +201,27 @@
     </div>
 
     <script>
+        // Function to handle enrollment click
+        function enrollUser() {
+            localStorage.setItem('isEnrolled', 'true');
+            alert('Congratulations! Aapne course me successfully enroll kar liya hai.');
+            window.location.href = 'sqlanalysis.html';
+        }
+
         window.onload = function() {
+            // 1. Enrollment Button Logic Check
+            const isEnrolled = localStorage.getItem('isEnrolled');
+            const actionContainer = document.getElementById('courseActionContainer');
+
+            if (isEnrolled === 'true') {
+                // Agar enroll ho chuka hai toh "Go to Course Content" / Continue Learning button dikhao
+                actionContainer.innerHTML = `<a href="sqlanalysis.html" class="continue-btn">Go to Course Content</a>`;
+            } else {
+                // Agar enroll nahi hai toh "Enroll Now" button dikhao jo click par function trigger karega
+                actionContainer.innerHTML = `<button onclick="enrollUser()" class="enroll-btn">Enroll Now</button>`;
+            }
+
+            // 2. Quiz Status Box Logic Check
             const status = localStorage.getItem('quizStatus');
             const score = localStorage.getItem('quizScore');
             const statusBox = document.getElementById('dashboardStatusBox');
@@ -195,7 +229,7 @@
             const statusMsg = document.getElementById('statusMsg');
 
             if (status) {
-                statusBox.style.display = "block"; // Box show karein
+                statusBox.style.display = "block"; 
                 
                 if (status === 'PASS') {
                     statusBox.className = "status-box pass";
