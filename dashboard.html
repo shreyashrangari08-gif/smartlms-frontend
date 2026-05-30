@@ -1,47 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Learning System - Dashboard</title>
+    <!-- Aapki main style.css linked hai -->
     <link rel="stylesheet" href="style.css">
-    <title>Dashboard</title>
+    <style>
+        /* Grey theme ke hisab se basic responsive layout overrides */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 260px;
+            background-color: #1e293b;
+            border-right: 1px solid #334155;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #334155;
+            color: #00ffcc;
+        }
+
+        /* Main Dashboard Content Area */
+        .main-container {
+            flex-grow: 1;
+            padding: 30px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .header {
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #f8fafc;
+            font-size: 24px;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 450px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-card h2 {
+            margin-top: 0;
+            color: #38bdf8;
+        }
+
+        .enroll-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            transition: background 0.2s ease;
+        }
+
+        .enroll-btn:hover {
+            background-color: #00ffcc;
+        }
+    </style>
 </head>
-<body id="dashboard-page">
+<body>
 
-    <!-- Sidebar Menu Icon (Top-Left) -->
-    <div style="padding: 20px;">
-        <span style="font-size:30px; cursor:pointer; color:white;" onclick="openNav()">&#9776;</span>
-    </div>
-
-    <!-- Sidebar Panel -->
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="profile.html">👤 Student Profile</a>
+    <!-- Left Sidebar Navigation Menu -->
+    <div class="sidebar">
+        <h2 style="color: #00ffcc; font-size: 18px; margin-bottom: 20px; padding-left: 15px;">LMS Panel</h2>
+        <a href="dashboard.html" class="active">🏠 Dashboard</a>
+        <!-- Is link par click karte hi user aapke sahi course content page pr chala jayega -->
+        <a href="sqlanalysis.html">📚 My Courses</a>
+        <a href="assessment.html">📝 Quizzes</a>
+        <a href="certificate.html">🎓 Certificate</a>
+        <a href="profile.html">👤 Profile</a>
         <a href="settings.html">⚙️ Settings</a>
-        <a href="index.html">🚪 Log Out</a>
     </div>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>Online Learning System</h1>
-    </div>
-    
-    <!-- Course -->
-    <div class="course-container">
-        <div class="course-box">
-            <h3>Data Analytics Course</h3>
-            <p style="opacity: 0.8;">Master SQL, R, and Tableau.</p>
-            <br>
-            <button class="btn-enroll" id="enroll-btn" onclick="enrollCourse()">Enroll Now</button>
-            <button id="continue-btn" style="display:none; width: 100%; padding: 12px; background: #00f2fe; color: black; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;" onclick="window.location.href='sqlanalysis.html'">Continue Learning</button>
+    <!-- Main Content Panel (Galat videos poori tarah saaf) -->
+    <div class="main-container">
+        <div class="header">
+            <h1>Online Learning System</h1>
+        </div>
+
+        <div class="welcome-card">
+            <h2>Data Analytics Course</h2>
+            <p style="color: #94a3b8; font-size: 14px; line-height: 1.5;">Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
+            <!-- Yeh button bhi seedha course content file par navigate karega -->
+            <a href="sqlanalysis.html" class="enroll-btn">Go to Course Content</a>
         </div>
     </div>
 
-    <script>
-        function openNav() { document.getElementById("mySidebar").style.width = "250px"; }
-        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
-        function enrollCourse() {
-            document.getElementById('enroll-btn').style.display = 'none';
-            document.getElementById('continue-btn').style.display = 'block';
-        }
-    </script>
 </body>
 </html>
