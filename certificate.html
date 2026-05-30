@@ -1,17 +1,314 @@
 <!DOCTYPE html>
-<html>
-<body style="background:#0b1a26; text-align:center; color:white; padding-top:50px;">
-    <canvas id="c" width="1000" height="700" style="max-width:90%; border:2px solid white;"></canvas>
-    <br><button onclick="window.print()">Download Certificate</button>
-    <script>
-        const ctx = document.getElementById('c').getContext('2d');
-        const img = new Image();
-        img.src = '1000182664.png';
-        img.onload = () => {
-            ctx.drawImage(img, 0, 0, 1000, 700);
-            ctx.font = "italic 60px Georgia";
-            ctx.fillText(localStorage.getItem('userName') || "Student", 500, 380);
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Certificate</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #111827;
+            color: #f3f4f6;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
         }
+        .sidebar {
+            width: 260px;
+            background-color: #1f2937;
+            border-right: 1px solid #374151;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: fixed;
+            height: 100vh;
+        }
+        .sidebar h2 { color: #38bdf8; font-size: 20px; margin-top: 0; margin-bottom: 25px; padding-left: 10px; }
+        .sidebar a { color: #9ca3af; text-decoration: none; font-size: 16px; padding: 12px 15px; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+        .sidebar a:hover, .sidebar a.active { background-color: #374151; color: #38bdf8; }
+        .main-container { margin-left: 260px; flex-grow: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        
+        .header { width: 100%; border-bottom: 1px solid #374151; padding-bottom: 20px; margin-bottom: 35px; text-align: left;}
+        .header h1 { margin: 0; color: #ffffff; }
+
+        /* Lock Screen Interface Card */
+        .lock-container {
+            background-color: #1f2937;
+            border: 1px dashed #eab308;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        .lock-container h3 { color: #eab308; margin-top: 0; }
+        .lock-container p { color: #9ca3af; line-height: 1.6; font-size: 15px; }
+
+        /* Premium Blue-Gold Certificate Layout (Matching 1000182663.png) */
+        .cert-frame {
+            display: none;
+            width: 850px;
+            height: 580px;
+            background-color: #ffffff;
+            color: #1e293b;
+            border: 3px solid #ca8a04;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        /* Premium Outer Geometric Borders */
+        .cert-frame::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 140px; height: 140px;
+            background: linear-gradient(135deg, #0f172a 50%, #ca8a04 50%, #ca8a04 53%, transparent 53%);
+        }
+        .cert-frame::after {
+            content: "";
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 140px; height: 140px;
+            background: linear-gradient(315deg, #0f172a 50%, #ca8a04 50%, #ca8a04 53%, transparent 53%);
+        }
+
+        .cert-inner {
+            border: 2px solid #ca8a04;
+            width: 100%;
+            height: 100%;
+            padding: 30px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            background: radial-gradient(circle, rgba(15, 23, 42, 0.01) 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+
+        .cert-meta-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #475569;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .cert-id { text-align: right; }
+        .cert-date { text-align: right; margin-top: 4px; }
+
+        .cert-logo-area {
+            margin-top: 10px;
+            font-weight: 800;
+            font-size: 22px;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+        .cert-logo-sub {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #ca8a04;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        .cert-main-title {
+            font-size: 46px;
+            font-family: 'Times New Roman', Times, serif;
+            color: #0f172a;
+            margin: 15px 0 0 0;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+        .cert-sub-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #ca8a04;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .cert-award { font-size: 16px; color: #475569; font-style: italic; margin-bottom: 5px; }
+        
+        /* Direct Login System Name Injection Area */
+        .cert-user-name { 
+            font-size: 42px; 
+            font-weight: normal; 
+            color: #0f172a; 
+            display: inline-block; 
+            padding-bottom: 5px; 
+            margin: 5px auto; 
+            font-family: 'Brush Script MT', 'Georgia', cursive, serif;
+            min-width: 320px; 
+            text-transform: capitalize; 
+        }
+        .name-divider {
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ca8a04, transparent);
+            margin: 0 auto 15px auto;
+        }
+        
+        .cert-text { font-size: 15px; color: #475569; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        .cert-course-name { font-size: 24px; font-weight: bold; color: #0f172a; display: block; margin-top: 8px; letter-spacing: 1px; }
+        
+        .cert-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px; }
+        .signature-block { text-align: center; width: 180px; }
+        .signature-line { border-top: 1px solid #94a3b8; margin-bottom: 5px; }
+        .sig-image { font-family: 'Georgia', serif; font-style: italic; font-size: 16px; color: #0f172a; height: 30px; }
+        .sig-title { font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Premium Golden Ribbons Badge */
+        .badge-container { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .badge { 
+            width: 75px; height: 75px; 
+            background: #0f172a; color: #fff; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 9px; font-weight: bold; border: 4px double #ca8a04; 
+            box-shadow: 0 0 0 4px #0f172a; text-transform: uppercase; text-align: center;
+            line-height: 1.2;
+        }
+
+        .print-btn {
+            display: none;
+            margin-top: 25px;
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .print-btn:hover { background-color: #059669; }
+
+        @media print {
+            body * { visibility: hidden; }
+            .cert-frame, .cert-frame * { visibility: visible; }
+            .cert-frame { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>LMS Panel</h2>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="sqlanalysis.html">📚 My Courses</a>
+        <a href="assessment.html">📝 Quizzes</a>
+        <a href="certificate.html" class="active">🎓 Certificate</a>
+        <a href="profile.html">👤 Profile</a>
+        <a href="settings.html">⚙️ Settings</a>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <h1>Course Certificate</h1>
+        </div>
+
+        <div id="lockCard" class="lock-container">
+            <h3>🔒 Certificate Locked</h3>
+            <p>Aapka certificate abhi tak generate nahi hua hai. Jab aap sabhi videos dekh lenge aur quiz pass karke apni progress ko <b>100% Complete</b> kar lenge, tab aapka certificate aapke login wale naam ke sath yahan automatic active ho jayega.</p>
+        </div>
+
+        <div id="certificateTemplate" class="cert-frame">
+            <div class="cert-inner">
+                <div class="cert-meta-info">
+                    <div>&nbsp;</div>
+                    <div style="text-align: right;">
+                        <div>Certificate ID: YLS-DA-2026-00001</div>
+                        <div class="cert-date" id="completionDateSlot">Date: 25 May 2026</div>
+                    </div>
+                </div>
+
+                <div class="cert-logo-area">
+                    🎓 Your Learning
+                    <div class="cert-logo-sub">Online Learning System</div>
+                </div>
+
+                <div>
+                    <div class="cert-main-title">CERTIFICATE</div>
+                    <div class="cert-sub-title">Of Completion</div>
+                </div>
+
+                <div class="cert-award">This is to certify that</div>
+                
+                <div>
+                    <div class="cert-user-name" id="studentNameSlot">Your Name</div>
+                    <div class="name-divider"></div>
+                </div>
+                
+                <div class="cert-text">
+                    has successfully completed the course
+                    <span class="cert-course-name">DATA ANALYTICS</span>
+                    and has demonstrated the required skills and knowledge to successfully complete all course requirements.
+                </div>
+                
+                <div class="cert-footer">
+                    <div class="signature-block">
+                        <div class="sig-image">Jn Sane</div>
+                        <div class="signature-line"></div>
+                        <div class="sig-title">Course Instructor</div>
+                    </div>
+                    <div class="badge-container">
+                        <div class="badge">Course<br>Completed</div>
+                    </div>
+                    <div class="signature-block">
+                        <div class="sig-image">Admin</div>
+                        <div class="signature-line"></div>
+                        <div class="sig-title">Academic Director</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="printActionBtn" class="print-btn" onclick="window.print()">🖨️ Download / Print PDF</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const currentProgress = localStorage.getItem('course_progress_percent');
+            const quizStatus = localStorage.getItem('quizStatus');
+            
+            // Login system validation check: extracts active signed user
+            let activeUser = localStorage.getItem('userName'); 
+            if(!activeUser) {
+                const sessionUser = localStorage.getItem('currentUser');
+                if(sessionUser) {
+                    activeUser = localStorage.getItem(sessionUser + '_name') || sessionUser;
+                } else {
+                    activeUser = "Valued Learner";
+                }
+            }
+
+            // Set current date dynamically on template
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('completionDateSlot').innerText = "Date: " + today.toLocaleDateString('en-US', options);
+
+            const lockCard = document.getElementById('lockCard');
+            const certificateTemplate = document.getElementById('certificateTemplate');
+            const printActionBtn = document.getElementById('printActionBtn');
+            const studentNameSlot = document.getElementById('studentNameSlot');
+
+            // Verification Logic: Lock drops only if 100% complete and quiz passed
+            if (parseInt(currentProgress) === 100 && quizStatus === 'PASS') {
+                lockCard.style.display = "none";
+                
+                // Active session login profile name map
+                studentNameSlot.innerText = activeUser;
+                
+                certificateTemplate.style.display = "block";
+                printActionBtn.style.display = "block";
+            }
+        };
     </script>
 </body>
 </html>
