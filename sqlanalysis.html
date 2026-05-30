@@ -2,56 +2,64 @@
 <html>
 <head>
     <style>
-        body { margin: 0; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; overflow: hidden; }
-        .header-bar { padding: 15px; background: #1c2e3d; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #4facfe; }
-        .main-container { display: flex; height: 100%; }
-        
-        /* Views */
-        .page { display: none; padding: 40px; width: 100%; }
+        body { margin: 0; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; }
+        .header { padding: 15px; background: #1c2e3d; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #4facfe; }
+        .page { padding: 20px; display: none; }
         .active { display: block; }
-        
-        /* Dashboard Card */
-        .dash-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 300px; }
-        
-        /* Settings Form */
-        .settings-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 80%; max-width: 500px; }
-        input, textarea { width: 100%; padding: 10px; margin: 10px 0; background: #0b1a26; border: 1px solid #4facfe; color: white; }
+        .card { background: #1c2e3d; padding: 20px; border-radius: 10px; width: 250px; border: 1px solid #4facfe; }
+        .module { color: #4facfe; cursor: pointer; margin: 10px 0; display: block; }
     </style>
 </head>
 <body>
 
-    <div class="header-bar">
-        <div style="cursor:pointer;" onclick="showPage('dashboard')">🏠</div>
-        <h2 style="margin:0;">Online Learning System</h2>
-        <div style="cursor:pointer; font-size:24px;" onclick="showPage('settings')">⋮</div>
+    <div class="header">
+        <div onclick="showPage('dashboard')">🏠</div>
+        <div>Online Learning System</div>
+        <div onclick="showPage('settings')">⋮</div>
     </div>
 
-    <!-- Dashboard Page -->
+    <!-- Dashboard -->
     <div id="dashboard" class="page active">
-        <div class="dash-card">
-            <h3>Data Analytics Course</h3>
-            <p>Master SQL, R, and Tableau.</p>
-            <button onclick="alert('Course Started!')">Enroll Now</button>
+        <div class="card">
+            <h3>Data Analytics</h3>
+            <button id="enrollBtn" onclick="enroll()">Enroll Now</button>
         </div>
     </div>
 
-    <!-- Settings Page -->
+    <!-- Course Content -->
+    <div id="content" class="page">
+        <h3>Modules</h3>
+        <span class="module" onclick="openVideo()">1. Introduction</span>
+        <div id="videoArea"></div>
+        <button onclick="showPage('dashboard')">Back to Dashboard</button>
+    </div>
+
+    <!-- Settings -->
     <div id="settings" class="page">
-        <div class="settings-card">
-            <h2>Account Settings</h2>
-            <input type="text" placeholder="Full Name">
-            <input type="email" placeholder="Email Address">
-            <textarea placeholder="Bio"></textarea>
-            <button onclick="showPage('dashboard')">Save & Back to Dashboard</button>
-        </div>
+        <h3>Account Settings</h3>
+        <input type="text" placeholder="Update Name">
+        <button onclick="showPage('dashboard')">Save & Back</button>
     </div>
 
     <script>
-        function showPage(pageId) {
-            // Saare pages hide karo
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // Selected page show karo
-            document.getElementById(pageId).classList.add('active');
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function enroll() {
+            localStorage.setItem('enrolled', 'true');
+            document.getElementById('enrollBtn').innerText = "Continue Learning";
+            showPage('content');
+        }
+
+        function openVideo() {
+            document.getElementById('videoArea').innerHTML = '<iframe src="https://www.youtube.com/embed/yZvFH7B6gKI" width="100%" height="300"></iframe>';
+        }
+
+        // Check enrollment on load
+        if(localStorage.getItem('enrolled') === 'true') {
+            document.getElementById('enrollBtn').innerText = "Continue Learning";
         }
     </script>
 </body>
