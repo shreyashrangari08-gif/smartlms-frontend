@@ -3,211 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Learning System - Dashboard</title>
+    <title>LMS - Dashboard</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         body {
-            background-color: #111827;
-            color: #f3f4f6;
+            background-color: #111827; color: #f3f4f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
+            margin: 0; padding: 0; display: flex; min-height: 100vh;
         }
         .sidebar {
-            width: 260px;
-            background-color: #1f2937;
-            border-right: 1px solid #374151;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-            top: 0;
+            width: 260px; background-color: #1f2937; border-right: 1px solid #374151;
+            padding: 25px 15px; display: flex; flex-direction: column; gap: 10px;
+            position: fixed; height: 100vh; left: 0; top: 0;
         }
-        .sidebar h2 {
-            color: #38bdf8;
-            font-size: 20px;
-            margin-top: 0;
-            margin-bottom: 25px;
-            padding-left: 10px;
-            font-weight: 600;
-        }
+        .sidebar h2 { color: #38bdf8; font-size: 20px; margin: 0 0 25px 0; padding-left: 10px; font-weight: 600; }
         .sidebar a {
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 12px 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.2s ease;
+            color: #9ca3af; text-decoration: none; font-size: 16px; padding: 12px 15px;
+            border-radius: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease;
         }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #374151;
-            color: #38bdf8;
+        .sidebar a:hover, .sidebar a.active { background-color: #374151; color: #38bdf8; }
+        .main-container { margin-left: 260px; flex-grow: 1; padding: 40px; background: #111827; }
+        .header { border-bottom: 1px solid #374151; padding-bottom: 20px; margin-bottom: 35px; }
+        .header h1 { margin: 0; color: #ffffff; font-size: 28px; }
+        .card-box {
+            background-color: #1f2937; border: 1px solid #374151; border-radius: 12px;
+            padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
         }
-        .main-container {
-            margin-left: 260px;
-            flex-grow: 1;
-            padding: 40px;
-            background: #111827;
+        .card-box h3 { margin: 0 0 10px 0; color: #38bdf8; font-size: 18px; }
+        .card-box p { color: #9ca3af; font-size: 14px; line-height: 1.5; margin-bottom: 15px; }
+        .btn-action {
+            background-color: #38bdf8; color: #111827; border: none; padding: 10px 20px;
+            border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block;
         }
-        .header {
-            border-bottom: 1px solid #374151;
-            padding-bottom: 20px;
-            margin-bottom: 35px;
-        }
-        .header h1 {
-            margin: 0;
-            color: #ffffff;
-            font-size: 28px;
-        }
-        .welcome-card {
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 500px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            margin-bottom: 25px;
-        }
-        .welcome-card h2 {
-            margin-top: 0;
-            color: #38bdf8;
-            font-size: 22px;
-        }
-        .welcome-card p {
-            color: #9ca3af;
-            font-size: 15px;
-            line-height: 1.6;
-            margin: 15px 0 25px 0;
-        }
-        
-        .enroll-btn {
-            background-color: #2dd4bf;
-            color: #111827;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.2s ease;
-        }
-        .enroll-btn:hover {
-            background-color: #14b8a6;
-        }
-        
-        .continue-btn {
-            background-color: #38bdf8;
-            color: #111827;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.2s ease;
-        }
-        .continue-btn:hover {
-            background-color: #0ea5e9;
-        }
-
-        .status-box {
-            display: none; 
-            max-width: 500px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            border: 1px solid #374151;
-        }
-        .status-box.pass {
-            background-color: rgba(16, 185, 129, 0.1);
-            border-color: #10b981;
-        }
-        .status-box.fail {
-            background-color: rgba(239, 68, 68, 0.1);
-            border-color: #ef4444;
-        }
-        .status-box h3 {
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #9ca3af;
-            font-weight: 600;
-        }
-        .status-box h4 {
-            margin: 12px 0 10px 0;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .status-box p {
-            margin: 0;
-            font-size: 14px;
-            color: #e5e7eb;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .progress-container {
-            width: 100%;
-            background-color: #374151;
-            border-radius: 20px;
-            height: 10px;
-            margin: 10px 0 12px 0;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            border-radius: 20px;
-            transition: width 0.4s ease-in-out;
-        }
-        .progress-text {
-            font-size: 13px;
-            color: #9ca3af;
-            text-align: right;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .cert-download-btn {
-            display: none;
-            background: linear-gradient(135deg, #eab308, #ca8a04);
-            color: #111827;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            margin-top: 15px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 6px -1px rgba(234, 179, 8, 0.2);
-        }
-        .cert-download-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 12px -2px rgba(234, 179, 8, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar { position: relative; width: 100%; height: auto; }
-            .main-container { margin-left: 0; padding: 20px; }
-        }
+        .btn-action:hover { background-color: #0ea5e9; }
+        .progress-container { background-color: #111827; border-radius: 10px; height: 16px; width: 100%; position: relative; overflow: hidden; margin-bottom: 10px; border: 1px solid #374151; }
+        .progress-bar { background-color: #10b981; height: 100%; width: 0%; transition: width 0.4s ease; }
+        .progress-text { font-size: 12px; color: #9ca3af; text-align: right; display: block; margin-bottom: 15px; }
+        .status-container { background-color: #111827; border: 1px solid #064e3b; padding: 15px; border-radius: 8px; color: #34d399; font-size: 14px; display: none; }
+        .logout-btn { background-color: #ef4444; color: white; margin-top: auto; border: none; padding: 12px 15px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 16px; font-weight: bold; }
+        .logout-btn:hover { background-color: #dc2626; }
     </style>
 </head>
 <body>
@@ -220,6 +54,7 @@
         <a href="certificate.html">🎓 Certificate</a>
         <a href="profile.html">👤 Profile</a>
         <a href="settings.html">⚙️ Settings</a>
+        <button onclick="handleLogout()" class="logout-btn">🚪 Logout</button>
     </div>
 
     <div class="main-container">
@@ -227,111 +62,66 @@
             <h1>Online Learning System</h1>
         </div>
 
-        <div class="welcome-card">
-            <h2>Data Analytics Course</h2>
+        <div class="card-box">
+            <h3>Data Analytics Course</h3>
             <p>Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
-            <div id="courseActionContainer"></div>
+            <a href="sqlanalysis.html" class="btn-action">Go to Course Content</a>
         </div>
 
-        <div id="dashboardStatusBox" class="status-box">
-            <h3 id="panelTitle">Course Progress</h3>
-            
-            <div class="progress-text" id="progressPercentage">0% Completed</div>
+        <div class="card-box" id="progress-card">
+            <h3 id="progress-title">QUIZ PROGRESS</h3>
             <div class="progress-container">
-                <div id="courseProgressBar" class="progress-bar"></div>
+                <div id="bar" class="progress-bar"></div>
             </div>
+            <span id="percent-text" class="progress-text">0% Completed</span>
 
-            <h4 id="statusTitle"></h4>
-            <p id="statusMsg"></p>
-
-            <a href="certificate.html" id="dashboardCertBtn" class="cert-download-btn">🎓 Claim Your Certificate</a>
+            <div id="status-box" class="status-container">
+                <strong>Congratulations! 🎉</strong><br>
+                Aapne Data Analytics quiz successfully clear kar liya hai! Aapka score <span id="score-text">0</span>/10 raha. Keep learning and shining!
+                <br><br>
+                <a href="certificate.html" class="btn-action" style="background-color:#eab308;">🎓 Claim Your Certificate</a>
+            </div>
         </div>
     </div>
 
     <script>
-        function enrollUser() {
-            localStorage.setItem('isEnrolled', 'true');
-            alert('Congratulations! Aapne course me successfully enroll kar liya hai.');
-            window.location.href = 'sqlanalysis.html';
+        function getUserKey(baseKey) {
+            const user = localStorage.getItem('currentUser') || 'guest';
+            return user + '_' + baseKey;
         }
 
         window.onload = function() {
-            const isEnrolled = localStorage.getItem('isEnrolled');
-            const actionContainer = document.getElementById('courseActionContainer');
+            const user = localStorage.getItem('currentUser');
+            if(!user) { window.location.href = 'index.html'; return; }
 
-            if (isEnrolled === 'true') {
-                actionContainer.innerHTML = `<a href="sqlanalysis.html" class="continue-btn">Go to Course Content</a>`;
-            } else {
-                actionContainer.innerHTML = `<button onclick="enrollUser()" class="enroll-btn">Enroll Now</button>`;
+            // Dynamic User Data Loading
+            let progress = localStorage.getItem(getUserKey('course_progress_percent')) || 0;
+            let quizStatus = localStorage.getItem(getUserKey('quizStatus'));
+            let quizScore = localStorage.getItem(getUserKey('quizScore')) || 0;
+
+            const bar = document.getElementById('bar');
+            const percentText = document.getElementById('percent-text');
+            const statusBox = document.getElementById('status-box');
+            const scoreText = document.getElementById('score-text');
+            const progressTitle = document.getElementById('progress-title');
+
+            bar.style.width = progress + '%';
+            percentText.innerText = progress + '% Completed';
+
+            if (parseInt(progress) === 100) {
+                progressTitle.innerText = "COURSE COMPLETED 🎉";
             }
 
-            // Ab total 4 videos hain aur 1 quiz hai (Total 5 items)
-            let totalItems = 5; 
-            let completedItems = 0;
-
-            // 4 video completeness counter checks
-            for (let i = 1; i <= 4; i++) {
-                if (localStorage.getItem('video_completed_' + i) === 'true') {
-                    completedItems++;
-                }
-            }
-
-            const status = localStorage.getItem('quizStatus');
-            const score = localStorage.getItem('quizScore');
-            
-            // Agar quiz pass hai toh item complete
-            if (status === 'PASS') {
-                completedItems++;
-            }
-
-            let percentage = Math.round((completedItems / totalItems) * 100);
-            if (percentage > 100) percentage = 100;
-
-            const statusBox = document.getElementById('dashboardStatusBox');
-            const statusTitle = document.getElementById('statusTitle');
-            const statusMsg = document.getElementById('statusMsg');
-            const progressBar = document.getElementById('courseProgressBar');
-            const progressPercentage = document.getElementById('progressPercentage');
-            const certBtn = document.getElementById('dashboardCertBtn');
-            const panelTitle = document.getElementById('panelTitle');
-
-            progressPercentage.innerText = percentage + "% Completed";
-            progressBar.style.width = percentage + "%";
-
-            // LocalStorage calculation update 
-            localStorage.setItem('course_progress_percent', percentage);
-
-            if (status || completedItems > 0) {
-                statusBox.style.display = "block"; 
-                
-                if (status === 'PASS') {
-                    statusBox.className = "status-box pass";
-                    progressBar.style.backgroundColor = "#10b981";
-                    statusTitle.innerHTML = "Congratulations! 🎉";
-                    statusTitle.style.color = "#10b981";
-                    statusMsg.innerHTML = "Aapne Data Analytics quiz successfully clear kar liya hai! Aapka score <b>" + score + "/10</b> raha. Keep learning and shining!";
-                    
-                    if (percentage === 100) {
-                        panelTitle.innerText = "COURSE COMPLETED 🎉";
-                        certBtn.style.display = "inline-block";
-                    }
-                } else if (status === 'FAIL') {
-                    statusBox.className = "status-box fail";
-                    progressBar.style.backgroundColor = "#ef4444";
-                    statusTitle.innerHTML = "Keep Trying! 👍";
-                    statusTitle.style.color = "#ef4444";
-                    statusMsg.innerHTML = "Aapka score <b>" + score + "/10</b> raha. Pass hone ke liye kam se kam 5 sahi jawab chahiye. Ek baar phir se try karein!";
-                } else {
-                    // Sirf videos dekhe hain abhi quiz baki hai
-                    statusBox.style.backgroundColor = "rgba(56, 189, 248, 0.05)";
-                    statusBox.style.borderColor = "#38bdf8";
-                    progressBar.style.backgroundColor = "#38bdf8";
-                    statusTitle.innerHTML = "Learning Mode 📖";
-                    statusTitle.style.color = "#38bdf8";
-                    statusMsg.innerHTML = "Aap course timeline track kar rahe hain. Sabhi 4 videos dekhne ke baad Quiz section me jaakar test paas karein tabhi certificate khulega!";
-                }
+            if (quizStatus === 'PASS') {
+                statusBox.style.display = 'block';
+                scoreText.innerText = quizScore;
             }
         };
+
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>
