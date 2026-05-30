@@ -9,7 +9,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #111827; /* Dark Grey Background */
+            background-color: #111827;
             color: #f3f4f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -17,11 +17,9 @@
             display: flex;
             min-height: 100vh;
         }
-
-        /* Sidebar Styling (Dashboard aur Course Page jaisa same design) */
         .sidebar {
             width: 260px;
-            background-color: #1f2937; /* Grey Container */
+            background-color: #1f2937;
             border-right: 1px solid #374151;
             padding: 25px 15px;
             display: flex;
@@ -32,7 +30,6 @@
             left: 0;
             top: 0;
         }
-
         .sidebar h2 {
             color: #38bdf8;
             font-size: 20px;
@@ -41,7 +38,6 @@
             padding-left: 10px;
             font-weight: 600;
         }
-
         .sidebar a {
             color: #9ca3af;
             text-decoration: none;
@@ -53,39 +49,31 @@
             gap: 10px;
             transition: all 0.2s ease;
         }
-
         .sidebar a:hover, .sidebar a.active {
             background-color: #374151;
             color: #38bdf8;
         }
-
-        /* Main Content Container */
         .main-container {
-            margin-left: 260px; /* Sidebar ke liye gap */
+            margin-left: 260px;
             flex-grow: 1;
             padding: 40px;
             background: #111827;
         }
-
         .header {
             border-bottom: 1px solid #374151;
             padding-bottom: 20px;
             margin-bottom: 35px;
         }
-
         .header h1 {
             margin: 0;
             color: #ffffff;
             font-size: 28px;
         }
-
         .header p {
             color: #9ca3af;
             margin: 5px 0 0 0;
             font-size: 15px;
         }
-
-        /* Quiz Card Design */
         .quiz-card {
             background-color: #1f2937;
             border: 1px solid #374151;
@@ -95,7 +83,6 @@
             max-width: 800px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
-
         .question-text {
             font-size: 18px;
             font-weight: 600;
@@ -103,14 +90,11 @@
             margin-top: 0;
             margin-bottom: 15px;
         }
-
-        /* Options Design */
         .options-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-
         .option-label {
             background-color: #111827;
             border: 1px solid #374151;
@@ -124,18 +108,14 @@
             color: #d1d5db;
             transition: all 0.2s ease;
         }
-
         .option-label:hover {
             border-color: #38bdf8;
             background-color: #1f2937;
         }
-
         .option-label input[type="radio"] {
             margin: 0;
             accent-color: #38bdf8;
         }
-
-        /* Submit Button */
         .submit-btn {
             background-color: #38bdf8;
             color: #111827;
@@ -148,12 +128,9 @@
             margin-top: 15px;
             transition: background 0.2s ease;
         }
-
         .submit-btn:hover {
             background-color: #0ea5e9;
         }
-
-        /* Result Section */
         #result-box {
             display: none;
             background-color: #1f2937;
@@ -164,32 +141,19 @@
             margin-top: 30px;
             text-align: center;
         }
-
         #result-box h2 {
             margin-top: 0;
             color: #10b981;
         }
-
         #score-text {
             font-size: 24px;
             font-weight: bold;
             color: #ffffff;
         }
-
-        /* Responsive View */
         @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-            .main-container {
-                margin-left: 0;
-                padding: 20px;
-            }
+            body { flex-direction: column; }
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .main-container { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
@@ -208,7 +172,7 @@
     <div class="main-container">
         <div class="header">
             <h1>Data Analytics Quiz</h1>
-            <p>Apni learning test karne ke liye niche diye gaye 10 sawalon ke jawab dein.</p>
+            <p>Apni learning test karne ke liye niche diye gaye 10 sawalon ke jawab edin.</p>
         </div>
 
         <form id="quizForm">
@@ -318,13 +282,12 @@
         <div id="result-box">
             <h2>Quiz Result</h2>
             <p id="score-text"></p>
-            <p style="color: #9ca3af;">Great effort! Practice makes perfect.</p>
+            <p style="color: #9ca3af;">Result has been updated on your Dashboard!</p>
         </div>
     </div>
 
     <script>
         function calculateScore() {
-            // Sahi answers ki list jo aapne share ki thi
             const correctAnswers = {
                 q1: 'B', q2: 'A', q3: 'C', q4: 'B', q5: 'B',
                 q6: 'B', q7: 'C', q8: 'C', q9: 'D', q10: 'D'
@@ -333,24 +296,27 @@
             let score = 0;
             const form = document.getElementById('quizForm');
 
-            // 10 sawaalon ke loop se answers check karna
             for (let i = 1; i <= 10; i++) {
                 const questionName = 'q' + i;
                 const selectedOption = form.elements[questionName].value;
-
                 if (selectedOption === correctAnswers[questionName]) {
                     score++;
                 }
             }
 
-            // Result dikhana
             document.getElementById('score-text').innerText = "Your Score: " + score + " / 10";
             document.getElementById('result-box').style.display = "block";
-            
-            // Score tak page ko automatic scroll karna
+
+            // LocalStorage mein data save karna taaki dashboard ise read kar sake
+            localStorage.setItem('quizScore', score);
+            if (score >= 5) {
+                localStorage.setItem('quizStatus', 'PASS');
+            } else {
+                localStorage.setItem('quizStatus', 'FAIL');
+            }
+
             document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
-
 </body>
 </html>
