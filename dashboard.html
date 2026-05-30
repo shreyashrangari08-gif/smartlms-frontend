@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Learning System - Dashboard</title>
-    <!-- Aapki main style.css linked hai -->
-    <link rel="stylesheet" href="style.css">
     <style>
-        /* Grey theme ke hisab se basic responsive layout overrides */
+        * {
+            box-sizing: border-box;
+        }
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: sans-serif;
+            background-color: #111827; /* Dark Grey/Blackish Background */
+            color: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -21,88 +21,126 @@
         /* Sidebar Styling */
         .sidebar {
             width: 260px;
-            background-color: #1e293b;
-            border-right: 1px solid #334155;
-            padding: 20px;
+            background-color: #1f2937; /* Clean Grey Container */
+            border-right: 1px solid #374151;
+            padding: 25px 15px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar h2 {
+            color: #38bdf8;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-left: 10px;
+            font-weight: 600;
         }
 
         .sidebar a {
-            color: #94a3b8;
+            color: #9ca3af;
             text-decoration: none;
             font-size: 16px;
-            padding: 10px 15px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
         }
 
         .sidebar a:hover, .sidebar a.active {
-            background-color: #334155;
-            color: #00ffcc;
+            background-color: #374151;
+            color: #38bdf8;
         }
 
-        /* Main Dashboard Content Area */
+        /* Main Content Container */
         .main-container {
+            margin-left: 260px; /* Sidebar ki jagah chhodne ke liye */
             flex-grow: 1;
-            padding: 30px;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 40px;
+            background: #111827;
         }
 
         .header {
-            border-bottom: 1px solid #334155;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 20px;
+            margin-bottom: 35px;
         }
 
         .header h1 {
             margin: 0;
-            color: #f8fafc;
-            font-size: 24px;
+            color: #ffffff;
+            font-size: 28px;
         }
 
-        /* Welcome Card */
+        /* Card Design */
         .welcome-card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
+            background-color: #1f2937;
+            border: 1px solid #374151;
             border-radius: 12px;
-            padding: 25px;
-            max-width: 450px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
 
         .welcome-card h2 {
             margin-top: 0;
             color: #38bdf8;
+            font-size: 22px;
+        }
+
+        .welcome-card p {
+            color: #9ca3af;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 15px 0 25px 0;
         }
 
         .enroll-btn {
             background-color: #38bdf8;
-            color: #0f172a;
+            color: #111827;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            margin-top: 15px;
             transition: background 0.2s ease;
         }
 
         .enroll-btn:hover {
-            background-color: #00ffcc;
+            background-color: #0ea5e9;
+        }
+
+        /* Mobile View Responsive Adjustment */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .main-container {
+                margin-left: 0;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Left Sidebar Navigation Menu -->
     <div class="sidebar">
-        <h2 style="color: #00ffcc; font-size: 18px; margin-bottom: 20px; padding-left: 15px;">LMS Panel</h2>
+        <h2>LMS Panel</h2>
         <a href="dashboard.html" class="active">🏠 Dashboard</a>
-        <!-- Is link par click karte hi user aapke sahi course content page pr chala jayega -->
         <a href="sqlanalysis.html">📚 My Courses</a>
         <a href="assessment.html">📝 Quizzes</a>
         <a href="certificate.html">🎓 Certificate</a>
@@ -110,7 +148,6 @@
         <a href="settings.html">⚙️ Settings</a>
     </div>
 
-    <!-- Main Content Panel (Galat videos poori tarah saaf) -->
     <div class="main-container">
         <div class="header">
             <h1>Online Learning System</h1>
@@ -118,8 +155,7 @@
 
         <div class="welcome-card">
             <h2>Data Analytics Course</h2>
-            <p style="color: #94a3b8; font-size: 14px; line-height: 1.5;">Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
-            <!-- Yeh button bhi seedha course content file par navigate karega -->
+            <p>Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
             <a href="sqlanalysis.html" class="enroll-btn">Go to Course Content</a>
         </div>
     </div>
