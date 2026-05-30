@@ -105,9 +105,9 @@
             background-color: #0ea5e9;
         }
 
-        /* NAYA: Dynamic Result Box Design Subject Box ke niche ke liye */
+        /* Status Box Styling */
         .status-box {
-            display: none; /* Default mein hidden rahega */
+            display: none; /* Default mein hidden */
             max-width: 500px;
             padding: 20px;
             border-radius: 12px;
@@ -122,14 +122,31 @@
             background-color: rgba(239, 68, 68, 0.1);
             border-color: #ef4444;
         }
+        
+        /* Quiz Progress Heading Style */
         .status-box h3 {
             margin-top: 0;
-            font-size: 18px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9ca3af;
+            font-weight: 600;
         }
+        
+        /* Pass/Fail Main Text Style */
+        .status-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        /* Description Text Style */
         .status-box p {
-            margin: 5px 0 0 0;
+            margin: 0;
             font-size: 14px;
             color: #e5e7eb;
+            line-height: 1.5;
         }
 
         @media (max-width: 768px) {
@@ -163,13 +180,13 @@
         </div>
 
         <div id="dashboardStatusBox" class="status-box">
-            <h3 id="statusTitle"></h3>
+            <h3>Quiz Progress</h3>
+            <h4 id="statusTitle"></h4>
             <p id="statusMsg"></p>
         </div>
     </div>
 
     <script>
-        // Page load hote hi check karega ki quiz diya hai ya nahi
         window.onload = function() {
             const status = localStorage.getItem('quizStatus');
             const score = localStorage.getItem('quizScore');
@@ -178,7 +195,7 @@
             const statusMsg = document.getElementById('statusMsg');
 
             if (status) {
-                statusBox.style.display = "block"; // Box ko show karega
+                statusBox.style.display = "block"; // Box show karein
                 
                 if (status === 'PASS') {
                     statusBox.className = "status-box pass";
