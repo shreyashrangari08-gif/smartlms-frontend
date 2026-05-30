@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; height: 100vh; display: flex; flex-direction: column; }
+        /* Professional Dark Theme */
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0b1120; color: #e2e8f0; height: 100vh; display: flex; flex-direction: column; }
         .navbar { display: flex; justify-content: space-between; padding: 15px 40px; background: #1e293b; border-bottom: 2px solid #38bdf8; }
         .main-wrapper { display: flex; flex-grow: 1; overflow: hidden; }
-        .sidebar { width: 250px; background: #1e293b; padding: 20px; border-right: 1px solid #334155; }
+        .sidebar { width: 250px; background: #111827; padding: 20px; border-right: 1px solid #334155; }
         .content-area { flex-grow: 1; padding: 30px; overflow-y: auto; }
         
         .section { display: none; }
         .active { display: block; }
+        
+        /* Card & UI Elements */
         .card { background: #1e293b; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #38bdf8; }
+        .nav-link { cursor: pointer; padding: 12px; color: #94a3b8; display: block; transition: 0.3s; }
+        .nav-link:hover { color: #38bdf8; background: #1e293b; border-radius: 5px; }
         
-        .nav-link { cursor: pointer; padding: 12px; color: #94a3b8; display: block; }
-        .nav-link:hover { color: #38bdf8; }
+        .settings-item { padding: 15px; border-bottom: 1px solid #334155; cursor: pointer; color: #cbd5e1; }
+        .settings-item:hover { color: #38bdf8; background: #1e293b; }
         
-        input { width: 100%; padding: 10px; margin: 8px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 5px; }
-        .btn { padding: 10px 20px; background: #38bdf8; border: none; cursor: pointer; border-radius: 5px; color: #0f172a; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin: 8px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 5px; box-sizing: border-box; }
+        .btn { padding: 10px 20px; background: #38bdf8; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -36,37 +41,48 @@
 
         <div class="content-area">
             <div id="dashboard" class="section active">
-                <h1 style="color:#38bdf8;">ONLINE LEARNING SYSTEM</h1>
-                <div class="card"><h3>📊 Stats:</h3><p>Active: 03 | Completed: 02</p></div>
-                <div class="card"><h3>🕒 Recent Activity:</h3><p>Last watched: Data Analytics Intro</p></div>
-                <div class="card"><h3>🎯 Learning Goals:</h3><p>Complete SQL module by tonight!</p></div>
+                <h1 style="color:#38bdf8;">Welcome Back!</h1>
+                <div class="card"><h3>📊 System Overview</h3><p>Active: 03 | Completed: 02</p></div>
+                <div class="card"><h3>🕒 Recent Activity</h3><p>Last watched: Data Analytics Intro</p></div>
             </div>
 
             <div id="settings-menu" class="section">
                 <h2>⚙️ Settings</h2>
-                <div class="card" onclick="showSection('profile-edit')" style="cursor:pointer;">👤 Profile Settings</div>
-                <div class="card">🎨 Appearance</div>
-                <div class="card">🔔 Notifications</div>
-                <div class="card">🔒 Security</div>
-                <div class="card" onclick="showSection('dashboard')">📊 Back to Dashboard</div>
+                <div class="settings-item" onclick="showSection('profile-edit')">👤 Profile Settings</div>
+                <div class="settings-item" onclick="showSection('appearance')">🎨 Appearance</div>
+                <div class="settings-item" onclick="showSection('notifications')">🔔 Notifications</div>
+                <div class="settings-item" onclick="showSection('security')">🔒 Security</div>
+                <div class="settings-item" onclick="showSection('dashboard')">📊 Back to Dashboard</div>
             </div>
 
             <div id="profile-edit" class="section">
                 <h2>Edit Profile</h2>
                 <div class="card">
-                    <label>Profile Picture:</label> <input type="file">
                     <input type="text" placeholder="Full Name">
-                    <input type="text" placeholder="Student ID">
                     <input type="email" placeholder="Email Address">
-                    <input type="tel" placeholder="Phone Number">
-                    <input type="password" placeholder="Change Password">
-                    <h4>🌐 Social Links (Optional)</h4>
-                    <input type="text" placeholder="GitHub URL">
-                    <input type="text" placeholder="LinkedIn URL">
-                    <br><br>
-                    <button class="btn" onclick="alert('Profile Updated Successfully!')">Save Changes</button>
-                    <button class="btn" style="background:#475569;" onclick="showSection('settings-menu')">Back</button>
+                    <textarea placeholder="Bio/About section" style="width:100%; height:80px; background:#0f172a; color:white;"></textarea>
+                    <button class="btn" onclick="alert('Profile Updated!')">Save Changes</button>
+                    <button class="btn" style="background:transparent; border:1px solid #38bdf8;" onclick="showSection('settings-menu')">Back</button>
                 </div>
+            </div>
+
+            <div id="appearance" class="section">
+                <h2>🎨 Appearance</h2>
+                <div class="card"><p>Dark Mode enabled by default. Choose Theme: <select><option>Dark</option><option>Light</option></select></p></div>
+                <button class="btn" onclick="showSection('settings-menu')">Back</button>
+            </div>
+
+            <div id="notifications" class="section">
+                <h2>🔔 Notifications</h2>
+                <div class="card"><input type="checkbox" checked> Enable Email Notifications <br> <input type="checkbox"> Push Notifications</div>
+                <button class="btn" onclick="showSection('settings-menu')">Back</button>
+            </div>
+
+            <div id="security" class="section">
+                <h2>🔒 Security</h2>
+                <div class="card"><input type="password" placeholder="Current Password"> <input type="password" placeholder="New Password"></div>
+                <button class="btn" onclick="alert('Password Changed!')">Update Security</button>
+                <button class="btn" style="background:transparent; border:1px solid #38bdf8;" onclick="showSection('settings-menu')">Back</button>
             </div>
         </div>
     </div>
