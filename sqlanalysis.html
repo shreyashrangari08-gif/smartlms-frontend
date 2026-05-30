@@ -70,16 +70,37 @@
     </div>
 
     <script>
+        // Page load par last section yaad rakhega
+        window.onload = () => {
+            const lastSection = localStorage.getItem('activeSection') || 'dashboard';
+            showSection(lastSection);
+            
+            // Agar enrolled hai toh button update rakhega
+            if(localStorage.getItem('isEnrolled') === 'true') {
+                updateEnrollUI();
+            }
+        };
+
         function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+            const target = document.getElementById(id);
+            if(target) {
+                target.classList.add('active');
+                localStorage.setItem('activeSection', id);
+            }
         }
+
         function enrollCourse() {
+            localStorage.setItem('isEnrolled', 'true');
+            updateEnrollUI();
+            alert("Course Started!");
+        }
+
+        function updateEnrollUI() {
             document.getElementById('course-enroll-btn').style.display = 'none';
             document.getElementById('main-enroll-btn').style.display = 'none';
             document.getElementById('continue-btn').style.display = 'block';
             document.getElementById('course-status').innerText = 'Status: In Progress';
-            alert("Course Started!");
         }
     </script>
 </body>
