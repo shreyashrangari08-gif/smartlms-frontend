@@ -41,6 +41,7 @@
         .submit-btn {
             background-color: #10b981; color: white; border: none; padding: 12px 30px;
             border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.2s ease;
+            margin-bottom: 40px;
         }
         .submit-btn:hover { background-color: #059669; }
     </style>
@@ -60,22 +61,89 @@
     <div class="main-container">
         <div class="header">
             <h1>Data Analytics Quiz</h1>
-            <p>Apni learning test karne ke liye niche diye gaye sawalon ka jawab dein.</p>
+            <p>Apni learning test karne ke liye niche diye gaye 10 sawalon ka jawab dein.</p>
         </div>
 
         <form id="quiz-form" onsubmit="submitQuiz(event)">
+            
             <div class="quiz-card">
                 <div class="question">1. What is Data Analytics?</div>
                 <label class="option-label"><input type="radio" name="q1" value="wrong"> Designing websites</label>
                 <label class="option-label"><input type="radio" name="q1" value="correct"> Analyzing data to find insights</label>
                 <label class="option-label"><input type="radio" name="q1" value="wrong"> Creating databases only</label>
+                <label class="option-label"><input type="radio" name="q1" value="wrong"> Installing software</label>
             </div>
 
             <div class="quiz-card">
                 <div class="question">2. Which of the following is a Data Analytics tool?</div>
                 <label class="option-label"><input type="radio" name="q2" value="correct"> Power BI</label>
                 <label class="option-label"><input type="radio" name="q2" value="wrong"> MS Paint</label>
+                <label class="option-label"><input type="radio" name="q2" value="wrong"> VLC Player</label>
                 <label class="option-label"><input type="radio" name="q2" value="wrong"> Notepad</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">3. Which type of analytics answers "What happened?"</div>
+                <label class="option-label"><input type="radio" name="q3" value="wrong"> Predictive Analytics</label>
+                <label class="option-label"><input type="radio" name="q3" value="wrong"> Diagnostic Analytics</label>
+                <label class="option-label"><input type="radio" name="q3" value="correct"> Descriptive Analytics</label>
+                <label class="option-label"><input type="radio" name="q3" value="wrong"> Prescriptive Analytics</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">4. Which language is widely used in Data Analytics?</div>
+                <label class="option-label"><input type="radio" name="q4" value="wrong"> HTML</label>
+                <label class="option-label"><input type="radio" name="q4" value="correct"> Python</label>
+                <label class="option-label"><input type="radio" name="q4" value="wrong"> CSS</label>
+                <label class="option-label"><input type="radio" name="q4" value="wrong"> XML</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">5. What is the first step in the Data Analytics process?</div>
+                <label class="option-label"><input type="radio" name="q5" value="wrong"> Visualization</label>
+                <label class="option-label"><input type="radio" name="q5" value="correct"> Data Collection</label>
+                <label class="option-label"><input type="radio" name="q5" value="wrong"> Reporting</label>
+                <label class="option-label"><input type="radio" name="q5" value="wrong"> Prediction</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">6. Which database query language is commonly used by Data Analysts?</div>
+                <label class="option-label"><input type="radio" name="q6" value="wrong"> Java</label>
+                <label class="option-label"><input type="radio" name="q6" value="correct"> SQL</label>
+                <label class="option-label"><input type="radio" name="q6" value="wrong"> C++</label>
+                <label class="option-label"><input type="radio" name="q6" value="wrong"> PHP</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">7. Moving from data to insights requires which primary skill?</div>
+                <label class="option-label"><input type="radio" name="q7" value="correct"> Critical Thinking & Analysis</label>
+                <label class="option-label"><input type="radio" name="q7" value="wrong"> Graphic Design</label>
+                <label class="option-label"><input type="radio" name="q7" value="wrong"> Typing Speed</label>
+                <label class="option-label"><input type="radio" name="q7" value="wrong"> Hardware Repair</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">8. What type of analytics helps predict future trends?</div>
+                <label class="option-label"><input type="radio" name="q8" value="correct"> Predictive Analytics</label>
+                <label class="option-label"><input type="radio" name="q8" value="wrong"> Descriptive Analytics</label>
+                <label class="option-label"><input type="radio" name="q8" value="wrong"> Diagnostic Analytics</label>
+                <label class="option-label"><input type="radio" name="q8" value="wrong"> Historical Analytics</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">9. Which process involves cleaning raw data to remove errors?</div>
+                <label class="option-label"><input type="radio" name="q9" value="wrong"> Data Loading</label>
+                <label class="option-label"><input type="radio" name="q9" value="correct"> Data Cleaning / Scrubbing</label>
+                <label class="option-label"><input type="radio" name="q9" value="wrong"> Data Expansion</label>
+                <label class="option-label"><input type="radio" name="q9" value="wrong"> Data Storage</label>
+            </div>
+
+            <div class="quiz-card">
+                <div class="question">10. Excel charts and Tableau dashboards are examples of:</div>
+                <label class="option-label"><input type="radio" name="q10" value="wrong"> Data Collection</label>
+                <label class="option-label"><input type="radio" name="q10" value="wrong"> Data Extraction</label>
+                <label class="option-label"><input type="radio" name="q10" value="correct"> Data Visualization</label>
+                <label class="option-label"><input type="radio" name="q10" value="wrong"> Data Definition</label>
             </div>
 
             <button type="submit" class="submit-btn">Submit Quiz</button>
@@ -90,36 +158,40 @@
 
         function submitQuiz(e) {
             e.preventDefault();
-            let score = 0;
-            
-            // Basic demo checking mechanism
-            const q1 = document.querySelector('input[name="q1"]:checked');
-            const q2 = document.querySelector('input[name="q2"]:checked');
+            let finalScore = 0;
+            const totalQuestions = 10;
 
-            if(!q1 || !q2) {
-                alert('Please answer all questions!');
-                return;
+            // Loop checking for all 10 questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const checkedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                
+                if (!checkedOption) {
+                    alert(`Please answer question number ${i}!`);
+                    return;
+                }
+                
+                if (checkedOption.value === 'correct') {
+                    finalScore += 1; // 1 mark per correct answer (Total Score out of 10)
+                }
             }
 
-            if(q1.value === 'correct') score += 5;
-            if(q2.value === 'correct') score += 5;
-
+            // Save state specifically for current logged-in user
             localStorage.setItem(getUserKey('quizStatus'), 'PASS');
-            localStorage.setItem(getUserKey('quizScore'), score);
+            localStorage.setItem(getUserKey('quizScore'), finalScore);
             
-            // Progress Calculation logic update
+            // Calculate dynamic progress bars on dashboard
             let completedVideosCount = 0;
-            for(let i=1; i<=4; i++) {
-                if(localStorage.getItem(getUserKey('video_completed_' + i)) === 'true') {
+            for (let v = 1; v <= 4; v++) {
+                if (localStorage.getItem(getUserKey('video_completed_' + v)) === 'true') {
                     completedVideosCount++;
                 }
             }
             
-            // Total items 5 (4 videos + 1 quiz)
+            // 4 videos + 1 quiz = total 5 tracking milestones
             let totalPercentage = Math.round(((completedVideosCount + 1) / 5) * 100);
             localStorage.setItem(getUserKey('course_progress_percent'), totalPercentage);
 
-            alert('Quiz submitted! Score: ' + score + '/10');
+            alert('Quiz submitted successfully! Your score: ' + finalScore + '/' + totalQuestions);
             window.location.href = 'dashboard.html';
         }
     </script>
