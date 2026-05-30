@@ -3,158 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizzes - Data Analytics</title>
+    <title>Data Analytics Quiz</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         body {
-            background-color: #111827;
-            color: #f3f4f6;
+            background-color: #111827; color: #f3f4f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
+            margin: 0; padding: 0; display: flex; min-height: 100vh;
         }
         .sidebar {
-            width: 260px;
-            background-color: #1f2937;
-            border-right: 1px solid #374151;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-            top: 0;
+            width: 260px; background-color: #1f2937; border-right: 1px solid #374151;
+            padding: 25px 15px; display: flex; flex-direction: column; gap: 10px;
+            position: fixed; height: 100vh; left: 0; top: 0;
         }
-        .sidebar h2 {
-            color: #38bdf8;
-            font-size: 20px;
-            margin-top: 0;
-            margin-bottom: 25px;
-            padding-left: 10px;
-            font-weight: 600;
-        }
+        .sidebar h2 { color: #38bdf8; font-size: 20px; margin: 0 0 25px 0; padding-left: 10px; font-weight: 600; }
         .sidebar a {
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 12px 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.2s ease;
+            color: #9ca3af; text-decoration: none; font-size: 16px; padding: 12px 15px;
+            border-radius: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease;
         }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #374151;
-            color: #38bdf8;
-        }
-        .main-container {
-            margin-left: 260px;
-            flex-grow: 1;
-            padding: 40px;
-            background: #111827;
-        }
-        .header {
-            border-bottom: 1px solid #374151;
-            padding-bottom: 20px;
-            margin-bottom: 35px;
-        }
-        .header h1 {
-            margin: 0;
-            color: #ffffff;
-            font-size: 28px;
-        }
-        .header p {
-            color: #9ca3af;
-            margin: 5px 0 0 0;
-            font-size: 15px;
-        }
+        .sidebar a:hover, .sidebar a.active { background-color: #374151; color: #38bdf8; }
+        .main-container { margin-left: 260px; flex-grow: 1; padding: 40px; background: #111827; }
+        .header { border-bottom: 1px solid #374151; padding-bottom: 20px; margin-bottom: 35px; }
+        .header h1 { margin: 0; color: #ffffff; font-size: 28px; }
+        .header p { margin: 5px 0 0 0; color: #9ca3af; font-size: 14px; }
         .quiz-card {
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            max-width: 800px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            background-color: #1f2937; border: 1px solid #374151; border-radius: 12px;
+            padding: 25px; margin-bottom: 25px;
         }
-        .question-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .question { font-size: 16px; color: #ffffff; margin-bottom: 15px; font-weight: 600; }
         .option-label {
-            background-color: #111827;
-            border: 1px solid #374151;
-            padding: 12px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
-            color: #d1d5db;
-            transition: all 0.2s ease;
+            display: block; background-color: #111827; border: 1px solid #374151;
+            padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer;
+            font-size: 14px; color: #d1d5db; transition: all 0.2s ease;
         }
-        .option-label:hover {
-            border-color: #38bdf8;
-            background-color: #1f2937;
-        }
-        .option-label input[type="radio"] {
-            margin: 0;
-            accent-color: #38bdf8;
-        }
+        .option-label:hover { border-color: #38bdf8; background-color: #1f2937; }
+        .option-label input { margin-right: 10px; }
         .submit-btn {
-            background-color: #38bdf8;
-            color: #111827;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.2s ease;
+            background-color: #10b981; color: white; border: none; padding: 12px 30px;
+            border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: background 0.2s ease;
         }
-        .submit-btn:hover {
-            background-color: #0ea5e9;
-        }
-        #result-box {
-            display: none;
-            background-color: #1f2937;
-            border: 2px solid #10b981;
-            border-radius: 12px;
-            padding: 25px;
-            max-width: 800px;
-            margin-top: 30px;
-            text-align: center;
-        }
-        #result-box h2 {
-            margin-top: 0;
-            color: #10b981;
-        }
-        #score-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffffff;
-        }
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar { position: relative; width: 100%; height: auto; }
-            .main-container { margin-left: 0; padding: 20px; }
-        }
+        .submit-btn:hover { background-color: #059669; }
     </style>
 </head>
 <body>
@@ -172,150 +60,67 @@
     <div class="main-container">
         <div class="header">
             <h1>Data Analytics Quiz</h1>
-            <p>Apni learning test karne ke liye niche diye gaye 10 sawalon ke jawab edin.</p>
+            <p>Apni learning test karne ke liye niche diye gaye sawalon ka jawab dein.</p>
         </div>
 
-        <form id="quizForm">
+        <form id="quiz-form" onsubmit="submitQuiz(event)">
             <div class="quiz-card">
-                <p class="question-text">1. What is Data Analytics?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q1" value="A"> Designing websites</label>
-                    <label class="option-label"><input type="radio" name="q1" value="B"> Analyzing data to find insights</label>
-                    <label class="option-label"><input type="radio" name="q1" value="C"> Creating databases only</label>
-                    <label class="option-label"><input type="radio" name="q1" value="D"> Installing software</label>
-                </div>
+                <div class="question">1. What is Data Analytics?</div>
+                <label class="option-label"><input type="radio" name="q1" value="wrong"> Designing websites</label>
+                <label class="option-label"><input type="radio" name="q1" value="correct"> Analyzing data to find insights</label>
+                <label class="option-label"><input type="radio" name="q1" value="wrong"> Creating databases only</label>
             </div>
 
             <div class="quiz-card">
-                <p class="question-text">2. Which of the following is a Data Analytics tool?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q2" value="A"> Power BI</label>
-                    <label class="option-label"><input type="radio" name="q2" value="B"> MS Paint</label>
-                    <label class="option-label"><input type="radio" name="q2" value="C"> VLC Player</label>
-                    <label class="option-label"><input type="radio" name="q2" value="D"> Notepad</label>
-                </div>
+                <div class="question">2. Which of the following is a Data Analytics tool?</div>
+                <label class="option-label"><input type="radio" name="q2" value="correct"> Power BI</label>
+                <label class="option-label"><input type="radio" name="q2" value="wrong"> MS Paint</label>
+                <label class="option-label"><input type="radio" name="q2" value="wrong"> Notepad</label>
             </div>
 
-            <div class="quiz-card">
-                <p class="question-text">3. Which type of analytics answers "What happened?"</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q3" value="A"> Predictive Analytics</label>
-                    <label class="option-label"><input type="radio" name="q3" value="B"> Diagnostic Analytics</label>
-                    <label class="option-label"><input type="radio" name="q3" value="C"> Descriptive Analytics</label>
-                    <label class="option-label"><input type="radio" name="q3" value="D"> Prescriptive Analytics</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">4. Which language is widely used in Data Analytics?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q4" value="A"> HTML</label>
-                    <label class="option-label"><input type="radio" name="q4" value="B"> Python</label>
-                    <label class="option-label"><input type="radio" name="q4" value="C"> CSS</label>
-                    <label class="option-label"><input type="radio" name="q4" value="D"> XML</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">5. What is the first step in the Data Analytics process?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q5" value="A"> Visualization</label>
-                    <label class="option-label"><input type="radio" name="q5" value="B"> Data Collection</label>
-                    <label class="option-label"><input type="radio" name="q5" value="C"> Reporting</label>
-                    <label class="option-label"><input type="radio" name="q5" value="D"> Prediction</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">6. Which database query language is commonly used by Data Analysts?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q6" value="A"> Java</label>
-                    <label class="option-label"><input type="radio" name="q6" value="B"> SQL</label>
-                    <label class="option-label"><input type="radio" name="q6" value="C"> C++</label>
-                    <label class="option-label"><input type="radio" name="q6" value="D"> PHP</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">7. Which type of analytics predicts future outcomes?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q7" value="A"> Descriptive Analytics</label>
-                    <label class="option-label"><input type="radio" name="q7" value="B"> Diagnostic Analytics</label>
-                    <label class="option-label"><input type="radio" name="q7" value="C"> Predictive Analytics</label>
-                    <label class="option-label"><input type="radio" name="q7" value="D"> None of these</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">8. What is Data Visualization?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q8" value="A"> Storing Data</label>
-                    <label class="option-label"><input type="radio" name="q8" value="B"> Cleaning Data</label>
-                    <label class="option-label"><input type="radio" name="q8" value="C"> Presenting Data using Charts and Graphs</label>
-                    <label class="option-label"><input type="radio" name="q8" value="D"> Deleting Data</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">9. Which of the following is NOT a Data Analytics type?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q9" value="A"> Descriptive</label>
-                    <label class="option-label"><input type="radio" name="q9" value="B"> Diagnostic</label>
-                    <label class="option-label"><input type="radio" name="q9" value="C"> Predictive</label>
-                    <label class="option-label"><input type="radio" name="q9" value="D"> Programming</label>
-                </div>
-            </div>
-
-            <div class="quiz-card">
-                <p class="question-text">10. Why is Data Analytics important?</p>
-                <div class="options-container">
-                    <label class="option-label"><input type="radio" name="q10" value="A"> Better decision-making</label>
-                    <label class="option-label"><input type="radio" name="q10" value="B"> Business growth</label>
-                    <label class="option-label"><input type="radio" name="q10" value="C"> Finding patterns in data</label>
-                    <label class="option-label"><input type="radio" name="q10" value="D"> All of the above</label>
-                </div>
-            </div>
-
-            <button type="button" class="submit-btn" onclick="calculateScore()">Submit Quiz</button>
+            <button type="submit" class="submit-btn">Submit Quiz</button>
         </form>
-
-        <div id="result-box">
-            <h2>Quiz Result</h2>
-            <p id="score-text"></p>
-            <p style="color: #9ca3af;">Result has been updated on your Dashboard!</p>
-        </div>
     </div>
 
     <script>
-        function calculateScore() {
-            const correctAnswers = {
-                q1: 'B', q2: 'A', q3: 'C', q4: 'B', q5: 'B',
-                q6: 'B', q7: 'C', q8: 'C', q9: 'D', q10: 'D'
-            };
+        function getUserKey(baseKey) {
+            const user = localStorage.getItem('currentUser') || 'guest';
+            return user + '_' + baseKey;
+        }
 
+        function submitQuiz(e) {
+            e.preventDefault();
             let score = 0;
-            const form = document.getElementById('quizForm');
+            
+            // Basic demo checking mechanism
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
 
-            for (let i = 1; i <= 10; i++) {
-                const questionName = 'q' + i;
-                const selectedOption = form.elements[questionName].value;
-                if (selectedOption === correctAnswers[questionName]) {
-                    score++;
+            if(!q1 || !q2) {
+                alert('Please answer all questions!');
+                return;
+            }
+
+            if(q1.value === 'correct') score += 5;
+            if(q2.value === 'correct') score += 5;
+
+            localStorage.setItem(getUserKey('quizStatus'), 'PASS');
+            localStorage.setItem(getUserKey('quizScore'), score);
+            
+            // Progress Calculation logic update
+            let completedVideosCount = 0;
+            for(let i=1; i<=4; i++) {
+                if(localStorage.getItem(getUserKey('video_completed_' + i)) === 'true') {
+                    completedVideosCount++;
                 }
             }
+            
+            // Total items 5 (4 videos + 1 quiz)
+            let totalPercentage = Math.round(((completedVideosCount + 1) / 5) * 100);
+            localStorage.setItem(getUserKey('course_progress_percent'), totalPercentage);
 
-            document.getElementById('score-text').innerText = "Your Score: " + score + " / 10";
-            document.getElementById('result-box').style.display = "block";
-
-            // LocalStorage mein data save karna taaki dashboard ise read kar sake
-            localStorage.setItem('quizScore', score);
-            if (score >= 5) {
-                localStorage.setItem('quizStatus', 'PASS');
-            } else {
-                localStorage.setItem('quizStatus', 'FAIL');
-            }
-
-            document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+            alert('Quiz submitted! Score: ' + score + '/10');
+            window.location.href = 'dashboard.html';
         }
     </script>
 </body>
