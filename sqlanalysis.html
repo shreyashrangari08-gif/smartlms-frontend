@@ -1,67 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0a192f; color: #ccd6f6; height: 100vh; display: flex; flex-direction: column; }
+        body { margin: 0; font-family: sans-serif; background: #0b1a26; color: white; height: 100vh; overflow: hidden; }
+        .header-bar { padding: 15px; background: #1c2e3d; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #4facfe; }
+        .main-container { display: flex; height: 100%; }
         
-        /* Header */
-        .header-bar { padding: 20px; background: #112240; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #64ffda; }
-        .title { flex-grow: 1; text-align: center; font-size: 24px; color: #64ffda; }
-        .menu-icon { cursor: pointer; font-size: 28px; color: #64ffda; padding-right: 20px; }
-
-        .main-container { display: flex; flex-grow: 1; }
-        .sidebar { width: 300px; background: #112240; padding: 20px; display: none; border-right: 1px solid #233554; }
-        .content-area { flex-grow: 1; padding: 50px; display: flex; }
+        /* Views */
+        .page { display: none; padding: 40px; width: 100%; }
+        .active { display: block; }
         
-        /* FIX: Sirf yehi grey card dikhega */
-        .dash-card { background: #112240; padding: 40px; border-radius: 20px; border: 1px solid #64ffda; width: 350px; height: fit-content; }
-        .link { color: #8892b0; cursor: pointer; display: block; margin: 20px 0; font-size: 18px; text-decoration: none; }
+        /* Dashboard Card */
+        .dash-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 300px; }
         
-        iframe { width: 100%; height: 450px; border-radius: 15px; border: 2px solid #64ffda; }
+        /* Settings Form */
+        .settings-card { background: #1c2e3d; padding: 30px; border-radius: 15px; border: 1px solid #4facfe; width: 80%; max-width: 500px; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; background: #0b1a26; border: 1px solid #4facfe; color: white; }
     </style>
 </head>
 <body>
 
     <div class="header-bar">
-        <div style="width: 50px;"></div>
-        <div class="title">Online Learning System</div>
-        <div class="menu-icon" onclick="window.location.href='settings.html'">⋮</div>
+        <div style="cursor:pointer;" onclick="showPage('dashboard')">🏠</div>
+        <h2 style="margin:0;">Online Learning System</h2>
+        <div style="cursor:pointer; font-size:24px;" onclick="showPage('settings')">⋮</div>
     </div>
 
-    <div class="main-container">
-        <div class="sidebar" id="sidebar">
-            <h3 style="color:#64ffda;">Course Modules</h3>
-            <span class="link" onclick="loadContent('Introduction', 'yZvFH7B6gKI')">1. Introduction</span>
-            <span class="link" onclick="loadContent('Environment', 'hiS_mWZmmI0')">2. Environment</span>
-            <span class="link" onclick="loadContent('SQL Queries', 'kbKty5ZVKMY')">3. SQL Queries</span>
-            <span class="link" onclick="loadContent('Visualization', 'MiiANxRHSv4')">4. Visualization</span>
+    <!-- Dashboard Page -->
+    <div id="dashboard" class="page active">
+        <div class="dash-card">
+            <h3>Data Analytics Course</h3>
+            <p>Master SQL, R, and Tableau.</p>
+            <button onclick="alert('Course Started!')">Enroll Now</button>
         </div>
-        
-        <div class="content-area" id="main">
-            <div id="dashboard-view" class="dash-card">
-                <h2 style="color:white;">Data Analytics Course</h2>
-                <p>Master SQL, R, and Tableau.</p>
-                <button id="enroll-btn" onclick="startCourse()" style="padding:10px 20px; background:#64ffda; border:none; border-radius:5px; cursor:pointer;">Enroll Now</button>
-            </div>
-            
-            <div id="content-view" style="display:none; width: 100%;">
-                <h2 id="header-title" style="color:white;"></h2>
-                <div id="video-container"></div>
-            </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div id="settings" class="page">
+        <div class="settings-card">
+            <h2>Account Settings</h2>
+            <input type="text" placeholder="Full Name">
+            <input type="email" placeholder="Email Address">
+            <textarea placeholder="Bio"></textarea>
+            <button onclick="showPage('dashboard')">Save & Back to Dashboard</button>
         </div>
     </div>
 
     <script>
-        function startCourse() {
-            document.getElementById('dashboard-view').style.display = 'none';
-            document.getElementById('sidebar').style.display = 'block';
-            loadContent('Introduction', 'yZvFH7B6gKI');
-        }
-
-        function loadContent(title, vidId) {
-            document.getElementById('content-view').style.display = 'block';
-            document.getElementById('header-title').innerText = title;
-            document.getElementById('video-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}"></iframe>`;
+        function showPage(pageId) {
+            // Saare pages hide karo
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Selected page show karo
+            document.getElementById(pageId).classList.add('active');
         }
     </script>
 </body>
