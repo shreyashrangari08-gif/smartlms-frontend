@@ -9,7 +9,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #111827; /* Dark Grey/Blackish Background */
+            background-color: #111827;
             color: #f3f4f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -17,11 +17,9 @@
             display: flex;
             min-height: 100vh;
         }
-
-        /* Sidebar Styling */
         .sidebar {
             width: 260px;
-            background-color: #1f2937; /* Clean Grey Container */
+            background-color: #1f2937;
             border-right: 1px solid #374151;
             padding: 25px 15px;
             display: flex;
@@ -32,7 +30,6 @@
             left: 0;
             top: 0;
         }
-
         .sidebar h2 {
             color: #38bdf8;
             font-size: 20px;
@@ -41,7 +38,6 @@
             padding-left: 10px;
             font-weight: 600;
         }
-
         .sidebar a {
             color: #9ca3af;
             text-decoration: none;
@@ -53,33 +49,26 @@
             gap: 10px;
             transition: all 0.2s ease;
         }
-
         .sidebar a:hover, .sidebar a.active {
             background-color: #374151;
             color: #38bdf8;
         }
-
-        /* Main Content Container */
         .main-container {
-            margin-left: 260px; /* Sidebar ki jagah chhodne ke liye */
+            margin-left: 260px;
             flex-grow: 1;
             padding: 40px;
             background: #111827;
         }
-
         .header {
             border-bottom: 1px solid #374151;
             padding-bottom: 20px;
             margin-bottom: 35px;
         }
-
         .header h1 {
             margin: 0;
             color: #ffffff;
             font-size: 28px;
         }
-
-        /* Card Design */
         .welcome-card {
             background-color: #1f2937;
             border: 1px solid #374151;
@@ -87,21 +76,19 @@
             padding: 30px;
             max-width: 500px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
         }
-
         .welcome-card h2 {
             margin-top: 0;
             color: #38bdf8;
             font-size: 22px;
         }
-
         .welcome-card p {
             color: #9ca3af;
             font-size: 15px;
             line-height: 1.6;
             margin: 15px 0 25px 0;
         }
-
         .enroll-btn {
             background-color: #38bdf8;
             color: #111827;
@@ -114,25 +101,41 @@
             display: inline-block;
             transition: background 0.2s ease;
         }
-
         .enroll-btn:hover {
             background-color: #0ea5e9;
         }
 
-        /* Mobile View Responsive Adjustment */
+        /* NAYA: Dynamic Result Box Design Subject Box ke niche ke liye */
+        .status-box {
+            display: none; /* Default mein hidden rahega */
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border: 1px solid #374151;
+        }
+        .status-box.pass {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .status-box.fail {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+        }
+        .status-box h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .status-box p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #e5e7eb;
+        }
+
         @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-            .main-container {
-                margin-left: 0;
-                padding: 20px;
-            }
+            body { flex-direction: column; }
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .main-container { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
@@ -158,7 +161,38 @@
             <p>Master SQL, R, and Tableau with industry experts to jumpstart your career in tech.</p>
             <a href="sqlanalysis.html" class="enroll-btn">Go to Course Content</a>
         </div>
+
+        <div id="dashboardStatusBox" class="status-box">
+            <h3 id="statusTitle"></h3>
+            <p id="statusMsg"></p>
+        </div>
     </div>
 
+    <script>
+        // Page load hote hi check karega ki quiz diya hai ya nahi
+        window.onload = function() {
+            const status = localStorage.getItem('quizStatus');
+            const score = localStorage.getItem('quizScore');
+            const statusBox = document.getElementById('dashboardStatusBox');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusMsg = document.getElementById('statusMsg');
+
+            if (status) {
+                statusBox.style.display = "block"; // Box ko show karega
+                
+                if (status === 'PASS') {
+                    statusBox.className = "status-box pass";
+                    statusTitle.innerHTML = "Congratulations! 🎉";
+                    statusTitle.style.color = "#10b981";
+                    statusMsg.innerHTML = "Aapne Data Analytics quiz successfully clear kar liya hai! Aapka score <b>" + score + "/10</b> raha. Keep learning and shining!";
+                } else {
+                    statusBox.className = "status-box fail";
+                    statusTitle.innerHTML = "Keep Trying! 👍";
+                    statusTitle.style.color = "#ef4444";
+                    statusMsg.innerHTML = "Aapka score <b>" + score + "/10</b> raha. Pass hone ke liye kam se kam 5 sahi jawab chahiye. Ek baar phir se try karein!";
+                }
+            }
+        };
+    </script>
 </body>
 </html>
