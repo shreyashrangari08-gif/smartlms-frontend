@@ -234,7 +234,7 @@
         </div>
 
         <div id="dashboardStatusBox" class="status-box">
-            <h3 id="panelTitle">Quiz Progress</h3>
+            <h3 id="panelTitle">Course Progress</h3>
             
             <div class="progress-text" id="progressPercentage">0% Completed</div>
             <div class="progress-container">
@@ -265,12 +265,12 @@
                 actionContainer.innerHTML = `<button onclick="enrollUser()" class="enroll-btn">Enroll Now</button>`;
             }
 
-            // Humare paas 3 modules/videos hain aur 1 quiz hai (Total items = 4)
-            let totalItems = 4; 
+            // Ab total 4 videos hain aur 1 quiz hai (Total 5 items)
+            let totalItems = 5; 
             let completedItems = 0;
 
-            // Module completion checks
-            for (let i = 1; i <= 3; i++) {
+            // 4 video completeness counter checks
+            for (let i = 1; i <= 4; i++) {
                 if (localStorage.getItem('video_completed_' + i) === 'true') {
                     completedItems++;
                 }
@@ -279,7 +279,7 @@
             const status = localStorage.getItem('quizStatus');
             const score = localStorage.getItem('quizScore');
             
-            // Agar quiz successfully complete ho gaya hai toh track badhao
+            // Agar quiz pass hai toh item complete
             if (status === 'PASS') {
                 completedItems++;
             }
@@ -298,9 +298,10 @@
             progressPercentage.innerText = percentage + "% Completed";
             progressBar.style.width = percentage + "%";
 
+            // LocalStorage calculation update 
             localStorage.setItem('course_progress_percent', percentage);
 
-            if (status) {
+            if (status || completedItems > 0) {
                 statusBox.style.display = "block"; 
                 
                 if (status === 'PASS') {
@@ -314,21 +315,21 @@
                         panelTitle.innerText = "COURSE COMPLETED 🎉";
                         certBtn.style.display = "inline-block";
                     }
-                } else {
+                } else if (status === 'FAIL') {
                     statusBox.className = "status-box fail";
                     progressBar.style.backgroundColor = "#ef4444";
                     statusTitle.innerHTML = "Keep Trying! 👍";
                     statusTitle.style.color = "#ef4444";
                     statusMsg.innerHTML = "Aapka score <b>" + score + "/10</b> raha. Pass hone ke liye kam se kam 5 sahi jawab chahiye. Ek baar phir se try karein!";
+                } else {
+                    // Sirf videos dekhe hain abhi quiz baki hai
+                    statusBox.style.backgroundColor = "rgba(56, 189, 248, 0.05)";
+                    statusBox.style.borderColor = "#38bdf8";
+                    progressBar.style.backgroundColor = "#38bdf8";
+                    statusTitle.innerHTML = "Learning Mode 📖";
+                    statusTitle.style.color = "#38bdf8";
+                    statusMsg.innerHTML = "Aap course timeline track kar rahe hain. Sabhi 4 videos dekhne ke baad Quiz section me jaakar test paas karein tabhi certificate khulega!";
                 }
-            } else if (completedItems > 0) {
-                statusBox.style.display = "block";
-                statusBox.style.backgroundColor = "rgba(56, 189, 248, 0.05)";
-                statusBox.style.borderColor = "#38bdf8";
-                progressBar.style.backgroundColor = "#38bdf8";
-                statusTitle.innerHTML = "Learning Mode 📖";
-                statusTitle.style.color = "#38bdf8";
-                statusMsg.innerHTML = "Aap course timeline track kar rahe hain. Videos dekhne ke baad Quiz section me jaakar test zaroor dein!";
             }
         };
     </script>
