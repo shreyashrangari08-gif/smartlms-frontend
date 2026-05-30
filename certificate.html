@@ -33,7 +33,7 @@
         .header { width: 100%; border-bottom: 1px solid #374151; padding-bottom: 20px; margin-bottom: 35px; text-align: left;}
         .header h1 { margin: 0; color: #ffffff; }
 
-        /* Lock Screen Interface Card */
+        /* Lock Card Setup */
         .lock-container {
             background-color: #1f2937;
             border: 1px dashed #eab308;
@@ -46,7 +46,7 @@
         .lock-container h3 { color: #eab308; margin-top: 0; }
         .lock-container p { color: #9ca3af; line-height: 1.6; font-size: 15px; }
 
-        /* Premium Blue-Gold Certificate Layout (Matching 1000182663.png) */
+        /* Premium Blue-Gold Certificate Layout Rendering */
         .cert-frame {
             display: none;
             width: 850px;
@@ -60,7 +60,7 @@
             overflow: hidden;
         }
         
-        /* Premium Outer Geometric Borders */
+        /* Side Corner Triangles Gradient Shapes */
         .cert-frame::before {
             content: "";
             position: absolute;
@@ -86,8 +86,6 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            background: radial-gradient(circle, rgba(15, 23, 42, 0.01) 1px, transparent 1px);
-            background-size: 15px 15px;
         }
 
         .cert-meta-info {
@@ -98,7 +96,6 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        .cert-id { text-align: right; }
         .cert-date { text-align: right; margin-top: 4px; }
 
         .cert-logo-area {
@@ -136,10 +133,9 @@
 
         .cert-award { font-size: 16px; color: #475569; font-style: italic; margin-bottom: 5px; }
         
-        /* Direct Login System Name Injection Area */
+        /* Typography cursive text injection */
         .cert-user-name { 
             font-size: 42px; 
-            font-weight: normal; 
             color: #0f172a; 
             display: inline-block; 
             padding-bottom: 5px; 
@@ -164,7 +160,6 @@
         .sig-image { font-family: 'Georgia', serif; font-style: italic; font-size: 16px; color: #0f172a; height: 30px; }
         .sig-title { font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Premium Golden Ribbons Badge */
         .badge-container { display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .badge { 
             width: 75px; height: 75px; 
@@ -215,7 +210,7 @@
 
         <div id="lockCard" class="lock-container">
             <h3>🔒 Certificate Locked</h3>
-            <p>Aapka certificate abhi tak generate nahi hua hai. Jab aap sabhi videos dekh lenge aur quiz pass karke apni progress ko <b>100% Complete</b> kar lenge, tab aapka certificate aapke login wale naam ke sath yahan automatic active ho jayega.</p>
+            <p>Aapka certificate abhi tak generate nahi hua hai. Jab aap sabhi 4 videos dekh lenge aur quiz pass karke apni progress ko <b>100% Complete</b> kar lenge, tab aapka certificate automatic active ho jayega.</p>
         </div>
 
         <div id="certificateTemplate" class="cert-frame">
@@ -224,7 +219,7 @@
                     <div>&nbsp;</div>
                     <div style="text-align: right;">
                         <div>Certificate ID: YLS-DA-2026-00001</div>
-                        <div class="cert-date" id="completionDateSlot">Date: 25 May 2026</div>
+                        <div class="cert-date" id="completionDateSlot">Date: 30 May 2026</div>
                     </div>
                 </div>
 
@@ -277,7 +272,7 @@
             const currentProgress = localStorage.getItem('course_progress_percent');
             const quizStatus = localStorage.getItem('quizStatus');
             
-            // Login system validation check: extracts active signed user
+            // Login details extract logic matching index.html
             let activeUser = localStorage.getItem('userName'); 
             if(!activeUser) {
                 const sessionUser = localStorage.getItem('currentUser');
@@ -288,7 +283,6 @@
                 }
             }
 
-            // Set current date dynamically on template
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('completionDateSlot').innerText = "Date: " + today.toLocaleDateString('en-US', options);
@@ -298,13 +292,10 @@
             const printActionBtn = document.getElementById('printActionBtn');
             const studentNameSlot = document.getElementById('studentNameSlot');
 
-            // Verification Logic: Lock drops only if 100% complete and quiz passed
+            // Verification matching for 100% and dynamic unlock
             if (parseInt(currentProgress) === 100 && quizStatus === 'PASS') {
                 lockCard.style.display = "none";
-                
-                // Active session login profile name map
                 studentNameSlot.innerText = activeUser;
-                
                 certificateTemplate.style.display = "block";
                 printActionBtn.style.display = "block";
             }
