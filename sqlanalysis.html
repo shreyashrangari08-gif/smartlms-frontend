@@ -153,14 +153,14 @@
     <div class="main-container">
         <div class="header">
             <h1>Course Content: Data Analytics</h1>
-            <p>Sabhi videos ke saath apna learning track poora karein.</p>
+            <p>Sabhi videos ke saath apna learning track poora karein aur progress bar badhayein.</p>
         </div>
 
         <div class="module-card">
             <h3>Module 1: Introduction to Data Analytics</h3>
             <p>Data analytics kya hai aur iska tech industry mein kya role hai, is video se samajhiye.</p>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/HjrQWzxZno0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/7S_zhv4m6xA" allowfullscreen></iframe>
             </div>
             <button id="btn_video_1" onclick="markCompleted(1)" class="complete-btn">Mark as Complete</button>
         </div>
@@ -169,7 +169,7 @@
             <h3>Module 2: Descriptive Analytics</h3>
             <p>Historical data ka use karke trends aur patterns ko analyze karna seekhein.</p>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/glrbM9alwhX" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/yZfXFm-A994" allowfullscreen></iframe>
             </div>
             <button id="btn_video_2" onclick="markCompleted(2)" class="complete-btn">Mark as Complete</button>
         </div>
@@ -178,7 +178,7 @@
             <h3>Module 3: Diagnostic Analytics</h3>
             <p>Data mein koi trend ya problem kyun aayi, uski root-cause analysis karna seekhein.</p>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/cCyk-t10Kb3" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/6iZf_UvNglU" allowfullscreen></iframe>
             </div>
             <button id="btn_video_3" onclick="markCompleted(3)" class="complete-btn">Mark as Complete</button>
         </div>
@@ -196,7 +196,6 @@
     <script>
         function markCompleted(id) {
             localStorage.setItem('video_completed_' + id, 'true');
-            const btn = document.getElementById('btn_video_1');
             updateButtonState(id);
             updateDashboardProgress();
             alert('Module ' + id + ' completed! Aapki progress update ho gayi hai.');
@@ -231,7 +230,6 @@
         }
 
         window.onload = function() {
-            // Load state for all 4 videos
             for (let i = 1; i <= 4; i++) {
                 updateButtonState(i);
             }
