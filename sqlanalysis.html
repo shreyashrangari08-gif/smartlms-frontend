@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <style>
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0a192f; color: #ccd6f6; height: 100vh; display: flex; flex-direction: column; }
         
         /* Header */
         .header-bar { padding: 20px; background: #112240; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #64ffda; }
         .title { flex-grow: 1; text-align: center; font-size: 24px; color: #64ffda; }
-        .menu-icon { cursor: pointer; font-size: 28px; color: #64ffda; }
+        .menu-icon { cursor: pointer; font-size: 28px; color: #64ffda; padding-right: 20px; }
 
-        /* Dashboard & Layout */
         .main-container { display: flex; flex-grow: 1; }
         .sidebar { width: 300px; background: #112240; padding: 20px; display: none; border-right: 1px solid #233554; }
-        .content-area { flex-grow: 1; padding: 50px; }
+        .content-area { flex-grow: 1; padding: 50px; display: flex; }
         
-        /* Course Card */
-        .dash-card { background: #112240; padding: 40px; border-radius: 20px; border: 1px solid #64ffda; width: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        /* FIX: Sirf yehi grey card dikhega */
+        .dash-card { background: #112240; padding: 40px; border-radius: 20px; border: 1px solid #64ffda; width: 350px; height: fit-content; }
         .link { color: #8892b0; cursor: pointer; display: block; margin: 20px 0; font-size: 18px; text-decoration: none; }
-        .link:hover { color: #64ffda; }
-
-        /* Responsive Iframe */
+        
         iframe { width: 100%; height: 450px; border-radius: 15px; border: 2px solid #64ffda; }
     </style>
 </head>
 <body>
 
     <div class="header-bar">
-        <div></div>
+        <div style="width: 50px;"></div>
         <div class="title">Online Learning System</div>
-        <div class="menu-icon" onclick="openProfileSettings()">⋮</div>
+        <div class="menu-icon" onclick="window.location.href='settings.html'">⋮</div>
     </div>
 
     <div class="main-container">
@@ -39,18 +35,16 @@
             <span class="link" onclick="loadContent('Environment', 'hiS_mWZmmI0')">2. Environment</span>
             <span class="link" onclick="loadContent('SQL Queries', 'kbKty5ZVKMY')">3. SQL Queries</span>
             <span class="link" onclick="loadContent('Visualization', 'MiiANxRHSv4')">4. Visualization</span>
-            <hr style="border:0.5px solid #233554;">
-            <button onclick="goHome()" style="background:none; border:none; color:#64ffda; cursor:pointer; font-size:16px;">🏠 Back to Dashboard</button>
         </div>
         
         <div class="content-area" id="main">
             <div id="dashboard-view" class="dash-card">
                 <h2 style="color:white;">Data Analytics Course</h2>
-                <p>Master SQL, R, and Tableau with industry experts.</p>
-                <button id="enroll-btn" onclick="startCourse()" style="padding:12px 25px; background:#64ffda; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">Enroll Now</button>
+                <p>Master SQL, R, and Tableau.</p>
+                <button id="enroll-btn" onclick="startCourse()" style="padding:10px 20px; background:#64ffda; border:none; border-radius:5px; cursor:pointer;">Enroll Now</button>
             </div>
             
-            <div id="content-view" style="display:none;">
+            <div id="content-view" style="display:none; width: 100%;">
                 <h2 id="header-title" style="color:white;"></h2>
                 <div id="video-container"></div>
             </div>
@@ -59,27 +53,15 @@
 
     <script>
         function startCourse() {
-            document.getElementById('enroll-btn').innerText = "Continue Learning";
+            document.getElementById('dashboard-view').style.display = 'none';
             document.getElementById('sidebar').style.display = 'block';
             loadContent('Introduction', 'yZvFH7B6gKI');
         }
 
         function loadContent(title, vidId) {
-            document.getElementById('dashboard-view').style.display = 'none';
             document.getElementById('content-view').style.display = 'block';
             document.getElementById('header-title').innerText = title;
             document.getElementById('video-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${vidId}"></iframe>`;
-        }
-
-        function goHome() {
-            document.getElementById('dashboard-view').style.display = 'block';
-            document.getElementById('content-view').style.display = 'none';
-            document.getElementById('sidebar').style.display = 'none';
-        }
-
-        function openProfileSettings() {
-            // Yahan hum simply ek naye page ya section par redirect kar sakte hain
-            window.location.href = "settings.html"; 
         }
     </script>
 </body>
