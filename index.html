@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart LMS - Login</title>
+    <title>Smart LMS - Portal</title>
     <style>
         * {
             margin: 0;
@@ -95,12 +95,12 @@
         <form id="loginForm">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
+                <input type="text" id="username" placeholder="Enter Username (e.g. Shreyash123)" required>
             </div>
             
             <div class="input-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="Enter your registered email" required>
+                <input type="email" id="email" placeholder="name@gmail.com" required>
             </div>
             
             <button type="submit">Sign In</button>
@@ -114,14 +114,13 @@
             e.preventDefault();
             
             const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase(); // Sab small letters me convert karega
             const msgDiv = document.getElementById('msg');
             
             msgDiv.className = "message";
-            msgDiv.innerText = "Checking credentials...";
+            msgDiv.innerText = "Connecting to database...";
 
             try {
-                // Aapka live backend API endpoint
                 const response = await fetch('https://lms-backrnd.onrender.com/login', {
                     method: 'POST',
                     headers: {
@@ -136,22 +135,28 @@
                     msgDiv.className = "message success";
                     msgDiv.innerText = "Login Successful! Redirecting...";
                     
-                    // Email check karke sahi dashboard par bhejna
+                    // Browser me email save kar rahe hain check karne ke liye
+                    localStorage.setItem('roleEmail', email);
+                    localStorage.setItem('adminUsername', username);
+
+                    // ROLE ACCESS CHECK LOGIC
                     setTimeout(() => {
                         if (email === 'shreyashrangari08@gmail.com') {
+                            // Agar aapki mail h, toh Admin Panel
                             window.location.href = 'admin.html';
                         } else {
+                            // Agar doosri mail h, toh Normal Student Dashboard
                             window.location.href = 'dashboard.html';
                         }
                     }, 1500);
                 } else {
                     msgDiv.className = "message error";
-                    msgDiv.innerText = data.message || "Invalid credentials!";
+                    msgDiv.innerText = data.message || "Invalid credentials. Register first!";
                 }
             } catch (err) {
                 console.error(err);
                 msgDiv.className = "message error";
-                msgDiv.innerText = "Server error! Please try again later.";
+                msgDiv.innerText = "Server error! Make sure Render is live.";
             }
         });
     </script>
