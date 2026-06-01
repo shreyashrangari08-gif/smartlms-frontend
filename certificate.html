@@ -3,88 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Certificate</title>
+    <title>LMS - Official Certificate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
-        body {
-            background-color: #111827; color: #f3f4f6;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; padding: 0; display: flex; min-height: 100vh;
-        }
-        .sidebar {
-            width: 260px; background-color: #1f2937; border-right: 1px solid #374151;
-            padding: 25px 15px; display: flex; flex-direction: column; gap: 10px;
-            position: fixed; height: 100vh; left: 0; top: 0;
-        }
-        .sidebar h2 { color: #38bdf8; font-size: 20px; margin: 0 0 25px 0; padding-left: 10px; font-weight: 600; }
-        .sidebar a {
-            color: #9ca3af; text-decoration: none; font-size: 16px; padding: 12px 15px;
-            border-radius: 8px; display: flex; align-items: center; gap: 10px; transition: all 0.2s ease;
-        }
-        .sidebar a:hover, .sidebar a.active { background-color: #374151; color: #38bdf8; }
-        .main-container { margin-left: 260px; flex-grow: 1; padding: 40px; background: #111827; display: flex; flex-direction: column; align-items: center; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         
-        /* Certificate Design Layer Match */
-        .cert-wrapper {
-            background: white; color: #111827; padding: 50px; width: 100%; max-width: 800px;
-            border: 15px solid #1e3a8a; position: relative; text-align: center; border-radius: 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            margin-top: 20px;
+        /* Premium Certificate Outer Frame */
+        .certificate-wrapper {
+            background: #ffffff;
+            color: #06152d;
+            width: 100%;
+            max-width: 950px;
+            padding: 30px;
+            position: relative;
+            border: 2px solid #d4af37;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
-        .cert-title { font-size: 42px; font-weight: bold; color: #1e3a8a; margin: 0; letter-spacing: 2px; }
-        .cert-sub { font-size: 16px; text-transform: uppercase; letter-spacing: 4px; margin: 10px 0 40px 0; color: #b45309; }
-        .cert-name { font-family: 'Georgia', serif; font-size: 36px; font-style: italic; border-bottom: 2px solid #374151; display: inline-block; padding: 0 30px; margin: 20px 0; color: #111827; min-width: 300px; }
-        .cert-text { font-size: 16px; color: #4b5563; max-width: 550px; margin: 20px auto; line-height: 1.6; }
-        .cert-course { font-size: 24px; font-weight: bold; color: #111827; margin-bottom: 40px; }
-        .error-lock { color: #ef4444; font-size: 18px; text-align: center; margin-top: 50px; }
+
+        /* Gold and Navy Blue Corner Badges (Jaise image me hai) */
+        .certificate-wrapper::before {
+            content: ""; position: absolute; top: 0; left: 0;
+            width: 160px; height: 160px;
+            background: linear-gradient(135deg, #06152d 45%, #d4af37 47%, #d4af37 50%, transparent 53%);
+        }
+        .certificate-wrapper::after {
+            content: ""; position: absolute; bottom: 0; right: 0;
+            width: 160px; height: 160px;
+            background: linear-gradient(315deg, #06152d 45%, #d4af37 47%, #d4af37 50%, transparent 53%);
+        }
+
+        /* Inner Thin Gold Frame Border */
+        .inner-border {
+            border: 2px solid #e2c56a;
+            padding: 40px 60px;
+            position: relative;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* Top Header Brand Elements */
+        .cert-header { display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 25px; }
+        .logo-placeholder { font-size: 26px; font-weight: 800; color: #06152d; letter-spacing: 1px; }
+        .logo-sub { font-size: 10px; color: #d4af37; letter-spacing: 3px; font-weight: 600; margin-top: 2px; text-transform: uppercase; }
+
+        /* Meta details top corners */
+        .meta-top-right { position: absolute; top: 25px; right: 30px; text-align: right; font-size: 11px; color: #555; line-height: 1.5; }
+        .meta-top-right strong { color: #06152d; }
+
+        /* Main Certificate Titles */
+        .main-title { font-family: 'Cinzel', serif; font-size: 46px; font-weight: 700; color: #06152d; letter-spacing: 4px; margin-bottom: 5px; }
+        .sub-title { font-size: 14px; font-weight: 600; color: #d4af37; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; position: relative; }
+        .sub-title::before, .sub-title::after { content: " ♦ "; color: #d4af37; font-size: 10px; }
+
+        .certify-text { font-size: 15px; color: #555; font-style: italic; margin-bottom: 20px; }
+
+        /* Elegant Dynamic Name Styles */
+        .student-name { font-family: 'Great Vibes', cursive; font-size: 52px; color: #06152d; margin: 15px 0; border-bottom: 1px solid #ddd; display: inline-block; padding: 0 60px; min-width: 300px; }
+
+        .course-summary { font-size: 14px; color: #555; line-height: 1.8; margin-top: 15px; max-width: 650px; margin-left: auto; margin-right: auto; }
+        .course-title { font-size: 24px; font-weight: 800; color: #06152d; letter-spacing: 2px; margin: 10px 0; text-transform: uppercase; }
+
+        /* Footer Authority Signatures & Stamp badge */
+        .cert-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 50px; padding: 0 20px; }
+        .signature-block { width: 200px; text-align: center; }
+        .sign-img { font-family: 'Great Vibes', cursive; font-size: 26px; color: #06152d; margin-bottom: 5px; border-bottom: 1px solid #999; padding-bottom: 5px; font-style: italic; }
+        .sign-title { font-size: 11px; font-weight: 600; color: #777; letter-spacing: 1px; text-transform: uppercase; margin-top: 5px; }
+
+        /* Gold Medal Central Badge Placement */
+        .medal-badge { width: 85px; height: 85px; background: #d4af37; border-radius: 50%; position: relative; display: flex; justify-content: center; align-items: center; border: 4px double #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .medal-inner { text-align: center; color: white; font-size: 8px; font-weight: bold; text-transform: uppercase; padding: 5px; }
+        .medal-ribbon-l, .medal-ribbon-r { position: absolute; bottom: -20px; width: 20px; height: 35px; background: #06152d; z-index: -1; transform: rotate(15deg); border-bottom: 5px solid transparent; }
+        .medal-ribbon-r { transform: rotate(-15deg); right: 25px; left: auto; background: #06152d; }
+        .medal-ribbon-l { left: 25px; }
+
+        /* Bottom Verification URL link */
+        .verify-url { position: absolute; bottom: 15px; left: 0; right: 0; text-align: center; font-size: 10px; color: #777; letter-spacing: 0.5px; }
+        .verify-url a { color: #06152d; text-decoration: none; font-weight: 600; }
+
+        /* Action Controls Layout */
+        .controls { display: flex; gap: 15px; justify-content: center; margin-top: 25px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 14px; transition: 0.2s; }
+        .btn-download { background: #d4af37; color: #06152d; }
+        .btn-back { background: #334155; color: #f8fafc; }
+        .btn:hover { opacity: 0.9; }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .controls { display: none; }
+            .certificate-wrapper { box-shadow: none; border: 2px solid #d4af37; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>LMS Panel</h2>
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="sqlanalysis.html">📚 My Courses</a>
-        <a href="assessment.html">📝 Quizzes</a>
-        <a href="certificate.html" class="active">🎓 Certificate</a>
-        <a href="profile.html">👤 Profile</a>
-        <a href="settings.html">⚙️ Settings</a>
-    </div>
+    <div>
+        <div class="certificate-wrapper" id="printArea">
+            <div class="inner-border">
+                
+                <div class="meta-top-right">
+                    CERTIFICATE ID: <strong id="certId">YLS-DA-2026-00001</strong><br>
+                    DATE OF COMPLETION: <strong id="certDate">25 May 2026</strong>
+                </div>
 
-    <div class="main-container">
-        <div id="lock-screen" class="error-lock" style="display:none;">
-            🔒 Aapne abhi tak Quiz clear nahi kiya hai. Pehle quiz clear karein!
+                <div class="cert-header">
+                    <div class="logo-placeholder">🎓 Your Learning</div>
+                    <div class="logo-sub">Online Learning System</div>
+                </div>
+
+                <div class="main-title">CERTIFICATE</div>
+                <div class="sub-title">Of Completion</div>
+
+                <div class="certify-text">This is to certify that</div>
+                
+                <div class="student-name" id="studentName">Your Name</div>
+
+                <div class="course-summary">
+                    has successfully completed the course requirements and demonstrated the required skills and knowledge to successfully complete all course requirements in
+                </div>
+                
+                <div class="course-title">Data Analytics</div>
+
+                <div class="cert-footer">
+                    <div class="signature-block">
+                        <div class="sign-img">Ji~ Same</div>
+                        <div style="width: 100%; height: 1px; background: #ddd;"></div>
+                        <div class="sign-title">Course Instructor</div>
+                    </div>
+
+                    <div class="medal-badge">
+                        <div class="medal-ribbon-l"></div>
+                        <div class="medal-ribbon-r"></div>
+                        <div class="medal-inner">
+                            ⭐<br>Course<br>Completed
+                        </div>
+                    </div>
+
+                    <div class="signature-block">
+                        <div class="sign-img">Adum_</div>
+                        <div style="width: 100%; height: 1px; background: #ddd;"></div>
+                        <div class="sign-title">Academic Director</div>
+                    </div>
+                </div>
+
+                <div class="verify-url">
+                    You can verify this certificate at: <a href="#">www.yourlearning.com/verify</a>
+                </div>
+
+            </div>
         </div>
 
-        <div id="cert-screen" class="cert-wrapper">
-            <div class="cert-title">CERTIFICATE</div>
-            <div class="cert-sub">OF COMPLETION</div>
-            <p style="margin:0; font-size:14px; color:#6b7280;">This is to certify that</p>
-            <div id="user-display-name" class="cert-name">Your Name</div>
-            <div class="cert-text">has successfully completed the course requirements and demonstrated the required skills and knowledge in</div>
-            <div class="cert-course">DATA ANALYTICS</div>
-            <div style="font-size:12px; color:#9ca3af;">Verification ID: YLS-DA-2026-00001</div>
+        <div class="controls">
+            <button onclick="window.print()" class="btn btn-download">🖨️ Download / Print PDF</button>
+            <a href="dashboard.html" class="btn btn-back">⬅️ Back to Dashboard</a>
         </div>
     </div>
 
     <script>
-        function getUserKey(baseKey) {
-            const user = localStorage.getItem('currentUser') || 'guest';
-            return user + '_' + baseKey;
-        }
-
         window.onload = function() {
-            const user = localStorage.getItem('currentUser');
-            if(!user) { window.location.href = 'index.html'; return; }
-
-            let quizStatus = localStorage.getItem(getUserKey('quizStatus'));
-            let savedName = localStorage.getItem(getUserKey('fullName')) || user.toUpperCase();
-
-            if(quizStatus !== 'PASS') {
-                document.getElementById('cert-screen').style.display = 'none';
-                document.getElementById('lock-screen').style.display = 'block';
-            } else {
-                document.getElementById('user-display-name').innerText = savedName;
-            }
+            // LocalStorage se logged-in user ka original name pull karega
+            const currentUser = localStorage.getItem('currentUser') || 'Anshul Rangari';
+            
+            // Name field mapping target element assignment
+            document.getElementById('studentName').innerText = currentUser.toUpperCase();
+            
+            // Dynamic date stamp integration
+            const today = new Date();
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('certDate').innerText = today.toLocaleDateString('en-US', options);
+            
+            // Generating random transaction ID reference
+            const randomId = 'YLS-DA-2026-' + Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('certId').innerText = randomId;
         };
     </script>
 </body>
