@@ -63,4 +63,55 @@ app.get('/courses', async (req, res) => {
     }
 });
 
-app.get('/course/:id
+app.get('/course/:id', async (req, res) => {
+    try {
+        const course = await Course.findById(req.params.id);
+        if (!course) return res.status(404).json({ message: 'Course not found' });
+        res.json(course);
+    } catch (err) {
+        res.status(500).json({ message: err.message }); // minor fix: variable pass kiya string se hatakar
+    }
+});
+
+
+// =================================================================
+// 🔒 🆕 NAYA ADMIN ROUTE (KUCH BHI PURANA DELETE KIYE BINA JODA HAI)
+// =================================================================
+
+app.get('/api/admin/dashboard-data', async (req, res) => {
+    try {
+        const userEmail = req.query.email; // Frontend `index.html` se email aayegi
+
+        // 🔒 Security Check: Agar tumhari mail nahi hai toh block!
+        if (userEmail !== "shreyashrangari08@gmail.com") {
+            return res.status(403).json({ 
+                success: false, 
+                message: "Access Denied: Sirf Shreyash hi is data ko dekh sakta hai!" 
+            });
+        }
+
+        // 📊 MongoDB se live counting (Total users aur earned certificates)
+        const totalUsers = await User.countDocuments({}); 
+        
+        // Agar users table me certificate track ho raha hai toh uski ginti
+        const totalCertificates = await User.countDocuments({ certificateEarned: true }); 
+
+        res.status(200).json({
+            success: true,
+            totalUsers: totalUsers,
+            totalCertificates: totalCertificates || 0
+        });
+
+    } catch (error) {
+        res.status(500).json({ 
+            success: false, 
+            message: "Server error", 
+            error: error.message 
+        });
+    }
+});
+
+// =================================================================
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
