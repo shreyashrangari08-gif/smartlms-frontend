@@ -1,57 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login / Sign Up</title>
-    <style>
-        body { font-family: sans-serif; background: #0b1a26; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .box { background: white; padding: 30px; border-radius: 10px; width: 300px; text-align: center; color: black; }
-        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { width: 95%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; }
-    </style>
-</head>
-<body>
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const User = require('./user'); // Aapki file ka name user.js hai (small u)
+const Course = require('./course');
 
-    <div class="box">
-        <h2 id="formTitle">Login</h2>
-        <input type="text" id="name" placeholder="Full Name (for Sign Up)" style="display: none;">
-        <input type="text" id="user" placeholder="Email">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="handleAuth()" id="btnAction">Login</button>
-        <p id="toggleText" onclick="toggleForm()" style="cursor:pointer; color:blue; font-size:14px; margin-top: 15px;">New here? Sign Up</p>
-    </div>
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-    <script>
-        let isSignup = false;
-        function toggleForm() {
-            isSignup = !isSignup;
-            document.getElementById('formTitle').innerText = isSignup ? "Sign Up" : "Login";
-            document.getElementById('btnAction').innerText = isSignup ? "Sign Up" : "Login";
-            document.getElementById('toggleText').innerText = isSignup ? "Already have an account? Login" : "New here? Sign Up";
-            // Sign up ke waqt Name field dikhane ke liye
-            document.getElementById('name').style.display = isSignup ? "block" : "none";
+// MongoDB Connection (Aapke code ke mutabik variables bilkul same hain)
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('✅ Connected to MongoDB'))
+    .catch(err => console.error('❌ DB Error: ', err));
+
+// ==========================================
+// 🟢 AUTH ROUTES (BILKUL CHHEDA NAHI HAI)
+// ==========================================
+app.post('/register', async (req, res) => {
+    try {
+        const { username, email } = req.body;
+        const newUser = new User({ username, email });
+        await newUser.save();
+        res.status(200).json({ message: 'Registration Successful!' });
+    } catch (err) {
+        res.status(500).json({ message: 'DB Error: ' + err.message });
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, email } = req.body;
+        const user = await User.findOne({ email });
+        if (user && user.username === username) {
+            res.status(200).json({ message: 'Login Successful!' });
+        } else {
+            res.status(401).json({ message: 'Invalid credentials.' });
         }
-        function handleAuth() {
-            let n = document.getElementById('name').value;
-            let u = document.getElementById('user').value;
-            let p = document.getElementById('pass').value;
+    } catch (err) {
+        res.status(500).json({ message: 'Login Error: ' + err.message });
+    }
+});
 
-            if(isSignup) {
-                if(!u || !p) { alert("Please fill all fields"); return; }
-                localStorage.setItem(u + "_pass", p);
-                localStorage.setItem(u + "_name", n);
-                alert("Sign Up Successful! Now Login.");
-                toggleForm();
-            } else {
-                if (localStorage.getItem(u + "_pass") === p) {
-                    localStorage.setItem('currentUser', u);
-                    localStorage.setItem('userName', localStorage.getItem(u + "_name"));
-                    // YAHAN CHANGE KIYA HAI: Ab ye sahi grey dashboard par le jayega
-                    window.location.href = 'dashboard.html';
-                } else { 
-                    alert("Invalid Credentials!"); 
-                }
-            }
-        }
-    </script>
-</body>
-</html>
+// ==========================================
+// 🟢 COURSE ROUTES (KUCH BHI CHANGE NAHI KIYA)
+// ==========================================
+app.post('/add-course', async (req, res) => {
+    try {
+        const newCourse = new Course(req.body);
+        await newCourse.save();
+        res.status(201).json({ message: 'Course added successfully!' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error: ' + err.message });
+    }
+});
+
+app.get('/courses', async (req, res) => {
+    try {
+        const courses = await Course.find();
+        res.status(200).json(courses);
+    } catch (err) {
+        res.status(500).json({ message: 'Error: ' + err.message });
+    }
+});
+
+app.get('/course/:id
