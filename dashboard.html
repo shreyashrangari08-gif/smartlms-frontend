@@ -23,7 +23,7 @@
         .progress-text { font-size: 13px; color: #94a3b8; text-align: right; display: block; }
         .status-container { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 25px; border-radius: 8px; margin-top: 20px; display: none; }
         
-        /* Admin Grid Boxes Style */
+        /* Admin Cards Grid Dashboard */
         .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
         .admin-card { background: #0f172a; padding: 20px; border-radius: 8px; border: 1px solid #3b82f6; text-align: center; }
     </style>
@@ -113,7 +113,7 @@
 
             // CRITICAL OWNERSHIP SECURITY CHECK
             if (loggedInEmail === 'shreyashrangari08@gmail.com') {
-                // Settings ke upar wala button sirf aapke liye active aur visible hoga!
+                // Admin Button sirf aapke liye active aur visible hoga
                 document.getElementById('adminSidebarBtn').style.display = 'block';
                 document.getElementById('welcomeUser').innerText = `Welcome, Owner (${currentUser})!`;
             } else {
@@ -138,17 +138,31 @@
             }
         };
 
-        // Tab Switching Logic without reloading page
+        // PASSWORD PROTECTED TAB SWITCHING LOGIC
         function showSection(sectionType) {
             const navHome = document.getElementById('navHome');
             const adminBtn = document.getElementById('adminSidebarBtn');
             
             if(sectionType === 'admin') {
+                // STRICT PASSWORD LOCK ALERT PROMPT
+                const userPassword = prompt("🔐 Security Verification:\nPlease enter the Admin Access Password to proceed:");
+
+                // Agar password galat hai ya cancel kiya toh block kardo
+                if (userPassword !== '120722') {
+                    alert("❌ Incorrect Password! Unauthorized access is denied.");
+                    
+                    // Sidebar buttons ko wapas student mode par reset karo
+                    adminBtn.classList.remove('active');
+                    navHome.classList.add('active');
+                    return; 
+                }
+
+                // Sahi password (120722) daalne par hi yeh section open hoga
                 document.getElementById('studentSection').style.display = 'none';
                 document.getElementById('adminSection').style.display = 'block';
                 adminBtn.classList.add('active');
                 navHome.classList.remove('active');
-                fetchMongoDBAdminData(); // Live database data pull karega
+                fetchMongoDBAdminData(); // Live database calculation fetch
             } else {
                 document.getElementById('studentSection').style.display = 'block';
                 document.getElementById('adminSection').style.display = 'none';
@@ -157,17 +171,24 @@
             }
         }
 
-        // Live API call for MongoDB data 
+        // Live API call for MongoDB data with secure email check
         async function fetchMongoDBAdminData() {
+            const loggedInEmail = localStorage.getItem('roleEmail') || '';
             try {
-                const response = await fetch('https://lms-backrnd.onrender.com/api/admin/dashboard-data');
+                const response = await fetch('https://lms-backrnd.onrender.com/api/admin/dashboard-data', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-user-email': loggedInEmail
+                    }
+                });
                 const data = await response.json();
                 if (response.ok) {
                     document.getElementById('admTotalUsers').innerText = data.totalUsers ?? 0;
                     document.getElementById('admTotalCerts').innerText = data.totalCertificates ?? 0;
                 } else {
-                    document.getElementById('admTotalUsers').innerText = "0";
-                    document.getElementById('admTotalCerts').innerText = "0";
+                    document.getElementById('admTotalUsers').innerText = "🔒 Blocked";
+                    document.getElementById('admTotalCerts').innerText = "🔒 Blocked";
                 }
             } catch (err) {
                 document.getElementById('admTotalUsers').innerText = "Offline";
