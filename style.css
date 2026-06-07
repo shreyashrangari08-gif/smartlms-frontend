@@ -1,10 +1,19 @@
-/* --- AI Chatbot Styles (Added for AI Integration) --- */
-#chatbot-container { z-index: 9999; font-family: 'Segoe UI', sans-serif; }
+/* --- Purana Layout Styling --- */
+body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: #f4f4f9; }
+.sidebar { width: 250px; background: #1e293b; color: white; padding: 20px; height: 100vh; position: fixed; }
+.sidebar a { padding: 15px; display: block; color: #ccc; text-decoration: none; cursor: pointer; }
+.sidebar a:hover { color: white; background: #334155; }
+.main-container { margin-left: 250px; padding: 40px; }
+.card-box { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.btn-action { padding: 10px 20px; background: #3b8df8; color: white; border-radius: 6px; text-decoration: none; display: inline-block; }
+
+/* --- Naya Chatbot Styling --- */
+#chatbot-container { z-index: 9999; }
 #ai-chat-box { 
     display: none; position: fixed; bottom: 80px; right: 20px; 
     width: 300px; height: 400px; background: white; 
     border: 1px solid #3b8df8; padding: 15px; z-index: 1000; 
     border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
 }
-#ai-history { height: 300px; overflow-y: scroll; margin-top: 10px; border-top: 1px solid #eee; padding-top: 5px; }
-.ai-toggle-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; padding: 10px 20px; background: #3b8df8; color: white; border: none; border-radius: 5px; cursor: pointer; }
+#ai-history { height: 300px; overflow-y: auto; margin-top: 10px; border-top: 1px solid #eee; }
+.ai-toggle-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; padding: 12px 24px; background: #3b8df8; color: white; border: none; border-radius: 8px; cursor: pointer; }
