@@ -3,37 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS - Interactive Dashboard</title>
+    <title>LMS Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="sidebar">
         <h2>LMS Panel</h2>
-        <a onclick="showSection('home')" class="active">Dashboard</a>
+        <a href="#">Dashboard</a>
         <a href="sqlanalysis.html">My Courses</a>
         <a href="assessment.html">Quizzes</a>
         <a href="certificate.html">Certificate</a>
         <a href="profile.html">Profile</a>
-        <a onclick="showSection('settings')">Settings</a>
-        <button onclick="handleLogout()" class="logout-btn">Logout</button>
+        <a href="#">Settings</a>
+        <button onclick="window.location.href='index.html'" class="logout-btn">Logout</button>
     </div>
 
     <div class="main-container">
-        <div id="studentSection">
-            <div class="header"><h1 id="welcomeUser">Online Learning System</h1></div>
-            <div class="card-box">
-                <h3>Data Analytics Course</h3>
-                <p>Master SQL, R, and Tableau with industry experts.</p>
-                <a href="sqlanalysis.html" class="btn-action">Go to Course Content</a>
-            </div>
+        <h1>Online Learning System</h1>
+        <div class="card-box">
+            <h3>Data Analytics Course</h3>
+            <p>Master SQL, R, and Tableau with industry experts.</p>
+            <a href="sqlanalysis.html" class="btn-action">Go to Course Content</a>
+            <p style="margin-top:10px;"><b>COURSE PROGRESS</b></p>
+            <p>0% Completed</p>
         </div>
     </div>
 
-    <div id="chatbot-container"></div>
-    <script src="chatbot.js"></script>
-    <script>
-        function handleLogout() { localStorage.clear(); window.location.href = 'index.html'; }
-    </script>
 </body>
 </html>
