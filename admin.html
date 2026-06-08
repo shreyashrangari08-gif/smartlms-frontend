@@ -71,7 +71,7 @@
 
         // 2. Fetch Dashboard Stats
         async function fetchDashboardData() {
-            const res = await fetch('https://lms-backend.onrender.com/api/admin/dashboard-data');
+            const res = await fetch('https://lms-backrnd.onrender.com/api/admin/dashboard-data');
             const data = await res.json();
             document.getElementById('totalUsers').innerText = data.totalUsers;
             document.getElementById('totalCertificates').innerText = data.totalCertificates;
@@ -79,14 +79,14 @@
 
         // 3. Stats Toggle (Weekly/Monthly)
         async function fetchStats(type) {
-            const res = await fetch(`https://lms-backend.onrender.com/api/admin/stats?type=${type}`);
+            const res = await fetch(`https://lms-backrnd.onrender.com/api/admin/stats?type=${type}`);
             const data = await res.json();
             document.getElementById('reportContent').innerText = JSON.stringify(data);
         }
 
         // 4. Download CSV
         function downloadCSV() {
-            window.location.href = 'https://lms-backend.onrender.com/api/admin/download';
+            window.location.href = 'https://lms-backrnd.onrender.com/api/admin/download';
         }
 
         function logout() { localStorage.clear(); window.location.href = 'index.html'; }
