@@ -81,34 +81,29 @@
             }
         }
 
-        // SIGN UP
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const username = document.getElementById('signupUsername').value.trim();
-            const email = document.getElementById('signupEmail').value.trim().toLowerCase();
             const msgDiv = document.getElementById('msg');
-
             try {
                 const response = await fetch('https://lms-backrnd.onrender.com/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, email })
+                    body: JSON.stringify({ 
+                        username: document.getElementById('signupUsername').value.trim(), 
+                        email: document.getElementById('signupEmail').value.trim().toLowerCase() 
+                    })
                 });
+                const data = await response.json();
                 if (response.ok) {
                     msgDiv.className = "message success";
-                    msgDiv.innerText = "Registration Successful! Please Sign In.";
+                    msgDiv.innerText = "Registration Successful! Redirecting...";
                     setTimeout(() => switchTab('login'), 1500);
                 } else {
-                    const data = await response.json();
-                    msgDiv.className = "message error";
-                    msgDiv.innerText = data.message || "Registration Failed.";
+                    throw new Error(data.message || "Failed");
                 }
-            } catch (err) {
-                msgDiv.className = "message error"; msgDiv.innerText = "Server Error!";
-            }
+            } catch (err) { msgDiv.className = "message error"; msgDiv.innerText = err.message; }
         });
 
-        // LOGIN
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('loginUsername').value.trim();
@@ -122,26 +117,15 @@
                     body: JSON.stringify({ username, email })
                 });
                 const data = await response.json();
-
                 if (response.ok) {
                     msgDiv.className = "message success";
-                    msgDiv.innerText = "Login Successful! Loading Dashboard...";
-
-                    // Session data save kar rahe hain role check ke liye
-                    localStorage.setItem('roleEmail', email);
+                    msgDiv.innerText = "Login Successful!";
                     localStorage.setItem('currentUser', username);
-
-                    // Sabko ek hi dashboard par bhejenge
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1500);
+                    window.location.href = 'dashboard.html';
                 } else {
-                    msgDiv.className = "message error";
-                    msgDiv.innerText = data.message || "Invalid credentials.";
+                    throw new Error(data.message || "Invalid credentials.");
                 }
-            } catch (err) {
-                msgDiv.className = "message error"; msgDiv.innerText = "Backend Connection Error!";
-            }
+            } catch (err) { msgDiv.className = "message error"; msgDiv.innerText = err.message; }
         });
     </script>
 </body>
