@@ -1,4 +1,4 @@
-// chatbot.js
+// Secure Chatbot Code
 async function sendToAI() {
     const input = document.getElementById('user-input').value;
     const history = document.getElementById('chat-history');
@@ -8,11 +8,11 @@ async function sendToAI() {
     document.getElementById('user-input').value = '';
 
     try {
-        // Ye aapke Render backend URL ko point karega
+        // Yeh request aapke secure Render backend par jayegi
         const response = await fetch("https://lms-backrnd.onrender.com/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: input })
+            body: JSON.stringify({ prompt: input }) // Server.js mein 'prompt' use ho raha hai
         });
 
         const data = await response.json();
