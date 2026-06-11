@@ -26,7 +26,6 @@
         .report-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-top: 20px; min-height: 200px; }
         .report-card h3 { font-size: 18px; color: #1f2937; margin-bottom: 15px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
 
-        /* Dynamic list for Login/Signup Data */
         #reportContent { font-size: 14px; color: #374151; line-height: 1.6; }
         .data-list-item { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; }
         .data-list-item:nth-child(even) { background-color: #f9fafb; }
@@ -76,25 +75,19 @@
     </div>
 
     <script>
-        // 1. Password Protection & Security Check
+        // Password Protection & Security Check (Direct Password Prompt)
         window.onload = function() {
-            const email = localStorage.getItem('roleEmail');
-            // Agar email check enable rakhna hai toh theek, warna aap yahan se direct bypass bhi kar sakte hain testing ke liye
-            if (email !== 'shreyashrangari08@gmail.com') {
-                document.getElementById('deniedBlock').style.display = 'flex';
-            } else {
-                const pass = prompt("Enter Admin Password:");
-                if (pass !== "120722") { 
-                    alert("Wrong Password!"); 
-                    window.location.href = 'dashboard.html'; 
-                } else { 
-                    document.getElementById('adminWrapper').style.display = 'flex';
-                    fetchDashboardData();
-                }
+            const pass = prompt("Enter Admin Password:");
+            if (pass !== "120722") { 
+                alert("Wrong Password!"); 
+                window.location.href = 'dashboard.html'; 
+            } else { 
+                document.getElementById('adminWrapper').style.display = 'flex';
+                fetchDashboardData();
             }
         };
 
-        // 2. Fetch Dashboard Stats (FIXED URL)
+        // Fetch Dashboard Stats
         async function fetchDashboardData() {
             try {
                 const res = await fetch('https://lms-backrnd.onrender.com/admin/dashboard-data');
@@ -106,7 +99,7 @@
             }
         }
 
-        // 3. Stats Toggle (Weekly/Monthly) (FIXED URL)
+        // Stats Toggle (Weekly/Monthly)
         async function fetchStats(type) {
             const reportDiv = document.getElementById('reportContent');
             reportDiv.innerHTML = "Loading " + type + " data...";
@@ -136,7 +129,7 @@
             }
         }
 
-        // 4. Download CSV (FIXED URL)
+        // Download CSV
         function downloadCSV() {
             window.location.href = 'https://lms-backrnd.onrender.com/admin/download';
         }
