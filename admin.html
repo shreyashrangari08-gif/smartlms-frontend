@@ -5,35 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LMS - Secured Admin Panel</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #f4f6f9; display: flex; min-height: 100vh; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f9; display: flex; min-height: 100vh; width: 100vw; overflow-x: hidden; }
         
         /* Layout */
-        #adminWrapper { display: none; width: 100%; min-height: 100vh; }
-        .sidebar { width: 260px; background-color: #1f2937; color: white; padding: 20px; display: flex; flex-direction: column; }
-        .sidebar h2 { margin-bottom: 30px; font-size: 22px; text-align: center; color: #3b82f6; }
-        .sidebar a { color: #cbd5e1; text-decoration: none; padding: 12px; margin-bottom: 10px; border-radius: 6px; display: block; transition: 0.3s; cursor: pointer; }
+        #adminWrapper { display: none; width: 100%; min-height: 100vh; flex-direction: row; }
+        .sidebar { width: 280px; background-color: #1f2937; color: white; padding: 30px 20px; display: flex; flex-direction: column; flex-shrink: 0; }
+        .sidebar h2 { margin-bottom: 40px; font-size: 24px; text-align: center; color: #3b82f6; }
+        .sidebar a { color: #cbd5e1; text-decoration: none; padding: 14px 16px; margin-bottom: 10px; border-radius: 6px; display: block; transition: 0.3s; cursor: pointer; font-size: 15px; }
         .sidebar a:hover { background-color: #374151; color: white; }
-        .main-content { flex: 1; padding: 40px; }
         
-        .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid #3b82f6; }
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .main-content h1 { font-size: 28px; margin-bottom: 20px; color: #111827; }
         
-        .denied-container { display: none; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100vh; background-color: #fff1f2; color: #9f1239; }
+        .stats-container { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); width: 240px; border-top: 4px solid #3b82f6; }
+        .stat-card h3 { font-size: 14px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .stat-card p { font-size: 26px; font-weight: 700; color: #1f2937; }
+
+        .report-card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-top: 20px; min-height: 200px; }
+        .report-card h3 { font-size: 18px; color: #1f2937; margin-bottom: 15px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
+
+        /* Dynamic list for Login/Signup Data */
+        #reportContent { font-size: 14px; color: #374151; line-height: 1.6; }
+        .data-list-item { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; }
+        .data-list-item:nth-child(even) { background-color: #f9fafb; }
+
+        .denied-container { display: none; flex-direction: column; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: #fff1f2; color: #9f1239; font-size: 18px; }
+        .denied-container button { margin-top: 15px; padding: 10px 20px; background: #9f1239; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div id="deniedBlock" class="denied-container">
-        <div style="padding: 30px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            🚫 Access Denied! <button onclick="window.location.href='index.html'">Login Again</button>
+        <div style="padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); text-align: center;">
+            🚫 Access Denied! <br>
+            <button onclick="window.location.href='index.html'">Login Again</button>
         </div>
     </div>
 
     <div id="adminWrapper">
         <div class="sidebar">
             <h2>Admin Panel</h2>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="dashboard.html">Go to Dashboard</a>
             <a onclick="fetchStats('weekly')">Weekly Activity</a>
             <a onclick="fetchStats('monthly')">Monthly Activity</a>
             <a onclick="downloadCSV()" style="color: #10b981; font-weight: bold;">Download User CSV</a>
@@ -42,13 +56,21 @@
 
         <div class="main-content">
             <h1 id="welcomeTitle">Welcome, Admin!</h1>
+            
             <div class="stats-container">
-                <div class="stat-card"><h3>Total Users</h3><p id="totalUsers">Loading...</p></div>
-                <div class="stat-card"><h3>Total Certificates</h3><p id="totalCertificates">Loading...</p></div>
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p id="totalUsers">Loading...</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Certificates</h3>
+                    <p id="totalCertificates">Loading...</p>
+                </div>
             </div>
-            <div id="reportBox" class="stat-card" style="text-align: left;">
+            
+            <div id="reportBox" class="report-card">
                 <h3>Stats Report</h3>
-                <p id="reportContent">Select a report from sidebar.</p>
+                <div id="reportContent">Select "Weekly Activity" or "Monthly Activity" from the sidebar to view logs.</div>
             </div>
         </div>
     </div>
@@ -61,8 +83,10 @@
                 document.getElementById('deniedBlock').style.display = 'flex';
             } else {
                 const pass = prompt("Enter Admin Password:");
-                if (pass !== "120722") { alert("Wrong Password!"); window.location.href = 'dashboard.html'; }
-                else { 
+                if (pass !== "120722") { 
+                    alert("Wrong Password!"); 
+                    window.location.href = 'dashboard.html'; 
+                } else { 
                     document.getElementById('adminWrapper').style.display = 'flex';
                     fetchDashboardData();
                 }
@@ -71,17 +95,46 @@
 
         // 2. Fetch Dashboard Stats
         async function fetchDashboardData() {
-            const res = await fetch('https://lms-backrnd.onrender.com/api/admin/dashboard-data');
-            const data = await res.json();
-            document.getElementById('totalUsers').innerText = data.totalUsers;
-            document.getElementById('totalCertificates').innerText = data.totalCertificates;
+            try {
+                const res = await fetch('https://lms-backrnd.onrender.com/api/admin/dashboard-data');
+                const data = await res.json();
+                document.getElementById('totalUsers').innerText = data.totalUsers || 0;
+                document.getElementById('totalCertificates').innerText = data.totalCertificates || 0;
+            } catch (err) {
+                console.error("Error loading dashboard stats", err);
+            }
         }
 
-        // 3. Stats Toggle (Weekly/Monthly)
+        // 3. Stats Toggle (Weekly/Monthly) - formatted cleanly instead of raw JSON
         async function fetchStats(type) {
-            const res = await fetch(`https://lms-backrnd.onrender.com/api/admin/stats?type=${type}`);
-            const data = await res.json();
-            document.getElementById('reportContent').innerText = JSON.stringify(data);
+            const reportDiv = document.getElementById('reportContent');
+            reportDiv.innerHTML = "Loading " + type + " data...";
+            
+            try {
+                const res = await fetch(`https://lms-backrnd.onrender.com/api/admin/stats?type=${type}`);
+                const data = await res.json(); // Assuming this returns an array of objects representing logins/signups
+                
+                if (Array.isArray(data) && data.length > 0) {
+                    let html = "";
+                    data.forEach(user => {
+                        // Adjust properties (e.g. email, name, action, time) based on your API response structure
+                        const userIdentifier = user.email || user.username || "User";
+                        const actionType = user.action || "logged in / signed up";
+                        const timeStamp = user.timestamp ? new Date(user.timestamp).toLocaleString() : "Recently";
+                        
+                        html += `<div class="data-list-item">
+                            <span><strong>${userIdentifier}</strong> - ${actionType}</span>
+                            <span>${timeStamp}</span>
+                        </div>`;
+                    });
+                    reportDiv.innerHTML = html;
+                } else {
+                    // Fallback if the API returns a different object structure or raw string
+                    reportDiv.innerHTML = `<div style="padding: 15px; color: #4b5563;">${typeof data === 'object' ? JSON.stringify(data) : data}</div>`;
+                }
+            } catch (err) {
+                reportDiv.innerHTML = "<span style='color: red;'>Failed to load data. Please check your backend connection.</span>";
+            }
         }
 
         // 4. Download CSV
@@ -89,7 +142,10 @@
             window.location.href = 'https://lms-backrnd.onrender.com/api/admin/download';
         }
 
-        function logout() { localStorage.clear(); window.location.href = 'index.html'; }
+        function logout() { 
+            localStorage.clear(); 
+            window.location.href = 'index.html'; 
+        }
     </script>
 </body>
 </html>
