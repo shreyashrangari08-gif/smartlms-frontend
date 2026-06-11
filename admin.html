@@ -79,6 +79,7 @@
         // 1. Password Protection & Security Check
         window.onload = function() {
             const email = localStorage.getItem('roleEmail');
+            // Agar email check enable rakhna hai toh theek, warna aap yahan se direct bypass bhi kar sakte hain testing ke liye
             if (email !== 'shreyashrangari08@gmail.com') {
                 document.getElementById('deniedBlock').style.display = 'flex';
             } else {
@@ -93,10 +94,10 @@
             }
         };
 
-        // 2. Fetch Dashboard Stats
+        // 2. Fetch Dashboard Stats (FIXED URL)
         async function fetchDashboardData() {
             try {
-                const res = await fetch('https://lms-backrnd.onrender.com/api/admin/dashboard-data');
+                const res = await fetch('https://lms-backrnd.onrender.com/admin/dashboard-data');
                 const data = await res.json();
                 document.getElementById('totalUsers').innerText = data.totalUsers || 0;
                 document.getElementById('totalCertificates').innerText = data.totalCertificates || 0;
@@ -105,19 +106,18 @@
             }
         }
 
-        // 3. Stats Toggle (Weekly/Monthly) - formatted cleanly instead of raw JSON
+        // 3. Stats Toggle (Weekly/Monthly) (FIXED URL)
         async function fetchStats(type) {
             const reportDiv = document.getElementById('reportContent');
             reportDiv.innerHTML = "Loading " + type + " data...";
             
             try {
-                const res = await fetch(`https://lms-backrnd.onrender.com/api/admin/stats?type=${type}`);
-                const data = await res.json(); // Assuming this returns an array of objects representing logins/signups
+                const res = await fetch(`https://lms-backrnd.onrender.com/admin/stats?type=${type}`);
+                const data = await res.json();
                 
                 if (Array.isArray(data) && data.length > 0) {
                     let html = "";
                     data.forEach(user => {
-                        // Adjust properties (e.g. email, name, action, time) based on your API response structure
                         const userIdentifier = user.email || user.username || "User";
                         const actionType = user.action || "logged in / signed up";
                         const timeStamp = user.timestamp ? new Date(user.timestamp).toLocaleString() : "Recently";
@@ -129,7 +129,6 @@
                     });
                     reportDiv.innerHTML = html;
                 } else {
-                    // Fallback if the API returns a different object structure or raw string
                     reportDiv.innerHTML = `<div style="padding: 15px; color: #4b5563;">${typeof data === 'object' ? JSON.stringify(data) : data}</div>`;
                 }
             } catch (err) {
@@ -137,9 +136,9 @@
             }
         }
 
-        // 4. Download CSV
+        // 4. Download CSV (FIXED URL)
         function downloadCSV() {
-            window.location.href = 'https://lms-backrnd.onrender.com/api/admin/download';
+            window.location.href = 'https://lms-backrnd.onrender.com/admin/download';
         }
 
         function logout() { 
